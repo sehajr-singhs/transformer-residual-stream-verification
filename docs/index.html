@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description" content="Certified safety margins for a transformer residual stream: sound hybrid-zonotope branch-and-bound certification, an infeasibility proof for strict Lyapunov decrease, and an honest account of what does and does not scale, including two negative results and one comparison that did not complete.">
+  <meta name="keywords" content="formal verification, neural network certification, Lyapunov stability, transformer safety, interval bound propagation, CROWN, branch and bound, AI safety">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Certified Safety Margins for a Transformer Residual Stream</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/computer-modern/cmu-serif.css">
+  <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['\\(', '\\)']],
+        displayMath: [['\\[', '\\]']]
+      }
+    };
+  </script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+  <style>
+    :root {
+      --ink: #1a1a1a;
+      --muted: #555;
+      --faint: #8c8e90;
+      --panel: #f8f8f8;
+      --border: #c4c6c8;
+      --link: #226999;
+      --accent: #1a1a1a;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { background: #fff; }
+    body {
+      font-family: 'CMU Serif', Georgia, serif;
+      font-weight: 500;
+      color: var(--ink);
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+    a { color: var(--link); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    a:focus-visible { outline: 2px solid var(--link); outline-offset: 2px; border-radius: 2px; }
+
+    .container { max-width: 920px; margin: 0 auto; padding: 0 20px; }
+    .has-text-centered { text-align: center; }
+    .has-text-justified { text-align: justify; }
+
+    .hero { padding: 4.2rem 0 1.6rem; }
+    .publication-title {
+      font-family: 'CMU Serif', Georgia, serif;
+      font-weight: 700 !important;
+      line-height: 1.16;
+      letter-spacing: 0;
+      font-size: 2.3rem;
+      text-wrap: balance;
+    }
+    .publication-sub {
+      font-family: 'CMU Serif', Georgia, serif;
+      font-size: 1.2rem;
+      color: var(--muted);
+      line-height: 1.55;
+      max-width: 740px;
+      margin: 1rem auto 0;
+    }
+    .publication-authors {
+      font-family: 'CMU Serif', Georgia, serif;
+      font-size: 1.05rem;
+      margin-top: 1.1rem;
+      color: var(--muted);
+    }
+    .publication-venue {
+      color: var(--faint);
+      font-size: 0.95rem;
+      margin-top: 0.35rem;
+      font-style: italic;
+    }
+
+    .publication-links { margin-top: 1.5rem; display: flex; flex-wrap: wrap; justify-content: center; gap: 0.6rem; }
+    .external-link.button {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.88rem;
+      font-weight: 400;
+      letter-spacing: 0.03em;
+      border-radius: 8px;
+      padding: 0.55em 1.2em;
+      transition: background-color 0.15s ease, color 0.15s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5em;
+      background-color: var(--panel);
+      color: var(--faint);
+      text-decoration: none;
+      border: 1px solid transparent;
+    }
+    .external-link.button:hover { background-color: #eeeeee; color: var(--faint); }
+    .external-link.button .icon { display: inline-flex; }
+    .external-link.button svg { width: 15px; height: 15px; fill: currentColor; }
+
+    .section { padding: 2.6rem 0; }
+    .title {
+      font-family: 'CMU Serif', Georgia, serif;
+      font-size: 1.6rem;
+      font-weight: 700;
+      letter-spacing: 0;
+      text-align: center;
+      margin-bottom: 1.2rem;
+    }
+    .content p {
+      font-family: 'CMU Serif', Georgia, serif;
+      line-height: 1.72;
+      margin: 0.9rem 0;
+      font-size: 1.02rem;
+    }
+    .content strong { font-weight: 700; }
+
+    .abstract-box {
+      background-color: var(--panel);
+      border-radius: 8px;
+      padding: 2rem 2.5rem;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+    .abstract-box .title { margin-bottom: 0.8rem; }
+    @media (max-width: 640px) { .abstract-box { padding: 1.4rem 1.4rem; } }
+
+    .scope-box {
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--ink);
+      border-radius: 4px;
+      padding: 1.2rem 1.6rem;
+      margin: 1.4rem auto 0;
+      max-width: 700px;
+      background: #fff;
+    }
+    .scope-box p { margin: 0.5rem 0; font-size: 0.98rem; }
+
+    .impact-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      gap: 1rem;
+      margin: 1.4rem auto 0;
+      max-width: 900px;
+    }
+    .impact {
+      background: var(--panel);
+      border: 1px solid #e4e4e4;
+      border-radius: 10px;
+      padding: 1.1rem 1.4rem 1.3rem;
+    }
+    .impact .impact-num {
+      font-family: 'CMU Serif', Georgia, serif;
+      font-weight: 900;
+      font-size: 1.4rem;
+      color: var(--accent);
+      line-height: 1;
+      margin-bottom: 0.5rem;
+    }
+    .impact h4 {
+      font-family: 'CMU Serif', Georgia, serif;
+      font-size: 1.02rem;
+      font-weight: 700;
+      margin-bottom: 0.4rem;
+    }
+    .impact p { font-size: 0.9rem; line-height: 1.5; color: var(--muted); }
+    .impact p b { color: var(--ink); }
+
+    .figure { margin: 1.8rem auto 0; max-width: 780px; }
+    .figure img {
+      width: 100%;
+      height: auto;
+      display: block;
+      margin: 0 auto;
+      border: 1px solid #e4e4e4;
+      border-radius: 6px;
+    }
+    .figure .cap {
+      font-size: 0.9rem;
+      color: var(--muted);
+      text-align: center;
+      margin-top: 0.6rem;
+      line-height: 1.55;
+    }
+    .figure .cap b { color: var(--ink); }
+
+    ul.limits { max-width: 780px; margin: 1rem auto 0; padding-left: 1.3rem; }
+    ul.limits li { margin: 0.55rem 0; line-height: 1.6; font-size: 0.98rem; }
+
+    pre {
+      background-color: var(--panel);
+      border-radius: 8px;
+      border: none;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.8rem;
+      color: var(--faint);
+      padding: 1.5rem 2rem;
+      overflow-x: auto;
+      line-height: 1.6;
+      margin: 1.2rem 0;
+    }
+    code { font-family: 'IBM Plex Mono', monospace; font-size: 0.92em; }
+
+    .eq { text-align: center; margin: 1.2rem 0; font-size: 1.02rem; overflow-x: auto; }
+
+    .footer {
+      margin-top: 3rem;
+      padding: 2rem 0 3.5rem;
+      border-top: 1px solid #e6e6e6;
+      text-align: center;
+      color: var(--faint);
+      font-size: 0.85rem;
+      line-height: 1.7;
+    }
+    .footer a { color: var(--link); }
+    .note { color: var(--muted); font-size: 0.92rem; }
+
+    @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+  </style>
+</head>
+<body>
+
+<section class="hero">
+  <div class="container has-text-centered">
+    <h1 class="publication-title">Certified Safety Margins for a<br>Transformer Residual Stream</h1>
+    <p class="publication-sub">A strict Lyapunov decrease certificate is <strong>infeasible</strong> for this
+      model — measured spectral radius 1.273 against a threshold of 1 — so the obligation is restated as bounded
+      finite-horizon growth: proved by sound branch-and-bound, never sampled. This page reports what that
+      restatement buys, where it stops scaling, and one comparison this project's own compute environment could
+      not finish.</p>
+    <p class="publication-authors">Sehaj Singh</p>
+    <p class="publication-venue">Independent research &middot; formal verification of a toy transformer &middot; 2026</p>
+
+    <div class="publication-links">
+      <a class="external-link button" href="papers/nmi_paper.pdf">
+        <span class="icon"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6zm-1 7V3.5L18.5 9H13zm1 9h-4v-2h4v2zm0-4h-4v-2h4v2z"/></svg></span>
+        Paper (Nature-style)
+      </a>
+      <a class="external-link button" href="papers/ieee_paper.pdf">
+        <span class="icon"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6zm-1 7V3.5L18.5 9H13zm1 9h-4v-2h4v2zm0-4h-4v-2h4v2z"/></svg></span>
+        Paper (IEEE)
+      </a>
+      <a class="external-link button" href="https://github.com/sehajr-singhs/transformer-residual-stream-verification">
+        <span class="icon"><svg viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg></span>
+        Code
+      </a>
+      <a class="external-link button" href="../MANUSCRIPT.md">
+        <span class="icon"><svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-2 14H7v-2h10v2zm0-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg></span>
+        Full manuscript
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="section" style="padding-top: 0.5rem;">
+  <div class="container">
+    <div class="abstract-box">
+      <h2 class="title">Abstract</h2>
+      <div class="content has-text-justified">
+        <p>This paper reports three narrow, measured results on small transformers and states plainly what they
+          do and do not support. All three are scoped to two toy systems: a 2-layer, <code>d_model=32</code>,
+          <strong>26,144-parameter</strong> transformer trained on a synthetic feature-routing task, and a family
+          of up to 4-layer, <code>d_model</code> up to 256, at most 300,000-parameter character-language models
+          trained on TinyShakespeare. Neither has been shown to hold at production scale. On the routing-task
+          model, a strict contraction certificate for the residual-stream deviation dynamics is infeasible: the
+          measured spectral radius on the certified subspace is <strong>1.273</strong>, above the threshold of 1
+          required for any positive-definite Lyapunov function to exist. Depth compounds the same difficulty on
+          the character-language models in a way that does not follow a smooth power law. Putting a sound
+          interval-bound term into the training loss collapses the run-to-run spread of the certified gap from
+          <strong>1705&times; to 1.08&times;</strong> at the one grid cell where it converges — 18 of 18 other
+          cells diverged, and a further 9 of 9 runs diverged under three deliberately gentler schedules run
+          specifically to test whether that limit would move. No claim in this paper has been demonstrated to
+          transfer to a production model, and none of the results is offered as a general law of transformer
+          architectures.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" style="border-top: 1px solid #eee;">
+  <div class="container">
+    <h2 class="title">Scope, read first</h2>
+    <div class="scope-box">
+      <p><strong>What this is.</strong> A sound, from-scratch hybrid-zonotope branch-and-bound certifier for a
+        26k-parameter, 2-layer transformer, plus a scaling study on up to 300k-parameter character-language
+        models. Every number is read from a <code>results/*.json</code> file by a generator script; nothing in
+        either paper is hand-typed.</p>
+      <p><strong>What this is not.</strong> A production-scale result, a general theorem about transformer
+        architectures, or a claim that any of the four safety-relevant findings below transfer past the two toy
+        systems they were measured on.</p>
+      <p><strong>What's reported as failing, not hidden.</strong> An independent auto_LiRPA/CROWN baseline
+        attempted four times and never completed in this compute environment (documented, not fabricated — see
+        Results). A schedule search run specifically to make certified training converge past
+        <code>d_model=32</code>, which did not succeed (9 of 9 runs diverged). Both are written into the papers
+        as negative results, not omitted.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section" style="border-top: 1px solid #eee;">
+  <div class="container">
+    <h2 class="title">The bet</h2>
+    <div class="content has-text-justified">
+      <p>Treat the residual stream as a discrete-time nonlinear dynamical system with the layer index as time,
+        work in deviation coordinates \(e_l = x_l - x^*_l\) around a nominal trajectory, and formalize alignment
+        safety as an invariant sublevel set of a positive-definite \(V\) whose behaviour along layers is
+        <em>proved</em> rather than sampled:</p>
+      <div class="eq">\[
+        x_{l+1} = x_l + \mathrm{Attn}_l(\mathrm{LN}(x_l)) + \mathrm{MLP}_l\big(\mathrm{LN}(x_l + \mathrm{Attn}_l(\mathrm{LN}(x_l)))\big)
+      \]</div>
+      <p><strong>Threat model.</strong> Activation steering along 4 SAE decoder directions at the final token,
+        \(e = \sum_j \alpha_j U_j\), \(|\alpha_j| \le \rho\). <strong>Safety property.</strong> The unsafe-logit
+        margin \(s(x) = \max_{v\in\text{unsafe}} \text{logit}_v - \max_{v\in\text{safe}} \text{logit}_v\) stays
+        negative. Bridging this to any real notion of harmful behaviour is a semantic assumption, stated as one,
+        not a proved step.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section" style="border-top: 1px solid #eee;">
+  <div class="container">
+    <h2 class="title">What survived contact with the mathematics</h2>
+    <div class="content has-text-justified">
+      <p>Two of the original design assumptions did not, and both are load-bearing rather than embarrassing —
+        the paper's actual contribution is what replaces them.</p>
+      <p><strong>1. Strict decrease is infeasible, not just hard.</strong> A positive-definite \(V\) with
+        \(V(e') \le \gamma V(e)\), \(\gamma < 1\), exists <strong>iff</strong> the deviation dynamics has
+        spectral radius below 1 — standard Lyapunov theory, not a new claim. Measured on the certified subspace
+        it is <strong>1.273</strong>. No relaxation tightening or training schedule can produce that certificate,
+        so the obligation is restated as bounded finite-horizon growth: certify the smallest provable
+        \(\gamma_l\) per layer and compose. Still by construction, still sampling-free.</p>
+      <p><strong>2. Small-gain composition cannot certify a residual stream.</strong> The exact identity path
+        forces \(\gamma_{\text{layer}} \ge 1\) unconditionally; the measured cascade product is 5562.9.
+        Contraction would have to come from sign-aware cancellation, which a norm gain discards by construction.
+        The compositional payoff here is O(L) independent discharge, not gain multiplication.</p>
+    </div>
+    <div class="figure">
+      <img src="figs/fig2_contraction_infeasibility.png" alt="Measured deviation spectral radius 1.273 against the contraction boundary of spectral radius 1">
+      <div class="cap"><b>Figure 1.</b> Measured deviation spectral radius (1.273) against the contraction
+        boundary (spectral radius = 1). Above this line, no positive-definite Lyapunov function with strict
+        decrease can exist for this model.</div>
+    </div>
+  </div>
+</section>
+
+<section class="section" style="border-top: 1px solid #eee;">
+  <div class="container">
+    <h2 class="title">Results</h2>
+    <div class="content has-text-justified">
+      <p>By sound hybrid-zonotope branch-and-bound at 2048 boxes, the certified radius reaches
+        <strong>\(\rho = 0.04\)</strong>. Independent falsification across <strong>3209 discharged boxes</strong>
+        (2048 samples plus 30-step PGD each) finds no violation of any box's own bound and exact coverage of the
+        threat set. z3 over exact rationals confirms the margin readout 8/8 sound, 7/8 tight — and it is the
+        tightness query, not a soundness-only test, that caught a real bug: a sound-but-loose readout inflating
+        the bound by ~11.7 logits.</p>
+    </div>
+    <div class="impact-grid">
+      <div class="impact">
+        <div class="impact-num">3209 / 1.0000</div>
+        <h4>Independent falsification</h4>
+        <p>discharged boxes replayed with sampling + PGD; exact coverage of the threat set, zero violations</p>
+      </div>
+      <div class="impact">
+        <div class="impact-num">8/8, 7/8</div>
+        <h4>z3 exact-rational check</h4>
+        <p>margin readout sound / tight; caught an ~11.7-logit readout bug a soundness-only test would have missed</p>
+      </div>
+      <div class="impact">
+        <div class="impact-num">4.7e8&times;</div>
+        <h4>Why the cheap engines fail</h4>
+        <p>amplification through two blocks for any decorrelating abstraction — motivates the structure-preserving prover</p>
+      </div>
+      <div class="impact">
+        <div class="impact-num">11.12 &rarr; 2.46</div>
+        <h4>Fixed-scale normalizer</h4>
+        <p>fitted width-scaling exponent on random init — the wall is delayed, not removed, and still super-linear</p>
+      </div>
+    </div>
+    <div class="figure">
+      <img src="figs/fig1_softmax_bottleneck.png" alt="A state-of-the-art linear relaxation improves the layer-0 attention bound by only 0.3 percent over a plain interval bound">
+      <div class="cap"><b>Figure 2.</b> Layer-0 attention: a state-of-the-art linear relaxation improves the
+        bound by only 0.3% over a plain interval bound. The bottleneck is representational, not the tightness of
+        this relaxation.</div>
+    </div>
+    <div class="figure">
+      <img src="figs/fig3_layernorm_tax.png" alt="Relaxation gap across depth and width, standard versus fixnorm, log scale">
+      <div class="cap"><b>Figure 3.</b> Relaxation gap across depth and width, standard vs. fixnorm, log scale.
+        The fixed-norm variant stays inside the certifiable band (gap &lt; 1000) across the entire L=4 row;
+        standard leaves it at the first cell tested.</div>
+    </div>
+  </div>
+</section>
+
+<section class="section" style="border-top: 1px solid #eee;">
+  <div class="container">
+    <h2 class="title">Cross-engine check: partially closed</h2>
+    <div class="content has-text-justified">
+      <p>Two from-scratch reference engines (interval-bound, mean-value-form) are vacuous on this model — any
+        decorrelating abstraction amplifies 4.7&times;10<sup>8</sup> through two blocks, so the final
+        LayerNorm's structural clamp is all that keeps the bound finite. A CROWN-style engine built specifically
+        to keep the 4-dimensional steering structure exact still loses, and the loss is localized: it tracks the
+        prover to 1.61&times; at layer-0 LayerNorm and diverges to 39.5&times; (prover: 3.86&times;) at layer-0
+        attention, because softmax uncertainty enters as interval coefficients.</p>
+      <p><strong>The auto_LiRPA baseline — reported as an attempt, not a result.</strong> An independent
+        comparison against auto_LiRPA's CROWN implementation, on this exact trained model and threat model, was
+        attempted four separate times. auto_LiRPA itself is verified working in this environment — a standalone
+        two-layer MLP returns a CROWN bound in under a second, and this project's own tail model wrapped in
+        <code>BoundedModule</code> returns a real bound in isolation. The full comparison (retrain, then wrap)
+        never completed across four attempts, at system loads ranging from 47% to 100% to a normal 45% — a
+        spread that rules out simple resource contention as the sole explanation, and the actual cause was not
+        further diagnosed. Both halves of the comparison are independently verified working; the code that runs
+        it is <code>audit/c31_autolirpa_baseline.py</code>; this project's local compute environment did not
+        produce a completed run. That is the honest status, reported in Section III-C of the IEEE paper rather
+        than left out.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section" style="border-top: 1px solid #eee;">
+  <div class="container">
+    <h2 class="title">Certified training and the schedule search that didn't close the gap</h2>
+    <div class="content has-text-justified">
+      <p>Putting a sound interval-bound term into the training loss collapses the run-to-run spread of the
+        certified gap from <strong>1705&times; to 1.08&times;</strong> at \(L=2\), \(d_{\text{model}}=32\),
+        fixnorm, with zero unstable ReLUs on every converged run, at a perplexity cost of 13.3–28.0%. This is
+        reported for exactly the one cell where it holds: 18 of 18 other (depth, width, arm) combinations
+        diverged at every learning rate under the schedule used throughout.</p>
+      <p>Three deliberately gentler epsilon-ramp schedules were then run specifically to test whether that limit
+        was an artifact of one schedule choice — a smaller target radius, a much slower ramp, and both combined,
+        three seeds each at \(L=2\), \(d_{\text{model}}=64\). <strong>All 9 runs diverged.</strong> This rules
+        out the two most obvious fixes without ruling out every possible schedule in a space too large to search
+        exhaustively here. The question was tested directly rather than left open, and the answer at this
+        compute budget is still divergence.</p>
+    </div>
+    <div class="figure">
+      <img src="figs/fig4_certified_variance_collapse.png" alt="Certified-by-construction training collapses run-to-run verifiability variance from a 1705x spread to a 1.08x spread">
+      <div class="cap"><b>Figure 4.</b> Certified-by-construction training collapses run-to-run verifiability
+        variance from a ~1705&times; spread under ordinary training to a ~1.08&times; spread, with zero unstable
+        ReLUs on every converged run. Points are real per-seed measurements, not illustrative.</div>
+    </div>
+    <div class="figure">
+      <img src="figs/fig6_verifiability_cost_tradeoff.png" alt="Relaxation-gap improvement from removing LayerNorm's data-dependent scale, at a flat 1.8 percent perplexity cost">
+      <div class="cap"><b>Figure 5.</b> On real character-level language modelling (TinyShakespeare, no accuracy
+        ceiling to hide a penalty behind), the verifiability gain grows 83.2&times; &rarr; 879.3&times; from
+        <code>d_model</code> 32 to 64 for a flat ~1.8% perplexity cost.</div>
+    </div>
+  </div>
+</section>
+
+<section class="section" style="border-top: 1px solid #eee;">
+  <div class="container">
+    <h2 class="title">Adversarial stress test</h2>
+    <div class="content has-text-justified">
+      <p>A gradient-based search against the differentiable training-signal engine (interval arithmetic, not the
+        certifying prover) finds real, repeatable out-of-distribution sensitivity: a 16.9&times; relaxation-gap
+        increase on repeated-token contexts, reproduced in 5 of 5 restarts. Checked black-box against the actual
+        certifying zonotope prover — never part of the gradient search — the same adversarial context shifts the
+        sound bound by only <strong>1.05&times;</strong>, both points remaining far inside the certified band
+        with exact containment (worst violation 8.9e-15, float noise). One context pair, not a swept claim in
+        either direction — but the direction is the interesting one: the correlation-preserving engine did not
+        inherit the differentiable engine's blind spot on this search.</p>
+    </div>
+    <div class="figure">
+      <img src="figs/fig5_nonmonotone_activation_soundness.png" alt="Golden-section bound for non-monotone activations: a naive endpoint bound is unsound wherever the interval straddles the interior minimum">
+      <div class="cap"><b>Figure 6.</b> The golden-section bound for non-monotone activations (GeLU shown): a
+        naive endpoint bound is unsound wherever the interval straddles the interior minimum; the golden-section
+        bound is not. This is the differentiable engine the adversarial search in the paper was run against.</div>
+    </div>
+  </div>
+</section>
+
+<section class="section" style="border-top: 1px solid #eee;">
+  <div class="container">
+    <h2 class="title">Limitations, stated plainly</h2>
+    <ul class="limits">
+      <li>This is a 26,144-parameter toy transformer on a synthetic task. Nothing has been shown to scale, and
+        the unstable-ReLU mechanism worsens with width and depth.</li>
+      <li>The empirical radius is an <em>upper</em> bound on the true robust radius. PGD failing to break a
+        bound proves nothing beyond PGD's own failure, because PGD is incomplete.</li>
+      <li>The end-to-end bound has no independent confirmation past the primitives z3 checked and the partial
+        CROWN comparison above.</li>
+      <li>Safety is an unsafe-logit margin over a designated token subset. Bridging this to any real notion of
+        harmful behaviour is a semantic assumption, not a proved step.</li>
+      <li>The certificate covers a fixed discrete context; only the continuous perturbation is quantified over.</li>
+      <li>The language-modelling evidence removes the accuracy-ceiling confound but does not add scale: 2
+        layers, an 8-character context, a 1&nbsp;MB corpus. It reports no safety margin — only a relaxation gap.</li>
+      <li>The adversarial search only reaches the differentiable training-signal engine, never the zonotope
+        prover directly; the zonotope result is a single black-box context pair.</li>
+    </ul>
+  </div>
+</section>
+
+<section class="section" style="border-top: 1px solid #eee;">
+  <div class="container">
+    <h2 class="title">Run it yourself</h2>
+    <div class="content has-text-justified">
+      <p>The Anaconda build this was developed against ships a duplicate <code>libiomp5md.dll</code>;
+        <code>src/__init__.py</code> pins <code>KMP_DUPLICATE_LIB_OK</code> before torch is imported, so import
+        <code>src</code> first. Every number in the papers is regenerated from <code>results/*.json</code> by
+        these scripts, never hand-typed.</p>
+    </div>
+    <pre>pip install -r requirements.txt
+python tests/smoke.py             # fast sanity + soundness
+python tests/test_alignment.py    # the invariant that bit us
+python stages/a0_bootstrap.py     # full pipeline (~15 min, CPU)
+python src/report.py              # regenerate ARCHITECTURE.md
+python audit/report_manuscript.py # regenerate MANUSCRIPT.md from results/
+python audit/verify_bundle.py     # gate: every artifact present, synced, hashed</pre>
+    <div class="content has-text-justified">
+      <p>See the <a href="https://github.com/sehajr-singhs/transformer-residual-stream-verification">repository</a>
+        for the full README, soundness discipline, and the 30-script audit trail. LaTeX sources for both papers
+        (<code>nmi_paper.tex</code>, <code>ieee_paper.tex</code>) are included and regenerate with
+        <code>pdflatex</code> against the real Springer Nature and IEEE templates.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section" style="padding-top: 0.5rem;">
+  <div class="container">
+    <h2 class="title">Citation (BibTeX)</h2>
+    <pre>@article{singh2026certified,
+  title   = {Certified Safety Margins for a Transformer Residual Stream},
+  author  = {Singh, Sehaj},
+  year    = {2026},
+  note    = {Sound hybrid-zonotope branch-and-bound certification of a toy
+             transformer's residual stream; scaling and certified-training
+             study on character-language models},
+  url     = {https://github.com/sehajr-singhs/transformer-residual-stream-verification}
+}</pre>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <p>Independent research &middot; code MIT licensed &middot; <a href="papers/">papers/</a> &middot;
+      <a href="../MANUSCRIPT.md">full manuscript</a> &middot;
+      <a href="https://github.com/sehajr-singhs/transformer-residual-stream-verification">source</a></p>
+  </div>
+</footer>
+
+</body>
+</html>

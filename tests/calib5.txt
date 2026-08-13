@@ -1,0 +1,6 @@
+  rho=0.04   PGD max margin=-11.3371  broken=False
+  rho=0.1    PGD max margin=-11.3151  broken=False
+  rho=0.3    PGD max margin=-11.2328  broken=False
+  rho=1.0    PGD max margin=-10.6418  broken=False
+  rho=3.0    PGD max margin=-3.7004  broken=False
+  rho=10.0   PGD max margin=+4.0073  broken=True

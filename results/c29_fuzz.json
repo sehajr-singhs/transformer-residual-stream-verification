@@ -1,0 +1,289 @@
+{
+  "config": {
+    "d": 32,
+    "layers": 2,
+    "lr": 0.003,
+    "train_seed": 0,
+    "eps": 0.05,
+    "restarts": 5,
+    "steps": 300,
+    "tau": 1.0,
+    "fuzz_lr": 0.3,
+    "n_sample": 2000,
+    "baseline_anchors": 8
+  },
+  "training": {
+    "variant": "fixnorm",
+    "seed": 0,
+    "d_model": 32,
+    "n_layers": 2,
+    "arch": {
+      "norm": "standard",
+      "activation": "relu",
+      "mlp": "standard",
+      "norm_floor": 0.5,
+      "stock": true
+    },
+    "lr": 0.003,
+    "eps_train": 0.05,
+    "kappa_final": 0.5,
+    "steps_run": 3000,
+    "diverged": false,
+    "val_ce": 2.293933391571045,
+    "val_ppl": 9.913856168460336,
+    "val_bpc": 3.3094463281491473,
+    "train_seconds": 6117.436935186386,
+    "sec_per_step": 2.0391456450621286,
+    "n_params": 29632
+  },
+  "baselines": [
+    {
+      "bound_width": 1.7948102951049805,
+      "attained_width": 0.2619647979736328,
+      "relaxation_gap": 6.851341512250173,
+      "context": [
+        43,
+        2,
+        1,
+        46,
+        39,
+        52,
+        45,
+        1
+      ],
+      "prompt": "e! hang "
+    },
+    {
+      "bound_width": 1.8583641052246094,
+      "attained_width": 0.260988712310791,
+      "relaxation_gap": 7.12047693086293,
+      "context": [
+        51,
+        43,
+        6,
+        0,
+        35,
+        46,
+        47,
+        50
+      ],
+      "prompt": "me,\nWhil"
+    },
+    {
+      "bound_width": 1.8706741333007812,
+      "attained_width": 0.2778348922729492,
+      "relaxation_gap": 6.733042484321957,
+      "context": [
+        52,
+        1,
+        44,
+        56,
+        53,
+        51,
+        1,
+        39
+      ],
+      "prompt": "n from a"
+    },
+    {
+      "bound_width": 1.7584400177001953,
+      "attained_width": 0.2906508445739746,
+      "relaxation_gap": 6.050008284949773,
+      "context": [
+        39,
+        47,
+        58,
+        46,
+        6,
+        1,
+        46,
+        43
+      ],
+      "prompt": "aith, he"
+    },
+    {
+      "bound_width": 1.7519378662109375,
+      "attained_width": 0.2632274627685547,
+      "relaxation_gap": 6.655604425862456,
+      "context": [
+        50,
+        50,
+        6,
+        0,
+        32,
+        46,
+        53,
+        59
+      ],
+      "prompt": "ll,\nThou"
+    },
+    {
+      "bound_width": 2.4410839080810547,
+      "attained_width": 0.2797985076904297,
+      "relaxation_gap": 8.72443505231944,
+      "context": [
+        39,
+        52,
+        47,
+        53,
+        1,
+        42,
+        47,
+        42
+      ],
+      "prompt": "anio did"
+    },
+    {
+      "bound_width": 1.9335203170776367,
+      "attained_width": 0.3055839538574219,
+      "relaxation_gap": 6.327296615776399,
+      "context": [
+        57,
+        58,
+        59,
+        44,
+        44,
+        8,
+        0,
+        0
+      ],
+      "prompt": "stuff.\n\n"
+    },
+    {
+      "bound_width": 1.7896060943603516,
+      "attained_width": 0.2747669219970703,
+      "relaxation_gap": 6.513178811165025,
+      "context": [
+        57,
+        6,
+        1,
+        39,
+        52,
+        42,
+        1,
+        58
+      ],
+      "prompt": "s, and t"
+    }
+  ],
+  "adversarial_restarts": [
+    {
+      "bound_width": 61.06025695800781,
+      "attained_width": 0.5715398788452148,
+      "relaxation_gap": 106.8346395729706,
+      "context": [
+        1,
+        64,
+        29,
+        29,
+        29,
+        29,
+        29,
+        8
+      ],
+      "prompt": " zQQQQQ.",
+      "soft_bound_at_snap": 63.5096549987793
+    },
+    {
+      "bound_width": 61.06025695800781,
+      "attained_width": 0.5411081314086914,
+      "relaxation_gap": 112.84298537345367,
+      "context": [
+        1,
+        64,
+        29,
+        29,
+        29,
+        29,
+        29,
+        8
+      ],
+      "prompt": " zQQQQQ.",
+      "soft_bound_at_snap": 63.47828674316406
+    },
+    {
+      "bound_width": 60.16470718383789,
+      "attained_width": 0.5973129272460938,
+      "relaxation_gap": 100.72560703018227,
+      "context": [
+        1,
+        23,
+        29,
+        29,
+        29,
+        29,
+        29,
+        8
+      ],
+      "prompt": " KQQQQQ.",
+      "soft_bound_at_snap": 62.95015335083008
+    },
+    {
+      "bound_width": 61.95014190673828,
+      "attained_width": 0.5671501159667969,
+      "relaxation_gap": 109.23059021355306,
+      "context": [
+        1,
+        29,
+        29,
+        29,
+        29,
+        29,
+        3,
+        8
+      ],
+      "prompt": " QQQQQ$.",
+      "soft_bound_at_snap": 65.06671142578125
+    },
+    {
+      "bound_width": 46.40608596801758,
+      "attained_width": 0.7285003662109375,
+      "relaxation_gap": 63.700840960978574,
+      "context": [
+        29,
+        29,
+        29,
+        29,
+        29,
+        8,
+        29,
+        29
+      ],
+      "prompt": "QQQQQ.QQ",
+      "soft_bound_at_snap": 46.40565490722656
+    }
+  ],
+  "verdict": {
+    "baseline_median_gap": 6.694323455092206,
+    "baseline_max_gap": 8.72443505231944,
+    "adversarial_max_gap": 112.84298537345367,
+    "adversarial_median_gap": 106.8346395729706,
+    "ratio_adv_max_over_baseline_median": 16.856518232266893,
+    "exceeded_gap_meaningful_1e3": false,
+    "n_restarts": 5,
+    "n_steps_per_restart": 300
+  },
+  "numpy_zonotope_crosscheck": {
+    "note": "black-box eval of the ACTUAL certifying engine (not attacked directly -- not differentiable) on the torch-IBP fuzzer's winning context, at the real certified rho=0.02",
+    "natural_context": "e! hang ",
+    "natural": {
+      "bound_width": 0.042601161680797306,
+      "attained_width": 0.039129409977785024,
+      "relaxation_gap": 1.0887248671774836,
+      "gap_meaningful": true,
+      "unstable_relus": 0,
+      "max_containment_violation": 3.552713678800501e-15,
+      "rho": 0.02
+    },
+    "adversarial_context": " zQQQQQ.",
+    "adversarial": {
+      "bound_width": 0.08942993740347127,
+      "attained_width": 0.07800382753812407,
+      "relaxation_gap": 1.146481400028258,
+      "gap_meaningful": true,
+      "unstable_relus": 0,
+      "max_containment_violation": 8.881784197001252e-15,
+      "rho": 0.02
+    }
+  }
+}

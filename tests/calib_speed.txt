@@ -1,0 +1,17 @@
+config                     rho  m_out   margin bound   ms/box
+no-promote (m=4)         0.002      4     1.6961e+02     0.66
+no-promote (m=4)         0.005      4     3.2655e+09     0.63
+promote k=16             0.002     16     1.7798e+00    62.30
+promote k=16             0.005     16     2.9157e+02    59.08
+promote k=48             0.002     48     7.4141e-01    54.85
+promote k=48             0.005     48     6.6866e+00    55.92
+promote full             0.002    192     6.0594e-01    84.34
+promote full             0.005    192     3.1558e+00   105.22
+
+BaB with the cheap configuration (no promotion), generous box budget:
+     rho  proved        worst   boxes      reason    sec
+   0.001   False   1.4767e+00   32767   max_boxes   64.4
+   0.002   False   2.8766e+00   32767   max_boxes   56.6
+   0.003   False   4.5202e+00   32767   max_boxes   59.6
+   0.005   False   8.2411e+00   32767   max_boxes   61.5
+    0.01   False   2.1595e+01   32767   max_boxes   62.6

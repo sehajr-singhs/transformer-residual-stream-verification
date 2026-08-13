@@ -1,0 +1,8 @@
+__pycache__/
+*.pyc
+.venv/
+venv/
+*.egg-info/
+results/c24_cache_local/
+.DS_Store
+Thumbs.db

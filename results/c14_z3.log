@@ -1,0 +1,26 @@
+[    0.3s] rebuilt; feature_ids=[8, 31, 7, 50]  z3 5.0.0
+[   28.7s] prover discharges 128 boxes at rho=0.02; auditing 8
+[  229.3s]   box 100: margin -1.6212  soundness=unsat  tightness=unknown
+[  503.4s]   box 100: relu containment = unknown  (128 units, 100 symbols)
+[  752.7s]   box 100: layernorm containment = unknown
+[  818.6s]   box 80: margin -1.5668  soundness=unsat  tightness=sat
+[ 1040.0s]   box 80: relu containment = unknown  (128 units, 100 symbols)
+[ 1285.4s]   box 80: layernorm containment = unknown
+[ 1309.3s]   box 58: margin -1.7353  soundness=unsat  tightness=sat
+[ 1492.2s]   box 58: relu containment = unknown  (128 units, 100 symbols)
+[ 1527.8s]   box 2: margin -1.5706  soundness=unsat  tightness=sat
+[ 1569.9s]   box 64: margin -1.5333  soundness=unsat  tightness=sat
+[ 1595.1s]   box 98: margin -1.6250  soundness=unsat  tightness=sat
+[ 1624.2s]   box 81: margin -1.6316  soundness=unsat  tightness=sat
+[ 1664.3s]   box 36: margin -1.5821  soundness=unsat  tightness=sat
+Traceback (most recent call last):
+  File "C:\Users\sehaj\experiments\ai_safety_lyapunov\audit\z3_primitives.py", line 289, in <module>
+    "margin_soundness": tally(rep["margin_readout"], "sound"),
+                        ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\sehaj\experiments\ai_safety_lyapunov\audit\z3_primitives.py", line 282, in tally
+    return {"conclusive": sum(1 for r in rows if r["query"] in ("sat", "unsat")),
+                          ~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\sehaj\experiments\ai_safety_lyapunov\audit\z3_primitives.py", line 282, in <genexpr>
+    return {"conclusive": sum(1 for r in rows if r["query"] in ("sat", "unsat")),
+                                                 ~^^^^^^^^^
+KeyError: 'query'

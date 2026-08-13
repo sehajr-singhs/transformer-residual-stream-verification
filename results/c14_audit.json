@@ -1,0 +1,194 @@
+{
+  "config": {
+    "rhos": [
+      0.005,
+      0.01,
+      0.02,
+      0.03,
+      0.04,
+      0.06
+    ],
+    "samples_per_box": 2048,
+    "pgd_steps": 30,
+    "k": 4,
+    "feature_ids": [
+      8,
+      31,
+      7,
+      50
+    ],
+    "seed": 0
+  },
+  "reference_engine": {
+    "validated_against_torch_at_rho0": true
+  },
+  "per_rho": {
+    "0.005": {
+      "prover_proved": true,
+      "baseline_claimed": true,
+      "replay_agrees_with_baseline": true,
+      "discharged_boxes": 1,
+      "boxes_audited": 1,
+      "coverage": {
+        "volume_fraction": 1.0000000000000002,
+        "random_point_coverage": 1.0,
+        "tiles_the_box": true
+      },
+      "falsification": {
+        "samples_per_box": 2048,
+        "max_true_margin_found": -11.348885971400252,
+        "max_true_minus_claimed_bound": -3.5378554507275304,
+        "unsound": false,
+        "true_margin_stays_negative": true
+      },
+      "independent_ibp": {
+        "boxes_closed": 0,
+        "boxes_attempted": 1,
+        "fraction_closed": 0.0,
+        "median_bound": 82.11017463278962,
+        "min_bound": 82.11017463278962,
+        "max_bound": 82.11017463278962
+      }
+    },
+    "0.01": {
+      "prover_proved": true,
+      "baseline_claimed": true,
+      "replay_agrees_with_baseline": true,
+      "discharged_boxes": 8,
+      "boxes_audited": 8,
+      "coverage": {
+        "volume_fraction": 1.0000000000000002,
+        "random_point_coverage": 1.0,
+        "tiles_the_box": true
+      },
+      "falsification": {
+        "samples_per_box": 2048,
+        "max_true_margin_found": -11.34722998899094,
+        "max_true_minus_claimed_bound": -9.590411375675131,
+        "unsound": false,
+        "true_margin_stays_negative": true
+      },
+      "independent_ibp": {
+        "boxes_closed": 0,
+        "boxes_attempted": 8,
+        "fraction_closed": 0.0,
+        "median_bound": 82.11017463278962,
+        "min_bound": 82.11017463278962,
+        "max_bound": 82.11017463278962
+      }
+    },
+    "0.02": {
+      "prover_proved": true,
+      "baseline_claimed": true,
+      "replay_agrees_with_baseline": true,
+      "discharged_boxes": 128,
+      "boxes_audited": 128,
+      "coverage": {
+        "volume_fraction": 1.0000000000000002,
+        "random_point_coverage": 1.0,
+        "tiles_the_box": true
+      },
+      "falsification": {
+        "samples_per_box": 2048,
+        "max_true_margin_found": -11.343859302059762,
+        "max_true_minus_claimed_bound": -9.3870130690985,
+        "unsound": false,
+        "true_margin_stays_negative": true
+      },
+      "independent_ibp": {
+        "boxes_closed": 0,
+        "boxes_attempted": 128,
+        "fraction_closed": 0.0,
+        "median_bound": 82.11017463278962,
+        "min_bound": 82.11017463278962,
+        "max_bound": 82.11017463278962
+      }
+    },
+    "0.03": {
+      "prover_proved": true,
+      "baseline_claimed": true,
+      "replay_agrees_with_baseline": true,
+      "discharged_boxes": 1024,
+      "boxes_audited": 1024,
+      "coverage": {
+        "volume_fraction": 1.0000000000000004,
+        "random_point_coverage": 1.0,
+        "tiles_the_box": true
+      },
+      "falsification": {
+        "samples_per_box": 2048,
+        "max_true_margin_found": -11.340497876113428,
+        "max_true_minus_claimed_bound": -5.525631927577522,
+        "unsound": false,
+        "true_margin_stays_negative": true
+      },
+      "independent_ibp": {
+        "boxes_closed": 0,
+        "boxes_attempted": 1024,
+        "fraction_closed": 0.0,
+        "median_bound": 82.11017463278962,
+        "min_bound": 82.11017463278962,
+        "max_bound": 82.11017463278962
+      }
+    },
+    "0.04": {
+      "prover_proved": true,
+      "baseline_claimed": true,
+      "replay_agrees_with_baseline": true,
+      "discharged_boxes": 2048,
+      "boxes_audited": 2048,
+      "coverage": {
+        "volume_fraction": 1.0000000000000002,
+        "random_point_coverage": 1.0,
+        "tiles_the_box": true
+      },
+      "falsification": {
+        "samples_per_box": 2048,
+        "max_true_margin_found": -11.337121463435016,
+        "max_true_minus_claimed_bound": -8.930048881832194,
+        "unsound": false,
+        "true_margin_stays_negative": true
+      },
+      "independent_ibp": {
+        "boxes_closed": 0,
+        "boxes_attempted": 2048,
+        "fraction_closed": 0.0,
+        "median_bound": 82.11017463278962,
+        "min_bound": 82.11017463278962,
+        "max_bound": 82.11017463278962
+      }
+    },
+    "0.06": {
+      "prover_proved": false,
+      "baseline_claimed": false,
+      "replay_agrees_with_baseline": true,
+      "discharged_boxes": 0,
+      "boxes_audited": 0,
+      "coverage": {
+        "volume_fraction": 0.0,
+        "random_point_coverage": 0.0,
+        "tiles_the_box": false
+      },
+      "falsification": {
+        "samples_per_box": 2048,
+        "max_true_margin_found": -Infinity,
+        "max_true_minus_claimed_bound": -Infinity,
+        "unsound": false,
+        "true_margin_stays_negative": true
+      },
+      "independent_ibp": {
+        "boxes_closed": 0,
+        "boxes_attempted": 0,
+        "fraction_closed": null,
+        "median_bound": null,
+        "min_bound": null,
+        "max_bound": null
+      }
+    }
+  },
+  "runtime_sec": 1881.7966721057892,
+  "VERDICT": {
+    "no_unsoundness_found": true,
+    "note": "Falsification failing to find a violation is evidence, not proof. The IBP column is the only genuinely independent SOUND bound here; where it does not close, the box rests on the native engine alone."
+  }
+}

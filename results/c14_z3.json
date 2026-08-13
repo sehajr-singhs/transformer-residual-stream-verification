@@ -1,0 +1,168 @@
+{
+  "config": {
+    "rho": 0.02,
+    "n_boxes": 8,
+    "tol": 1e-06,
+    "timeout_ms": 180000,
+    "z3_version": "5.0.0",
+    "recovered_from": "results/c14_z3.log"
+  },
+  "margin_readout": [
+    {
+      "box": 100,
+      "bound": -1.6212,
+      "soundness_query": "unsat",
+      "tightness_query": "unknown",
+      "sound": true,
+      "tight": false
+    },
+    {
+      "box": 80,
+      "bound": -1.5668,
+      "soundness_query": "unsat",
+      "tightness_query": "sat",
+      "sound": true,
+      "tight": true
+    },
+    {
+      "box": 58,
+      "bound": -1.7353,
+      "soundness_query": "unsat",
+      "tightness_query": "sat",
+      "sound": true,
+      "tight": true
+    },
+    {
+      "box": 2,
+      "bound": -1.5706,
+      "soundness_query": "unsat",
+      "tightness_query": "sat",
+      "sound": true,
+      "tight": true
+    },
+    {
+      "box": 64,
+      "bound": -1.5333,
+      "soundness_query": "unsat",
+      "tightness_query": "sat",
+      "sound": true,
+      "tight": true
+    },
+    {
+      "box": 98,
+      "bound": -1.625,
+      "soundness_query": "unsat",
+      "tightness_query": "sat",
+      "sound": true,
+      "tight": true
+    },
+    {
+      "box": 81,
+      "bound": -1.6316,
+      "soundness_query": "unsat",
+      "tightness_query": "sat",
+      "sound": true,
+      "tight": true
+    },
+    {
+      "box": 36,
+      "bound": -1.5821,
+      "soundness_query": "unsat",
+      "tightness_query": "sat",
+      "sound": true,
+      "tight": true
+    }
+  ],
+  "relu": [
+    {
+      "box": 100,
+      "query": "unknown",
+      "sound": false,
+      "conclusive": false,
+      "n_units": 128,
+      "n_symbols": 100
+    },
+    {
+      "box": 80,
+      "query": "unknown",
+      "sound": false,
+      "conclusive": false,
+      "n_units": 128,
+      "n_symbols": 100
+    },
+    {
+      "box": 58,
+      "query": "unknown",
+      "sound": false,
+      "conclusive": false,
+      "n_units": 128,
+      "n_symbols": 100
+    }
+  ],
+  "layernorm": [
+    {
+      "box": 100,
+      "query": "unknown",
+      "sound": false,
+      "conclusive": false
+    },
+    {
+      "box": 80,
+      "query": "unknown",
+      "sound": false,
+      "conclusive": false
+    }
+  ],
+  "summary": {
+    "margin_soundness": {
+      "conclusive": 8,
+      "attempted": 8,
+      "passed": 8,
+      "queries": [
+        "unsat",
+        "unsat",
+        "unsat",
+        "unsat",
+        "unsat",
+        "unsat",
+        "unsat",
+        "unsat"
+      ]
+    },
+    "margin_tightness": {
+      "passed": 7,
+      "attempted": 8,
+      "queries": [
+        "unknown",
+        "sat",
+        "sat",
+        "sat",
+        "sat",
+        "sat",
+        "sat",
+        "sat"
+      ]
+    },
+    "relu": {
+      "conclusive": 0,
+      "attempted": 3,
+      "passed": 0,
+      "queries": [
+        "unknown",
+        "unknown",
+        "unknown"
+      ]
+    },
+    "layernorm": {
+      "conclusive": 0,
+      "attempted": 2,
+      "passed": 0,
+      "queries": [
+        "unknown",
+        "unknown"
+      ]
+    },
+    "note": "`unknown` is a solver timeout, not a refutation. Only `unsat` on a soundness query is a positive result; only `sat` on a tightness query is."
+  },
+  "runtime_sec": 1664.3
+}

@@ -1,0 +1,309 @@
+{
+  "config": {
+    "steps": 3000,
+    "batch": 256,
+    "lr": 0.003,
+    "warmup": 200,
+    "seeds": 3,
+    "widths": [
+      512
+    ],
+    "layers": [
+      12
+    ],
+    "variants": [
+      "fixnorm"
+    ],
+    "seq_len": 8,
+    "vocab": 65,
+    "rho": 0.0001,
+    "n_heads": 4,
+    "device": "cuda",
+    "gpu": "Tesla T4",
+    "gap_meaningful_threshold": 1000.0,
+    "verify_layers": [
+      2,
+      4
+    ],
+    "verify_widths": [
+      64,
+      128,
+      256
+    ],
+    "fp_train": "d22561792a22e50a",
+    "fp_verify": "74289f0b8fc9fa14",
+    "wall_seconds_total": 519.8
+  },
+  "data": {
+    "name": "tinyshakespeare",
+    "sha256": "86c4e6aa9db7c042ec79f339dcb96d42b0075e16b8fc2e86bf0ca57e2dc565ed",
+    "chars": 1115394,
+    "vocab": 65,
+    "split": "contiguous 90/10 by position"
+  },
+  "runs": [
+    {
+      "variant": "fixnorm",
+      "seed": 0,
+      "d_model": 512,
+      "n_layers": 12,
+      "curve": [
+        {
+          "step": 0,
+          "train_loss": 4.382164001464844,
+          "grad_norm": 5.393772125244141,
+          "val_ce": 4.1400837898254395,
+          "val_ppl": 62.80808390711514
+        },
+        {
+          "step": 100,
+          "train_loss": 2.1939384937286377,
+          "grad_norm": 1.7301499843597412,
+          "val_ce": 2.287199020385742,
+          "val_ppl": 9.847316882741035
+        },
+        {
+          "step": 200,
+          "train_loss": 3156212015169536.0,
+          "grad_norm": 6.79128543900205e+17,
+          "val_ce": 310107778842624.0,
+          "val_ppl": Infinity
+        },
+        {
+          "step": 300,
+          "train_loss": 5291544412160.0,
+          "grad_norm": 365470142169088.0,
+          "val_ce": 5047995334656.0,
+          "val_ppl": Infinity
+        },
+        {
+          "step": 400,
+          "train_loss": 83060087324672.0,
+          "grad_norm": 2694086150586368.0,
+          "val_ce": 69744010985472.0,
+          "val_ppl": Infinity
+        },
+        {
+          "step": 500,
+          "train_loss": 4061227909120.0,
+          "grad_norm": 142256447160320.0,
+          "val_ce": 4968749203456.0,
+          "val_ppl": Infinity
+        },
+        {
+          "step": 600,
+          "train_loss": 1390253965312.0,
+          "grad_norm": 72249646252032.0,
+          "val_ce": 2136151162880.0,
+          "val_ppl": Infinity
+        },
+        {
+          "step": 700,
+          "train_loss": 1226453549056.0,
+          "grad_norm": 59430838206464.0,
+          "val_ce": 1424581984256.0,
+          "val_ppl": Infinity
+        },
+        {
+          "step": 800,
+          "train_loss": 977735122944.0,
+          "grad_norm": 108564886585344.0,
+          "val_ce": 1004488622080.0,
+          "val_ppl": Infinity
+        },
+        {
+          "step": 900,
+          "train_loss": 762154123264.0,
+          "grad_norm": 51441414701056.0,
+          "val_ce": 738116370432.0,
+          "val_ppl": Infinity
+        },
+        {
+          "step": 1000,
+          "train_loss": 857169592320.0,
+          "grad_norm": 70025805299712.0,
+          "val_ce": 949916008448.0,
+          "val_ppl": Infinity
+        },
+        {
+          "step": 1100,
+          "train_loss": 857568313344.0,
+          "grad_norm": 58614064611328.0,
+          "val_ce": 842301702144.0,
+          "val_ppl": Infinity
+        },
+        {
+          "step": 1200,
+          "train_loss": 3209131917836288.0,
+          "grad_norm": 6.833865057579827e+16,
+          "val_ce": 2110654169219072.0,
+          "val_ppl": Infinity
+        },
+        {
+          "step": 1300,
+          "train_loss": 16857723568128.0,
+          "grad_norm": 953386304274432.0,
+          "val_ce": 22193132011520.0,
+          "val_ppl": Infinity
+        },
+        {
+          "step": 1400,
+          "train_loss": 12200955609088.0,
+          "grad_norm": 614785712390144.0,
+          "val_ce": 13351856898048.0,
+          "val_ppl": Infinity
+        },
+        {
+          "step": 1500,
+          "train_loss": 5192684142592.0,
+          "grad_norm": 201679936946176.0,
+          "val_ce": 4670589239296.0,
+          "val_ppl": Infinity
+        },
+        {
+          "step": 1600,
+          "train_loss": 3585994129408.0,
+          "grad_norm": 295459625107456.0,
+          "val_ce": 4313187352576.0,
+          "val_ppl": Infinity
+        },
+        {
+          "step": 1700,
+          "train_loss": 3202665938944.0,
+          "grad_norm": 203391850512384.0,
+          "val_ce": 3951111438336.0,
+          "val_ppl": Infinity
+        },
+        {
+          "step": 1800,
+          "train_loss": 4054830809088.0,
+          "grad_norm": Infinity,
+          "val_ce": 3783680327680.0,
+          "val_ppl": Infinity
+        },
+        {
+          "step": 1900,
+          "train_loss": 2900017283072.0,
+          "grad_norm": Infinity,
+          "val_ce": 3214727446528.0,
+          "val_ppl": Infinity
+        },
+        {
+          "step": 2000,
+          "train_loss": 3066428391424.0,
+          "grad_norm": 367531357372416.0,
+          "val_ce": 2732630736896.0,
+          "val_ppl": Infinity
+        },
+        {
+          "step": 2100,
+          "train_loss": 3552076890112.0,
+          "grad_norm": Infinity,
+          "val_ce": 3024757194752.0,
+          "val_ppl": Infinity
+        },
+        {
+          "step": 2200,
+          "train_loss": 3091069927424.0,
+          "grad_norm": 459173644992512.0,
+          "val_ce": 2570108534784.0,
+          "val_ppl": Infinity
+        },
+        {
+          "step": 2300,
+          "train_loss": 3856763191296.0,
+          "grad_norm": Infinity,
+          "val_ce": 3745750974464.0,
+          "val_ppl": Infinity
+        }
+      ],
+      "val_ce": NaN,
+      "val_ppl": NaN,
+      "val_bpc": NaN,
+      "diverged": true,
+      "final_grad_norm": Infinity,
+      "n_params": 37875712,
+      "train_seconds": 438.6669239997864,
+      "weights_saved": false
+    },
+    {
+      "variant": "fixnorm",
+      "seed": 1,
+      "d_model": 512,
+      "n_layers": 12,
+      "curve": [
+        {
+          "step": 0,
+          "train_loss": 4.38499641418457,
+          "grad_norm": 5.550454139709473,
+          "val_ce": 4.133587837219238,
+          "val_ppl": 62.4014078749387
+        },
+        {
+          "step": 100,
+          "train_loss": 2.1873178482055664,
+          "grad_norm": 1.437076449394226,
+          "val_ce": 2.2547943592071533,
+          "val_ppl": 9.533332666471505
+        }
+      ],
+      "val_ce": NaN,
+      "val_ppl": NaN,
+      "val_bpc": NaN,
+      "diverged": true,
+      "final_grad_norm": 1.437076449394226,
+      "n_params": 37875712,
+      "train_seconds": 40.64274525642395,
+      "weights_saved": false
+    },
+    {
+      "variant": "fixnorm",
+      "seed": 2,
+      "d_model": 512,
+      "n_layers": 12,
+      "curve": [
+        {
+          "step": 0,
+          "train_loss": 4.388760089874268,
+          "grad_norm": 5.450469970703125,
+          "val_ce": 4.164079666137695,
+          "val_ppl": 64.33344693972613
+        },
+        {
+          "step": 100,
+          "train_loss": 2.148171901702881,
+          "grad_norm": 1.546457290649414,
+          "val_ce": 2.2523906230926514,
+          "val_ppl": 9.510444569942173
+        }
+      ],
+      "val_ce": NaN,
+      "val_ppl": NaN,
+      "val_bpc": NaN,
+      "diverged": true,
+      "final_grad_norm": 1.546457290649414,
+      "n_params": 37875712,
+      "train_seconds": 39.90381932258606,
+      "weights_saved": false
+    }
+  ],
+  "summary": {
+    "L12_d512": {
+      "fixnorm": {
+        "n_seeds": 3,
+        "val_ppl_mean": NaN,
+        "val_ppl_std": NaN,
+        "val_ppl_sem": NaN,
+        "any_diverged": true,
+        "n_params": 37875712,
+        "verified": 0,
+        "gap_median": null,
+        "gap_all_finite": false,
+        "gap_meaningful": false,
+        "unstable_median": null,
+        "max_containment_violation": null
+      }
+    }
+  },
+  "note": "Split-metric sweep. Perplexity is measured on the full L x d grid; the relaxation gap is measured only on the subgrid where it still certifies, and gain ratios are withheld wherever either arm exceeds the meaningfulness threshold. Training may run on CUDA; verification always runs on the unmodified NumPy engine in src/bounds.py, on CPU, in float64."
+}

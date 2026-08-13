@@ -1,0 +1,5 @@
+[      0.0s] device=cpu eps_train=0.05 ramp=200+2500 kappa_final=0.5 vocab=65
+[    680.2s]   L2_d64_fixnorm_lr0.003_s0 ppl=nan div=True 223ms/step [670s]
+[    684.3s]   L2_d64_fixnorm_lr0.003_s1 ppl=nan div=True 1ms/step [4s]
+[    692.2s]   L2_d64_fixnorm_lr0.003_s2 ppl=nan div=True 2ms/step [7s]
+[    692.2s] done: 3 parts in C:\Users\sehaj\experiments\ai_safety_lyapunov\results\results/c30_rampB_parts

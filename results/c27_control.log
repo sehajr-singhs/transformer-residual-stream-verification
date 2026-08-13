@@ -1,0 +1,8 @@
+[      0.0s] device=cpu eps_train=0.0 ramp=100+1000 kappa_final=0.5 vocab=65
+[    125.9s]   L2_d64_fixnorm_lr0.003_s0 ppl=7.4823 div=False 41ms/step [123s]
+[    127.2s]   L2_d64_fixnorm_lr0.003_s0 gap=1313 meaningful=False unstable=243 viol=+3.6e-15
+[    256.8s]   L2_d64_fixnorm_lr0.003_s1 ppl=7.5008 div=False 43ms/step [129s]
+[    258.0s]   L2_d64_fixnorm_lr0.003_s1 gap=94.11 meaningful=True unstable=97 viol=+3.6e-15
+[    399.7s]   L2_d64_fixnorm_lr0.003_s2 ppl=7.5230 div=False 47ms/step [141s]
+[    401.1s]   L2_d64_fixnorm_lr0.003_s2 gap=114.2 meaningful=True unstable=45 viol=+3.6e-15
+[    401.1s] done: 3 parts in C:\Users\sehaj\experiments\ai_safety_lyapunov\results\results/c27_control_parts

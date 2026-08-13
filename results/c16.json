@@ -1,0 +1,119 @@
+{
+  "config": {
+    "n_prompts": 5,
+    "k": 4,
+    "feature_ids": [
+      8,
+      31,
+      7,
+      50
+    ],
+    "grid": [
+      0.005,
+      0.01,
+      0.02,
+      0.03,
+      0.04,
+      0.05
+    ],
+    "max_boxes": 512
+  },
+  "branching": {
+    "widest": {
+      "max_certified_rho": 0.05,
+      "seconds": 559.0,
+      "per_rho": null
+    },
+    "relu_guided": {
+      "max_certified_rho": 0.04,
+      "seconds": 808.0,
+      "per_rho": null
+    },
+    "max_boxes": 4096,
+    "grid_top": 0.05,
+    "provenance": "recovered from c16_budget4096.log (max_boxes=4096)",
+    "verdict": {
+      "improved": false,
+      "radius_ratio": 0.7999999999999999,
+      "gap_before": 200.0,
+      "gap_after": 250.0,
+      "slowdown": 1.445438282647585
+    }
+  },
+  "distribution": {
+    "per_prompt": {
+      "0": {
+        "max_certified_rho": 0.02,
+        "tokens": [
+          6,
+          5,
+          4,
+          2,
+          11
+        ]
+      },
+      "1": {
+        "max_certified_rho": 0.03,
+        "tokens": [
+          2,
+          0,
+          0,
+          0,
+          11
+        ]
+      },
+      "2": {
+        "max_certified_rho": 0.05,
+        "tokens": [
+          1,
+          6,
+          5,
+          7,
+          8
+        ]
+      },
+      "3": {
+        "max_certified_rho": 0.05,
+        "tokens": [
+          5,
+          0,
+          4,
+          1,
+          8
+        ]
+      },
+      "4": {
+        "max_certified_rho": 0.05,
+        "tokens": [
+          5,
+          4,
+          4,
+          7,
+          8
+        ]
+      }
+    },
+    "worst_case_over_prompts": 0.02,
+    "hull": {
+      "max_certified_rho": null,
+      "per_rho": {
+        "0.005": {
+          "proved": false,
+          "reason": "max_boxes",
+          "worst": 3.059846084832932e+18,
+          "boxes_touched": 1023
+        }
+      },
+      "hull_width_mean": 1.6593146569211967,
+      "hull_width_max": 3.7882860004901886,
+      "extra_generators": 160
+    },
+    "conservation_tax": {
+      "per_prompt_worst": 0.02,
+      "hull": null,
+      "ratio": null,
+      "note": "ratio = how much radius the single-proof hull gives up against certifying each anchor separately. null hull means the hull certified nothing on the grid."
+    }
+  },
+  "runtime_sec": 316.56563210487366
+}

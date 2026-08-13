@@ -1,0 +1,337 @@
+[skip] L2_d64_standard already downloaded
+=== chunk L2_d64_fixnorm @ 20:48:45 ===
+[    28.5s]   L= 2 d= 64 fixnorm  s=0 ppl=6.7996 bpc=2.7654 div=False [28s train]
+[    28.9s]   L= 2 d= 64 fixnorm  s=0 gap=1.159 meaningful=True unstable=0 viol=+6.2e-15 [0.5s]
+[    57.0s]   L= 2 d= 64 fixnorm  s=1 ppl=6.8841 bpc=2.7833 div=False [28s train]
+[    57.7s]   L= 2 d= 64 fixnorm  s=1 gap=1.183 meaningful=True unstable=0 viol=+6.2e-15 [0.6s]
+[    85.8s]   L= 2 d= 64 fixnorm  s=2 ppl=6.8745 bpc=2.7812 div=False [28s train]
+[    86.3s]   L= 2 d= 64 fixnorm  s=2 gap=1.217 meaningful=True unstable=0 viol=+6.2e-15 [0.5s]
+[    86.3s] wrote /content/aisl/results/c24_L2_d64_fixnorm.json
+0
+[ok] L2_d64_fixnorm downloaded (attempt 1)
+=== chunk L2_d128_standard @ 20:50:15 ===
+[    32.0s]   L= 2 d=128 standard s=0 ppl=6.4169 bpc=2.6819 div=False [31s train]
+[    33.5s]   L= 2 d=128 standard s=0 gap=9.856e+04 meaningful=False unstable=71 viol=+1.8e-12 [1.5s]
+[    65.3s]   L= 2 d=128 standard s=1 ppl=6.4886 bpc=2.6979 div=False [31s train]
+[    69.0s]   L= 2 d=128 standard s=1 gap=1.063e+04 meaningful=False unstable=16 viol=+3.4e-13 [3.7s]
+[    99.6s]   L= 2 d=128 standard s=2 ppl=6.4582 bpc=2.6911 div=False [30s train]
+[   101.2s]   L= 2 d=128 standard s=2 gap=2.068e+04 meaningful=False unstable=37 viol=+5.0e-14 [1.5s]
+[   101.2s] wrote /content/aisl/results/c24_L2_d128_standard.json
+0
+[ok] L2_d128_standard downloaded (attempt 1)
+=== chunk L2_d128_fixnorm @ 20:52:12 ===
+[    28.4s]   L= 2 d=128 fixnorm  s=0 ppl=6.6247 bpc=2.7279 div=False [28s train]
+[    29.8s]   L= 2 d=128 fixnorm  s=0 gap=2.379 meaningful=True unstable=0 viol=+5.9e-15 [1.4s]
+[    59.5s]   L= 2 d=128 fixnorm  s=1 ppl=6.6347 bpc=2.7300 div=False [29s train]
+[    61.0s]   L= 2 d=128 fixnorm  s=1 gap=1.364 meaningful=True unstable=0 viol=+7.3e-15 [1.5s]
+[    89.4s]   L= 2 d=128 fixnorm  s=2 ppl=6.5958 bpc=2.7216 div=False [28s train]
+[    90.9s]   L= 2 d=128 fixnorm  s=2 gap=2.383 meaningful=True unstable=0 viol=+4.4e-15 [1.5s]
+[    90.9s] wrote /content/aisl/results/c24_L2_d128_fixnorm.json
+0
+[ok] L2_d128_fixnorm downloaded (attempt 1)
+=== chunk L2_d256_standard @ 20:53:50 ===
+[    39.2s]   L= 2 d=256 standard s=0 ppl=6.3118 bpc=2.6581 div=False [37s train]
+[    50.3s]   L= 2 d=256 standard s=0 gap=5.337e+04 meaningful=False unstable=40 viol=+1.7e-13 [11.2s]
+[    88.8s]   L= 2 d=256 standard s=1 ppl=6.3521 bpc=2.6672 div=False [37s train]
+[   100.1s]   L= 2 d=256 standard s=1 gap=9.065e+04 meaningful=False unstable=112 viol=+5.7e-14 [11.3s]
+[   139.0s]   L= 2 d=256 standard s=2 ppl=6.4149 bpc=2.6814 div=False [37s train]
+[   150.4s]   L= 2 d=256 standard s=2 gap=5.548e+04 meaningful=False unstable=26 viol=+7.8e-12 [11.4s]
+[   150.4s] wrote /content/aisl/results/c24_L2_d256_standard.json
+0
+[ok] L2_d256_standard downloaded (attempt 1)
+=== chunk L2_d256_fixnorm @ 20:56:29 ===
+[    35.9s]   L= 2 d=256 fixnorm  s=0 ppl=6.4178 bpc=2.6821 div=False [34s train]
+[    45.7s]   L= 2 d=256 fixnorm  s=0 gap=3.263 meaningful=True unstable=0 viol=+8.0e-15 [9.8s]
+[    81.5s]   L= 2 d=256 fixnorm  s=1 ppl=6.4353 bpc=2.6860 div=False [34s train]
+[    92.6s]   L= 2 d=256 fixnorm  s=1 gap=2.405 meaningful=True unstable=0 viol=+6.7e-15 [11.1s]
+[   128.4s]   L= 2 d=256 fixnorm  s=2 ppl=6.4340 bpc=2.6857 div=False [34s train]
+[   138.7s]   L= 2 d=256 fixnorm  s=2 gap=1.446 meaningful=True unstable=0 viol=+1.1e-14 [10.3s]
+[   138.7s] wrote /content/aisl/results/c24_L2_d256_fixnorm.json
+0
+[ok] L2_d256_fixnorm downloaded (attempt 1)
+=== chunk L2_d512_standard @ 20:59:10 ===
+[     0.1s] device=cuda [Tesla T4] fp_train=d22561792a22e50a fp_verify=74289f0b8fc9fa14 vocab=65 val_tokens=131072
+[   112.0s]   L= 2 d=512 standard s=0 ppl=7.7670 bpc=2.9574 div=False [112s train]
+[   223.1s]   L= 2 d=512 standard s=1 ppl=8.2504 bpc=3.0445 div=False [111s train]
+[   333.6s]   L= 2 d=512 standard s=2 ppl=9.7699 bpc=3.2883 div=False [111s train]
+[   333.6s] wrote /content/aisl/results/c24_L2_d512_standard.json
+0
+[ok] L2_d512_standard downloaded (attempt 1)
+=== chunk L2_d512_fixnorm @ 21:04:58 ===
+[     0.1s] device=cuda [Tesla T4] fp_train=d22561792a22e50a fp_verify=74289f0b8fc9fa14 vocab=65 val_tokens=131072
+[   104.3s]   L= 2 d=512 fixnorm  s=0 ppl=6.5179 bpc=2.7044 div=False [104s train]
+[   208.9s]   L= 2 d=512 fixnorm  s=1 ppl=6.5518 bpc=2.7119 div=False [105s train]
+[   312.5s]   L= 2 d=512 fixnorm  s=2 ppl=6.4776 bpc=2.6954 div=False [104s train]
+[   312.5s] wrote /content/aisl/results/c24_L2_d512_fixnorm.json
+0
+[ok] L2_d512_fixnorm downloaded (attempt 1)
+=== chunk L4_d64_standard @ 21:10:23 ===
+[    54.0s]   L= 4 d= 64 standard s=0 ppl=6.4720 bpc=2.6942 div=False [54s train]
+[    55.0s]   L= 4 d= 64 standard s=0 gap=1.509e+14 meaningful=False unstable=513 viol=-2.7e-05 [1.0s]
+[   109.4s]   L= 4 d= 64 standard s=1 ppl=6.4955 bpc=2.6994 div=False [54s train]
+[   110.4s]   L= 4 d= 64 standard s=1 gap=1.251e+10 meaningful=False unstable=312 viol=+5.3e-15 [1.0s]
+[   165.6s]   L= 4 d= 64 standard s=2 ppl=6.5064 bpc=2.7019 div=False [55s train]
+[   166.7s]   L= 4 d= 64 standard s=2 gap=7.912e+07 meaningful=False unstable=292 viol=-7.0e-05 [1.1s]
+[   166.7s] wrote /content/aisl/results/c24_L4_d64_standard.json
+0
+[ok] L4_d64_standard downloaded (attempt 1)
+=== chunk L4_d64_fixnorm @ 21:13:28 ===
+[skip] L2_d64_standard already downloaded
+[skip] L2_d64_fixnorm already downloaded
+[skip] L2_d128_standard already downloaded
+[skip] L2_d128_fixnorm already downloaded
+[skip] L2_d256_standard already downloaded
+[skip] L2_d256_fixnorm already downloaded
+[skip] L2_d512_standard already downloaded
+[skip] L2_d512_fixnorm already downloaded
+[skip] L4_d64_standard already downloaded
+=== chunk L4_d64_fixnorm @ 21:15:26 ===
+[skip] L2_d64_standard already downloaded
+[skip] L2_d64_fixnorm already downloaded
+[skip] L2_d128_standard already downloaded
+[skip] L2_d128_fixnorm already downloaded
+[skip] L2_d256_standard already downloaded
+[skip] L2_d256_fixnorm already downloaded
+[skip] L2_d512_standard already downloaded
+[skip] L2_d512_fixnorm already downloaded
+[skip] L4_d64_standard already downloaded
+=== chunk L4_d64_fixnorm @ 15:14:19 ===
+[provision] session unhealthy, rebuilding
+[colab] Session 'c24_T4' not found.
+[retry] L4_d64_fixnorm attempt 1 failed
+[provision] session unhealthy, rebuilding
+[colab] Session 'c24_T4' not found.
+[retry] L4_d64_fixnorm attempt 2 failed
+[provision] session unhealthy, rebuilding
+[colab] Session 'c24_T4' not found.
+[retry] L4_d64_fixnorm attempt 3 failed
+=== chunk L4_d128_standard @ 15:18:31 ===
+[provision] session unhealthy, rebuilding
+[colab] Session 'c24_T4' not found.
+[retry] L4_d128_standard attempt 1 failed
+[provision] session unhealthy, rebuilding
+[colab] Session 'c24_T4' not found.
+[retry] L4_d128_standard attempt 2 failed
+[provision] session unhealthy, rebuilding
+[colab] Session 'c24_T4' not found.
+[retry] L4_d128_standard attempt 3 failed
+=== chunk L4_d128_fixnorm @ 15:22:27 ===
+[provision] session unhealthy, rebuilding
+[colab] Session 'c24_T4' not found.
+[retry] L4_d128_fixnorm attempt 1 failed
+[provision] session unhealthy, rebuilding
+[colab] Session 'c24_T4' not found.
+[retry] L4_d128_fixnorm attempt 2 failed
+[provision] session unhealthy, rebuilding
+[colab] Session 'c24_T4' not found.
+[retry] L4_d128_fixnorm attempt 3 failed
+=== chunk L4_d256_standard @ 15:31:04 ===
+[provision] session unhealthy, rebuilding
+[colab] Session 'c24_T4' not found.
+[retry] L4_d256_standard attempt 1 failed
+[provision] session unhealthy, rebuilding
+[colab] Session 'c24_T4' not found.
+[retry] L4_d256_standard attempt 2 failed
+[provision] session unhealthy, rebuilding
+[colab] Session 'c24_T4' not found.
+[retry] L4_d256_standard attempt 3 failed
+=== chunk L4_d256_fixnorm @ 15:34:36 ===
+[provision] session unhealthy, rebuilding
+[colab] Session 'c24_T4' not found.
+[retry] L4_d256_fixnorm attempt 1 failed
+[provision] session unhealthy, rebuilding
+[colab] Session 'c24_T4' not found.
+[retry] L4_d256_fixnorm attempt 2 failed
+[provision] session unhealthy, rebuilding
+[colab] Session 'c24_T4' not found.
+[retry] L4_d256_fixnorm attempt 3 failed
+=== chunk L4_d512_standard @ 15:38:17 ===
+[provision] session unhealthy, rebuilding
+[colab] Session 'c24_T4' not found.
+[retry] L4_d512_standard attempt 1 failed
+[provision] session unhealthy, rebuilding
+[colab] Session 'c24_T4' not found.
+[retry] L4_d512_standard attempt 2 failed
+[provision] session unhealthy, rebuilding
+[colab] Session 'c24_T4' not found.
+[retry] L4_d512_standard attempt 3 failed
+=== chunk L4_d512_fixnorm @ 15:43:15 ===
+[provision] session unhealthy, rebuilding
+[colab] Session 'c24_T4' not found.
+[retry] L4_d512_fixnorm attempt 1 failed
+[provision] session unhealthy, rebuilding
+[colab] Session 'c24_T4' not found.
+[retry] L4_d512_fixnorm attempt 2 failed
+[provision] session unhealthy, rebuilding
+[colab] Session 'c24_T4' not found.
+[retry] L4_d512_fixnorm attempt 3 failed
+=== chunk L8_d64_standard @ 15:51:30 ===
+[provision] session unhealthy, rebuilding
+[colab] Session 'c24_T4' not found.
+[retry] L8_d64_standard attempt 1 failed
+[provision] session unhealthy, rebuilding
+[colab] Session 'c24_T4' not found.
+[retry] L8_d64_standard attempt 2 failed
+[provision] session unhealthy, rebuilding
+[colab] Session 'c24_T4' not found.
+[retry] L8_d64_standard attempt 3 failed
+=== chunk L8_d64_fixnorm @ 15:56:34 ===
+[provision] session unhealthy, rebuilding
+[colab] Session 'c24_T4' not found.
+[retry] L8_d64_fixnorm attempt 1 failed
+[provision] session unhealthy, rebuilding
+[colab] Session 'c24_T4' not found.
+[retry] L8_d64_fixnorm attempt 2 failed
+[provision] session unhealthy, rebuilding
+[colab] Session 'c24_T4' not found.
+[retry] L8_d64_fixnorm attempt 3 failed
+=== chunk L8_d128_standard @ 16:03:51 ===
+[provision] session unhealthy, rebuilding
+[colab] Session 'c24_T4' not found.
+[retry] L8_d128_standard attempt 1 failed
+[provision] session unhealthy, rebuilding
+[colab] Session 'c24_T4' not found.
+[retry] L8_d128_standard attempt 2 failed
+[provision] session unhealthy, rebuilding
+[colab] Session 'c24_T4' not found.
+[retry] L8_d128_standard attempt 3 failed
+=== chunk L8_d128_fixnorm @ 16:09:44 ===
+[provision] session unhealthy, rebuilding
+[colab] Session 'c24_T4' not found.
+[retry] L8_d128_fixnorm attempt 1 failed
+[provision] session unhealthy, rebuilding
+[colab] Session 'c24_T4' not found.
+[retry] L8_d128_fixnorm attempt 2 failed
+[provision] session unhealthy, rebuilding
+[colab] Session 'c24_T4' not found.
+[retry] L8_d128_fixnorm attempt 3 failed
+=== chunk L8_d256_standard @ 16:15:47 ===
+[provision] session unhealthy, rebuilding
+[colab] Session 'c24_T4' not found.
+[retry] L8_d256_standard attempt 1 failed
+[provision] session unhealthy, rebuilding
+[colab] Session 'c24_T4' not found.
+[retry] L8_d256_standard attempt 2 failed
+[provision] session unhealthy, rebuilding
+[colab] Session 'c24_T4' not found.
+[retry] L8_d256_standard attempt 3 failed
+=== chunk L8_d256_fixnorm @ 16:22:31 ===
+[provision] session unhealthy, rebuilding
+[colab] Session 'c24_T4' not found.
+[retry] L8_d256_fixnorm attempt 1 failed
+[provision] session unhealthy, rebuilding
+[colab] Session 'c24_T4' not found.
+[retry] L8_d256_fixnorm attempt 2 failed
+[provision] session unhealthy, rebuilding
+[colab] Session 'c24_T4' not found.
+[retry] L8_d256_fixnorm attempt 3 failed
+=== chunk L8_d512_standard @ 16:28:29 ===
+[provision] session unhealthy, rebuilding
+[colab] Session 'c24_T4' not found.
+[retry] L8_d512_standard attempt 1 failed
+[provision] session unhealthy, rebuilding
+[colab] Session 'c24_T4' not found.
+[retry] L8_d512_standard attempt 2 failed
+[provision] session unhealthy, rebuilding
+[colab] Session 'c24_T4' not found.
+[retry] L8_d512_standard attempt 3 failed
+=== chunk L8_d512_fixnorm @ 16:34:53 ===
+[provision] session unhealthy, rebuilding
+[colab] Session 'c24_T4' not found.
+[retry] L8_d512_fixnorm attempt 1 failed
+[provision] session unhealthy, rebuilding
+[colab] Session 'c24_T4' not found.
+[retry] L8_d512_fixnorm attempt 2 failed
+[provision] session unhealthy, rebuilding
+[colab] Session 'c24_T4' not found.
+[retry] L8_d512_fixnorm attempt 3 failed
+=== chunk L12_d64_standard @ 16:40:58 ===
+[provision] session unhealthy, rebuilding
+[colab] Session 'c24_T4' not found.
+[retry] L12_d64_standard attempt 1 failed
+[provision] session unhealthy, rebuilding
+[colab] Session 'c24_T4' not found.
+[retry] L12_d64_standard attempt 2 failed
+[provision] session unhealthy, rebuilding
+[colab] Session 'c24_T4' not found.
+[retry] L12_d64_standard attempt 3 failed
+=== chunk L12_d64_fixnorm @ 16:46:42 ===
+[provision] session unhealthy, rebuilding
+[colab] Session 'c24_T4' not found.
+[retry] L12_d64_fixnorm attempt 1 failed
+[provision] session unhealthy, rebuilding
+[colab] Session 'c24_T4' not found.
+[retry] L12_d64_fixnorm attempt 2 failed
+[provision] session unhealthy, rebuilding
+[colab] Session 'c24_T4' not found.
+[retry] L12_d64_fixnorm attempt 3 failed
+=== chunk L12_d128_standard @ 16:52:51 ===
+[provision] session unhealthy, rebuilding
+[colab] Session 'c24_T4' not found.
+[retry] L12_d128_standard attempt 1 failed
+[provision] session unhealthy, rebuilding
+[colab] Session 'c24_T4' not found.
+[retry] L12_d128_standard attempt 2 failed
+[provision] session unhealthy, rebuilding
+[colab] Session 'c24_T4' not found.
+[retry] L12_d128_standard attempt 3 failed
+=== chunk L12_d128_fixnorm @ 16:56:20 ===
+[provision] session unhealthy, rebuilding
+[colab] Session 'c24_T4' not found.
+[retry] L12_d128_fixnorm attempt 1 failed
+[provision] session unhealthy, rebuilding
+[colab] Session 'c24_T4' not found.
+[retry] L12_d128_fixnorm attempt 2 failed
+[provision] session unhealthy, rebuilding
+[colab] Session 'c24_T4' not found.
+[retry] L12_d128_fixnorm attempt 3 failed
+=== chunk L12_d256_standard @ 17:00:18 ===
+[provision] session unhealthy, rebuilding
+[colab] Session 'c24_T4' not found.
+[retry] L12_d256_standard attempt 1 failed
+[provision] session unhealthy, rebuilding
+[colab] Session 'c24_T4' not found.
+[retry] L12_d256_standard attempt 2 failed
+[provision] session unhealthy, rebuilding
+[colab] Session 'c24_T4' not found.
+[retry] L12_d256_standard attempt 3 failed
+=== chunk L12_d256_fixnorm @ 17:02:19 ===
+[provision] session unhealthy, rebuilding
+[colab] Session 'c24_T4' not found.
+[retry] L12_d256_fixnorm attempt 1 failed
+[provision] session unhealthy, rebuilding
+[colab] Session 'c24_T4' not found.
+[retry] L12_d256_fixnorm attempt 2 failed
+[provision] session unhealthy, rebuilding
+[colab] Session 'c24_T4' not found.
+[retry] L12_d256_fixnorm attempt 3 failed
+=== chunk L12_d512_standard @ 17:05:12 ===
+[provision] session unhealthy, rebuilding
+[colab] Session 'c24_T4' not found.
+[retry] L12_d512_standard attempt 1 failed
+[provision] session unhealthy, rebuilding
+[colab] Session 'c24_T4' not found.
+[retry] L12_d512_standard attempt 2 failed
+[provision] session unhealthy, rebuilding
+│        self.stdin_channel.msg_ready())                                       │
+│   1096 │   │   │   │   ):                                                    │
+│ ❱ 1097 │   │   │   │   │   raise TimeoutError("Timeout waiting for output")  │
+│   1098 │   │   │   │                                                         │
+│   1099 │   │   │   │   if allow_stdin:                                       │
+│   1100 │   │   │   │   │   try:                                              │
+╰──────────────────────────────────────────────────────────────────────────────╯
+TimeoutError: Timeout waiting for output
+[retry] L12_d512_standard attempt 3 failed
+=== chunk L12_d512_fixnorm @ 19:25:35 ===
+[provision] session unhealthy, rebuilding
+[     0.6s] device=cuda [Tesla T4] fp_train=d22561792a22e50a fp_verify=74289f0b8fc9fa14 vocab=65 val_tokens=131072
+/content/aisl/audit/c24_scaling.py:301: RuntimeWarning: overflow encountered in exp
+  "val_ppl": float(np.exp(vce))})
+[   439.2s]   L=12 d=512 fixnorm  s=0 ppl=nan bpc=nan div=True [439s train]
+[   479.9s]   L=12 d=512 fixnorm  s=1 ppl=nan bpc=nan div=True [41s train]
+[   519.8s]   L=12 d=512 fixnorm  s=2 ppl=nan bpc=nan div=True [40s train]
+[   519.8s] wrote /content/aisl/results/c24_L12_d512_fixnorm.json
+0
+[ok] L12_d512_fixnorm downloaded (attempt 1)
+=== sweep finished 19:36:01; parts in /mnt/c/Users/sehaj/experiments/ai_safety_lyapunov/results/c24_parts ===
+11

@@ -1,0 +1,310 @@
+=== L4_d128_fixnorm @ 20:24:01 ===
+[provision] rebuilding
+[colab] Session 'c24_T4' not found.
+[retry] L4_d128_fixnorm attempt 1 failed
+[provision] rebuilding
+[colab] Session 'c24_T4' not found.
+[retry] L4_d128_fixnorm attempt 2 failed
+[provision] rebuilding
+[colab] Session 'c24_T4' not found.
+[retry] L4_d128_fixnorm attempt 3 failed
+=== L4_d256_standard @ 20:26:06 ===
+[provision] rebuilding
+[colab] Session 'c24_T4' not found.
+[retry] L4_d256_standard attempt 1 failed
+[provision] rebuilding
+[colab] Session 'c24_T4' not found.
+[retry] L4_d256_standard attempt 2 failed
+[provision] rebuilding
+[colab] Session 'c24_T4' not found.
+[retry] L4_d256_standard attempt 3 failed
+=== L4_d256_fixnorm @ 20:27:00 ===
+[provision] rebuilding
+[colab] Session 'c24_T4' not found.
+[retry] L4_d256_fixnorm attempt 1 failed
+[provision] rebuilding
+[colab] Session 'c24_T4' not found.
+[retry] L4_d256_fixnorm attempt 2 failed
+[provision] rebuilding
+[colab] Session 'c24_T4' not found.
+[retry] L4_d256_fixnorm attempt 3 failed
+=== priority subgrid done: 12 parts ===
+=== L4_d128_fixnorm @ 20:43:24 ===
+[provision] rebuilding
+[    55.2s]   L= 4 d=128 fixnorm  s=0 ppl=6.4167 bpc=2.6818 div=False [54s train]
+[    58.3s]   L= 4 d=128 fixnorm  s=0 gap=693.8 meaningful=True unstable=1 viol=+4.4e-15 [3.1s]
+[   107.1s]   L= 4 d=128 fixnorm  s=1 ppl=6.4462 bpc=2.6884 div=False [48s train]
+[   110.2s]   L= 4 d=128 fixnorm  s=1 gap=90.14 meaningful=True unstable=0 viol=+8.0e-15 [3.1s]
+[   160.1s]   L= 4 d=128 fixnorm  s=2 ppl=6.4106 bpc=2.6804 div=False [49s train]
+[   165.1s]   L= 4 d=128 fixnorm  s=2 gap=67.35 meaningful=True unstable=0 viol=+5.8e-15 [5.0s]
+[   165.1s] wrote /content/aisl/results/c24_L4_d128_fixnorm.json
+0
+[ok] L4_d128_fixnorm
+=== L4_d256_standard @ 20:47:25 ===
+[    72.1s]   L= 4 d=256 standard s=0 ppl=6.2492 bpc=2.6437 div=False [69s train]
+[    94.0s]   L= 4 d=256 standard s=0 gap=1.339e+23 meaningful=False unstable=2123 viol=-6.3e-05 [21.9s]
+[   165.9s]   L= 4 d=256 standard s=1 ppl=6.2973 bpc=2.6547 div=False [68s train]
+[   184.8s]   L= 4 d=256 standard s=1 gap=5.823e+22 meaningful=False unstable=2057 viol=-3.4e-06 [19.0s]
+[   256.6s]   L= 4 d=256 standard s=2 ppl=6.3228 bpc=2.6606 div=False [68s train]
+[   278.1s]   L= 4 d=256 standard s=2 gap=4.845e+17 meaningful=False unstable=2075 viol=-1.5e-03 [21.5s]
+[   278.1s] wrote /content/aisl/results/c24_L4_d256_standard.json
+0
+[ok] L4_d256_standard
+=== L4_d256_fixnorm @ 20:52:43 ===
+│   1086 │   │   │   while True:                                               │
+│   1087 │   │   │   │   if not self.connection_ready.is_set():                │
+│ ❱ 1088 │   │   │   │   │   raise RuntimeError("Connection was lost.")        │
+│   1089 │   │   │   │                                                         │
+│   1090 │   │   │   │   if timeout is not None:                               │
+│   1091 │   │   │   │   │   timeout = max(0, deadline - time.monotonic())     │
+╰──────────────────────────────────────────────────────────────────────────────╯
+RuntimeError: Connection was lost.
+[retry] L4_d256_fixnorm attempt 1 failed
+[provision] rebuilding
+[colab] Session 'c24_T4' not found.
+[retry] L4_d256_fixnorm attempt 2 failed
+[provision] rebuilding
+[colab] Session 'c24_T4' not found.
+[retry] L4_d256_fixnorm attempt 3 failed
+=== subgrid closed: 14 parts ===
+=== L4_d32_standard_clip1 @ 22:59:37 ===
+[provision] rebuilding
+[colab] Session 'c24_T4' not found.
+[retry] L4_d32_standard_clip1 attempt 1 failed
+[provision] rebuilding
+[colab] Session 'c24_T4' not found.
+[retry] L4_d32_standard_clip1 attempt 2 failed
+[provision] rebuilding
+[colab] Session 'c24_T4' not found.
+[retry] L4_d32_standard_clip1 attempt 3 failed
+=== L4_d32_fixnorm_clip1 @ 23:00:20 ===
+[provision] rebuilding
+[colab] Session 'c24_T4' not found.
+[retry] L4_d32_fixnorm_clip1 attempt 1 failed
+[provision] rebuilding
+[colab] Session 'c24_T4' not found.
+[retry] L4_d32_fixnorm_clip1 attempt 2 failed
+[provision] rebuilding
+[colab] Session 'c24_T4' not found.
+[retry] L4_d32_fixnorm_clip1 attempt 3 failed
+=== L4_d64_standard_clip1 @ 23:00:58 ===
+[provision] rebuilding
+[colab] Session 'c24_T4' not found.
+[retry] L4_d64_standard_clip1 attempt 1 failed
+[provision] rebuilding
+[colab] Session 'c24_T4' not found.
+[retry] L4_d64_standard_clip1 attempt 2 failed
+[provision] rebuilding
+[colab] Session 'c24_T4' not found.
+[retry] L4_d64_standard_clip1 attempt 3 failed
+=== L4_d64_fixnorm_clip1 @ 23:01:47 ===
+[provision] rebuilding
+[colab] Session 'c24_T4' not found.
+[retry] L4_d64_fixnorm_clip1 attempt 1 failed
+[provision] rebuilding
+[colab] Session 'c24_T4' not found.
+[retry] L4_d64_fixnorm_clip1 attempt 2 failed
+[provision] rebuilding
+[colab] Session 'c24_T4' not found.
+[retry] L4_d64_fixnorm_clip1 attempt 3 failed
+=== L4_d128_standard_clip1 @ 23:02:17 ===
+[provision] rebuilding
+[colab] Session 'c24_T4' not found.
+[retry] L4_d128_standard_clip1 attempt 1 failed
+[provision] rebuilding
+[colab] Session 'c24_T4' not found.
+[retry] L4_d128_standard_clip1 attempt 2 failed
+[provision] rebuilding
+[colab] Session 'c24_T4' not found.
+[retry] L4_d128_standard_clip1 attempt 3 failed
+=== L4_d128_fixnorm_clip1 @ 23:02:48 ===
+[provision] rebuilding
+[colab] Session 'c24_T4' not found.
+[retry] L4_d128_fixnorm_clip1 attempt 1 failed
+[provision] rebuilding
+[colab] Session 'c24_T4' not found.
+[retry] L4_d128_fixnorm_clip1 attempt 2 failed
+[provision] rebuilding
+[colab] Session 'c24_T4' not found.
+[retry] L4_d128_fixnorm_clip1 attempt 3 failed
+=== L4_d256_standard_clip1 @ 23:03:18 ===
+[provision] rebuilding
+[colab] Session 'c24_T4' not found.
+[retry] L4_d256_standard_clip1 attempt 1 failed
+[provision] rebuilding
+[colab] Session 'c24_T4' not found.
+[retry] L4_d256_standard_clip1 attempt 2 failed
+[provision] rebuilding
+[colab] Session 'c24_T4' not found.
+[retry] L4_d256_standard_clip1 attempt 3 failed
+=== L4_d256_fixnorm_clip1 @ 23:03:53 ===
+[provision] rebuilding
+[colab] Session 'c24_T4' not found.
+[retry] L4_d256_fixnorm_clip1 attempt 1 failed
+[provision] rebuilding
+[colab] Session 'c24_T4' not found.
+[retry] L4_d256_fixnorm_clip1 attempt 2 failed
+[provision] rebuilding
+[colab] Session 'c24_T4' not found.
+[retry] L4_d256_fixnorm_clip1 attempt 3 failed
+=== L8_d32_standard_clip1 @ 23:04:38 ===
+[provision] rebuilding
+[colab] Session 'c24_T4' not found.
+[retry] L8_d32_standard_clip1 attempt 1 failed
+[provision] rebuilding
+[colab] Session 'c24_T4' not found.
+[retry] L8_d32_standard_clip1 attempt 2 failed
+[provision] rebuilding
+[colab] Session 'c24_T4' not found.
+[retry] L8_d32_standard_clip1 attempt 3 failed
+=== L8_d32_fixnorm_clip1 @ 23:07:39 ===
+[provision] rebuilding
+[colab] Session 'c24_T4' not found.
+[retry] L8_d32_fixnorm_clip1 attempt 1 failed
+[provision] rebuilding
+[colab] Session 'c24_T4' not found.
+[retry] L8_d32_fixnorm_clip1 attempt 2 failed
+[provision] rebuilding
+[colab] Session 'c24_T4' not found.
+[retry] L8_d32_fixnorm_clip1 attempt 3 failed
+=== L8_d64_standard_clip1 @ 23:08:13 ===
+[provision] rebuilding
+[colab] Session 'c24_T4' not found.
+[retry] L8_d64_standard_clip1 attempt 1 failed
+[provision] rebuilding
+[colab] Session 'c24_T4' not found.
+[retry] L8_d64_standard_clip1 attempt 2 failed
+[provision] rebuilding
+[colab] Session 'c24_T4' not found.
+[retry] L8_d64_standard_clip1 attempt 3 failed
+=== L8_d64_fixnorm_clip1 @ 23:08:48 ===
+[provision] rebuilding
+[colab] Session 'c24_T4' not found.
+[retry] L8_d64_fixnorm_clip1 attempt 1 failed
+[provision] rebuilding
+[colab] Session 'c24_T4' not found.
+[retry] L8_d64_fixnorm_clip1 attempt 2 failed
+[provision] rebuilding
+[colab] Session 'c24_T4' not found.
+[retry] L8_d64_fixnorm_clip1 attempt 3 failed
+=== L8_d128_standard_clip1 @ 23:09:34 ===
+[provision] rebuilding
+[colab] Session 'c24_T4' not found.
+[retry] L8_d128_standard_clip1 attempt 1 failed
+[provision] rebuilding
+[colab] Session 'c24_T4' not found.
+[retry] L8_d128_standard_clip1 attempt 2 failed
+[provision] rebuilding
+[colab] Session 'c24_T4' not found.
+[retry] L8_d128_standard_clip1 attempt 3 failed
+=== L8_d128_fixnorm_clip1 @ 23:10:34 ===
+[provision] rebuilding
+[colab] Session 'c24_T4' not found.
+[retry] L8_d128_fixnorm_clip1 attempt 1 failed
+[provision] rebuilding
+[colab] Session 'c24_T4' not found.
+[retry] L8_d128_fixnorm_clip1 attempt 2 failed
+[provision] rebuilding
+[colab] Session 'c24_T4' not found.
+[retry] L8_d128_fixnorm_clip1 attempt 3 failed
+=== L8_d256_standard_clip1 @ 23:11:25 ===
+[provision] rebuilding
+[colab] Session 'c24_T4' not found.
+[retry] L8_d256_standard_clip1 attempt 1 failed
+[provision] rebuilding
+[colab] Session 'c24_T4' not found.
+[retry] L8_d256_standard_clip1 attempt 2 failed
+[provision] rebuilding
+[colab] Session 'c24_T4' not found.
+[retry] L8_d256_standard_clip1 attempt 3 failed
+=== L8_d256_fixnorm_clip1 @ 23:12:05 ===
+[provision] rebuilding
+[colab] Session 'c24_T4' not found.
+[retry] L8_d256_fixnorm_clip1 attempt 1 failed
+[provision] rebuilding
+[colab] Session 'c24_T4' not found.
+[retry] L8_d256_fixnorm_clip1 attempt 2 failed
+[provision] rebuilding
+[colab] Session 'c24_T4' not found.
+[retry] L8_d256_fixnorm_clip1 attempt 3 failed
+=== L12_d32_standard_clip1 @ 23:15:31 ===
+[provision] rebuilding
+[colab] Session 'c24_T4' not found.
+[retry] L12_d32_standard_clip1 attempt 1 failed
+[provision] rebuilding
+[colab] Session 'c24_T4' not found.
+[retry] L12_d32_standard_clip1 attempt 2 failed
+[provision] rebuilding
+[colab] Session 'c24_T4' not found.
+[retry] L12_d32_standard_clip1 attempt 3 failed
+=== L12_d32_fixnorm_clip1 @ 23:15:59 ===
+[provision] rebuilding
+[colab] Session 'c24_T4' not found.
+[retry] L12_d32_fixnorm_clip1 attempt 1 failed
+[provision] rebuilding
+[colab] Session 'c24_T4' not found.
+[retry] L12_d32_fixnorm_clip1 attempt 2 failed
+[provision] rebuilding
+[colab] Session 'c24_T4' not found.
+[retry] L12_d32_fixnorm_clip1 attempt 3 failed
+=== L12_d64_standard_clip1 @ 23:16:26 ===
+[provision] rebuilding
+[colab] Session 'c24_T4' not found.
+[retry] L12_d64_standard_clip1 attempt 1 failed
+[provision] rebuilding
+[colab] Session 'c24_T4' not found.
+[retry] L12_d64_standard_clip1 attempt 2 failed
+[provision] rebuilding
+[colab] Session 'c24_T4' not found.
+[retry] L12_d64_standard_clip1 attempt 3 failed
+=== L12_d64_fixnorm_clip1 @ 23:16:58 ===
+[provision] rebuilding
+[colab] Session 'c24_T4' not found.
+[retry] L12_d64_fixnorm_clip1 attempt 1 failed
+[provision] rebuilding
+[colab] Session 'c24_T4' not found.
+[retry] L12_d64_fixnorm_clip1 attempt 2 failed
+[provision] rebuilding
+[colab] Session 'c24_T4' not found.
+[retry] L12_d64_fixnorm_clip1 attempt 3 failed
+=== L12_d128_standard_clip1 @ 23:17:29 ===
+[provision] rebuilding
+[colab] Session 'c24_T4' not found.
+[retry] L12_d128_standard_clip1 attempt 1 failed
+[provision] rebuilding
+[colab] Session 'c24_T4' not found.
+[retry] L12_d128_standard_clip1 attempt 2 failed
+[provision] rebuilding
+[colab] Session 'c24_T4' not found.
+[retry] L12_d128_standard_clip1 attempt 3 failed
+=== L12_d128_fixnorm_clip1 @ 23:18:04 ===
+[provision] rebuilding
+[colab] Session 'c24_T4' not found.
+[retry] L12_d128_fixnorm_clip1 attempt 1 failed
+[provision] rebuilding
+[colab] Session 'c24_T4' not found.
+[retry] L12_d128_fixnorm_clip1 attempt 2 failed
+[provision] rebuilding
+[colab] Session 'c24_T4' not found.
+[retry] L12_d128_fixnorm_clip1 attempt 3 failed
+=== L12_d256_standard_clip1 @ 23:18:44 ===
+[provision] rebuilding
+[colab] Session 'c24_T4' not found.
+[retry] L12_d256_standard_clip1 attempt 1 failed
+[provision] rebuilding
+[colab] Session 'c24_T4' not found.
+[retry] L12_d256_standard_clip1 attempt 2 failed
+[provision] rebuilding
+[colab] Session 'c24_T4' not found.
+[retry] L12_d256_standard_clip1 attempt 3 failed
+=== L12_d256_fixnorm_clip1 @ 23:19:36 ===
+[provision] rebuilding
+[colab] Session 'c24_T4' not found.
+[retry] L12_d256_fixnorm_clip1 attempt 1 failed
+[provision] rebuilding
+[colab] Session 'c24_T4' not found.
+[retry] L12_d256_fixnorm_clip1 attempt 2 failed
+[provision] rebuilding
+[colab] Session 'c24_T4' not found.
+[retry] L12_d256_fixnorm_clip1 attempt 3 failed
+=== deep grid pass done: 14 parts ===

@@ -1,0 +1,1883 @@
+{
+  "config": {
+    "widths": [
+      8,
+      16
+    ],
+    "seeds": 10,
+    "steps": 800,
+    "batch": 256,
+    "lr": 0.003,
+    "n_feat": 20,
+    "variants": [
+      "standard",
+      "fixnorm"
+    ],
+    "band": [
+      0.7,
+      0.95
+    ],
+    "task": {
+      "N_FEAT": 20,
+      "N_REAL": 8,
+      "N_SLOT": 6,
+      "SEQ_LEN": 8,
+      "VOCAB": 26
+    }
+  },
+  "runs": [
+    {
+      "variant": "standard",
+      "seed": 0,
+      "curve": [
+        {
+          "step": 0,
+          "loss": 3.389158248901367,
+          "grad_norm": 0.4688156843185425
+        },
+        {
+          "step": 200,
+          "loss": 1.634300708770752,
+          "grad_norm": 0.8756423592567444
+        },
+        {
+          "step": 400,
+          "loss": 1.401053547859192,
+          "grad_norm": 0.9088922739028931
+        },
+        {
+          "step": 600,
+          "loss": 1.2518900632858276,
+          "grad_norm": 1.1621568202972412
+        },
+        {
+          "step": 799,
+          "loss": 1.4276539087295532,
+          "grad_norm": 1.0142778158187866
+        }
+      ],
+      "test_accuracy": 0.7215576171875,
+      "test_ce": 1.3669439554214478,
+      "final_grad_norm": 1.0142778158187866,
+      "frac_margin_negative": 0.9577886710239651,
+      "unsafe_margin_mean": -2.96223521232605,
+      "d_model": 8,
+      "trained_gap": {
+        "bound_width": 0.005615080364036018,
+        "attained_width": 0.00031763249463301335,
+        "relaxation_gap": 17.677915386218835,
+        "unstable_relus": 0,
+        "max_containment_violation": -1.1102230246251565e-16
+      }
+    },
+    {
+      "variant": "standard",
+      "seed": 1,
+      "curve": [
+        {
+          "step": 0,
+          "loss": 3.4649500846862793,
+          "grad_norm": 0.4557603895664215
+        },
+        {
+          "step": 200,
+          "loss": 1.8159923553466797,
+          "grad_norm": 0.8043975234031677
+        },
+        {
+          "step": 400,
+          "loss": 1.6293411254882812,
+          "grad_norm": 1.3591126203536987
+        },
+        {
+          "step": 600,
+          "loss": 1.5333118438720703,
+          "grad_norm": 0.8339155316352844
+        },
+        {
+          "step": 799,
+          "loss": 1.2810136079788208,
+          "grad_norm": 1.1209410429000854
+        }
+      ],
+      "test_accuracy": 0.7083740234375,
+      "test_ce": 1.4151958227157593,
+      "final_grad_norm": 1.1209410429000854,
+      "frac_margin_negative": 0.9720032617559119,
+      "unsafe_margin_mean": -3.382936716079712,
+      "d_model": 8,
+      "trained_gap": {
+        "bound_width": 0.0054067996664253215,
+        "attained_width": 0.0003516678365753645,
+        "relaxation_gap": 15.374734633335205,
+        "unstable_relus": 0,
+        "max_containment_violation": -1.0880185641326534e-14
+      }
+    },
+    {
+      "variant": "standard",
+      "seed": 2,
+      "curve": [
+        {
+          "step": 0,
+          "loss": 3.3385677337646484,
+          "grad_norm": 0.3812144696712494
+        },
+        {
+          "step": 200,
+          "loss": 1.665439248085022,
+          "grad_norm": 0.9305100440979004
+        },
+        {
+          "step": 400,
+          "loss": 1.5686389207839966,
+          "grad_norm": 0.9885088205337524
+        },
+        {
+          "step": 600,
+          "loss": 1.4691686630249023,
+          "grad_norm": 0.8534124493598938
+        },
+        {
+          "step": 799,
+          "loss": 1.217824935913086,
+          "grad_norm": 0.8529604077339172
+        }
+      ],
+      "test_accuracy": 0.732666015625,
+      "test_ce": 1.346535325050354,
+      "final_grad_norm": 0.8529604077339172,
+      "frac_margin_negative": 0.9662891046386192,
+      "unsafe_margin_mean": -3.281787872314453,
+      "d_model": 8,
+      "trained_gap": {
+        "bound_width": 0.00904448192044427,
+        "attained_width": 0.0003575732628591233,
+        "relaxation_gap": 25.294066586873456,
+        "unstable_relus": 0,
+        "max_containment_violation": 2.6645352591003757e-15
+      }
+    },
+    {
+      "variant": "standard",
+      "seed": 3,
+      "curve": [
+        {
+          "step": 0,
+          "loss": 3.4050700664520264,
+          "grad_norm": 0.5160613656044006
+        },
+        {
+          "step": 200,
+          "loss": 1.5867340564727783,
+          "grad_norm": 0.7810765504837036
+        },
+        {
+          "step": 400,
+          "loss": 1.4713870286941528,
+          "grad_norm": 1.1884013414382935
+        },
+        {
+          "step": 600,
+          "loss": 1.2903984785079956,
+          "grad_norm": 1.264571189880371
+        },
+        {
+          "step": 799,
+          "loss": 1.2266892194747925,
+          "grad_norm": 0.9746788144111633
+        }
+      ],
+      "test_accuracy": 0.7236328125,
+      "test_ce": 1.2655524015426636,
+      "final_grad_norm": 0.9746788144111633,
+      "frac_margin_negative": 0.9739413680781759,
+      "unsafe_margin_mean": -3.8058056831359863,
+      "d_model": 8,
+      "trained_gap": {
+        "bound_width": 0.0021205733125002624,
+        "attained_width": 0.00045222991328985884,
+        "relaxation_gap": 4.689148705519334,
+        "unstable_relus": 0,
+        "max_containment_violation": 6.661338147750939e-16
+      }
+    },
+    {
+      "variant": "standard",
+      "seed": 4,
+      "curve": [
+        {
+          "step": 0,
+          "loss": 3.2812390327453613,
+          "grad_norm": 0.34022775292396545
+        },
+        {
+          "step": 200,
+          "loss": 1.5912967920303345,
+          "grad_norm": 0.8551371097564697
+        },
+        {
+          "step": 400,
+          "loss": 1.3917680978775024,
+          "grad_norm": 0.7368735671043396
+        },
+        {
+          "step": 600,
+          "loss": 1.320685863494873,
+          "grad_norm": 1.0644543170928955
+        },
+        {
+          "step": 799,
+          "loss": 1.1516542434692383,
+          "grad_norm": 1.1180332899093628
+        }
+      ],
+      "test_accuracy": 0.7374267578125,
+      "test_ce": 1.1917688846588135,
+      "final_grad_norm": 1.1180332899093628,
+      "frac_margin_negative": 0.9889189189189189,
+      "unsafe_margin_mean": -4.230511665344238,
+      "d_model": 8,
+      "trained_gap": {
+        "bound_width": 0.0029198533707788243,
+        "attained_width": 0.00029557571610272504,
+        "relaxation_gap": 9.878529296243173,
+        "unstable_relus": 0,
+        "max_containment_violation": -2.220446049250313e-16
+      }
+    },
+    {
+      "variant": "standard",
+      "seed": 5,
+      "curve": [
+        {
+          "step": 0,
+          "loss": 3.3490214347839355,
+          "grad_norm": 0.43319159746170044
+        },
+        {
+          "step": 200,
+          "loss": 1.7524110078811646,
+          "grad_norm": 0.7539481520652771
+        },
+        {
+          "step": 400,
+          "loss": 1.483979344367981,
+          "grad_norm": 1.0437148809432983
+        },
+        {
+          "step": 600,
+          "loss": 1.3448885679244995,
+          "grad_norm": 0.850873589515686
+        },
+        {
+          "step": 799,
+          "loss": 1.3464853763580322,
+          "grad_norm": 1.6119728088378906
+        }
+      ],
+      "test_accuracy": 0.71728515625,
+      "test_ce": 1.35928213596344,
+      "final_grad_norm": 1.6119728088378906,
+      "frac_margin_negative": 0.9724473257698542,
+      "unsafe_margin_mean": -3.56662917137146,
+      "d_model": 8,
+      "trained_gap": {
+        "bound_width": 0.005387858707324833,
+        "attained_width": 0.000272052398139655,
+        "relaxation_gap": 19.804488929956197,
+        "unstable_relus": 0,
+        "max_containment_violation": 1.3322676295501878e-15
+      }
+    },
+    {
+      "variant": "standard",
+      "seed": 6,
+      "curve": [
+        {
+          "step": 0,
+          "loss": 3.3015410900115967,
+          "grad_norm": 0.3456595838069916
+        },
+        {
+          "step": 200,
+          "loss": 1.6474649906158447,
+          "grad_norm": 0.6710111498832703
+        },
+        {
+          "step": 400,
+          "loss": 1.3752938508987427,
+          "grad_norm": 0.8957961797714233
+        },
+        {
+          "step": 600,
+          "loss": 1.2856941223144531,
+          "grad_norm": 1.12669038772583
+        },
+        {
+          "step": 799,
+          "loss": 1.4105737209320068,
+          "grad_norm": 1.5022655725479126
+        }
+      ],
+      "test_accuracy": 0.7127685546875,
+      "test_ce": 1.350040316581726,
+      "final_grad_norm": 1.5022655725479126,
+      "frac_margin_negative": 0.9516041326808048,
+      "unsafe_margin_mean": -3.3686695098876953,
+      "d_model": 8,
+      "trained_gap": {
+        "bound_width": 0.0150035592848754,
+        "attained_width": 0.0009028706270486353,
+        "relaxation_gap": 16.61761811204342,
+        "unstable_relus": 0,
+        "max_containment_violation": 1.3322676295501878e-15
+      }
+    },
+    {
+      "variant": "standard",
+      "seed": 7,
+      "curve": [
+        {
+          "step": 0,
+          "loss": 3.4043681621551514,
+          "grad_norm": 0.5081046223640442
+        },
+        {
+          "step": 200,
+          "loss": 2.0452258586883545,
+          "grad_norm": 1.0327531099319458
+        },
+        {
+          "step": 400,
+          "loss": 1.6301690340042114,
+          "grad_norm": 1.3743900060653687
+        },
+        {
+          "step": 600,
+          "loss": 1.2260075807571411,
+          "grad_norm": 1.2023108005523682
+        },
+        {
+          "step": 799,
+          "loss": 1.364774465560913,
+          "grad_norm": 1.2576860189437866
+        }
+      ],
+      "test_accuracy": 0.719970703125,
+      "test_ce": 1.4110369682312012,
+      "final_grad_norm": 1.2576860189437866,
+      "frac_margin_negative": 0.9683954619124797,
+      "unsafe_margin_mean": -3.529360294342041,
+      "d_model": 8,
+      "trained_gap": {
+        "bound_width": 0.018355744531803442,
+        "attained_width": 0.0007133690424546701,
+        "relaxation_gap": 25.731064062777616,
+        "unstable_relus": 0,
+        "max_containment_violation": 1.3322676295501878e-15
+      }
+    },
+    {
+      "variant": "standard",
+      "seed": 8,
+      "curve": [
+        {
+          "step": 0,
+          "loss": 3.3657190799713135,
+          "grad_norm": 0.4222886860370636
+        },
+        {
+          "step": 200,
+          "loss": 1.873041033744812,
+          "grad_norm": 0.7684768438339233
+        },
+        {
+          "step": 400,
+          "loss": 1.4767626523971558,
+          "grad_norm": 1.1678271293640137
+        },
+        {
+          "step": 600,
+          "loss": 1.6292762756347656,
+          "grad_norm": 1.1393200159072876
+        },
+        {
+          "step": 799,
+          "loss": 1.4344009160995483,
+          "grad_norm": 1.1030596494674683
+        }
+      ],
+      "test_accuracy": 0.7296142578125,
+      "test_ce": 1.4217697381973267,
+      "final_grad_norm": 1.1030596494674683,
+      "frac_margin_negative": 0.967400162999185,
+      "unsafe_margin_mean": -3.1939797401428223,
+      "d_model": 8,
+      "trained_gap": {
+        "bound_width": 0.0017757028470617442,
+        "attained_width": 0.00026958277633370997,
+        "relaxation_gap": 6.586855700542399,
+        "unstable_relus": 0,
+        "max_containment_violation": 1.3322676295501878e-15
+      }
+    },
+    {
+      "variant": "standard",
+      "seed": 9,
+      "curve": [
+        {
+          "step": 0,
+          "loss": 3.423029661178589,
+          "grad_norm": 0.4256642162799835
+        },
+        {
+          "step": 200,
+          "loss": 1.7887965440750122,
+          "grad_norm": 0.5652164220809937
+        },
+        {
+          "step": 400,
+          "loss": 1.5127400159835815,
+          "grad_norm": 0.9451619386672974
+        },
+        {
+          "step": 600,
+          "loss": 1.4589263200759888,
+          "grad_norm": 1.05776047706604
+        },
+        {
+          "step": 799,
+          "loss": 0.9830736517906189,
+          "grad_norm": 1.3880367279052734
+        }
+      ],
+      "test_accuracy": 0.731689453125,
+      "test_ce": 1.0907522439956665,
+      "final_grad_norm": 1.3880367279052734,
+      "frac_margin_negative": 0.9719222462203023,
+      "unsafe_margin_mean": -3.687587022781372,
+      "d_model": 8,
+      "trained_gap": {
+        "bound_width": 0.012965738375510627,
+        "attained_width": 0.0008707561500385097,
+        "relaxation_gap": 14.890205914637766,
+        "unstable_relus": 0,
+        "max_containment_violation": 1.5543122344752192e-15
+      }
+    },
+    {
+      "variant": "fixnorm",
+      "seed": 0,
+      "curve": [
+        {
+          "step": 0,
+          "loss": 3.3530454635620117,
+          "grad_norm": 0.3689061403274536
+        },
+        {
+          "step": 200,
+          "loss": 1.772370457649231,
+          "grad_norm": 0.9514486789703369
+        },
+        {
+          "step": 400,
+          "loss": 1.5739015340805054,
+          "grad_norm": 1.3449807167053223
+        },
+        {
+          "step": 600,
+          "loss": 1.292734980583191,
+          "grad_norm": 1.2655619382858276
+        },
+        {
+          "step": 799,
+          "loss": 1.4382652044296265,
+          "grad_norm": 1.1498185396194458
+        }
+      ],
+      "test_accuracy": 0.7315673828125,
+      "test_ce": 1.4012662172317505,
+      "final_grad_norm": 1.1498185396194458,
+      "frac_margin_negative": 0.9670479302832244,
+      "unsafe_margin_mean": -3.790449619293213,
+      "d_model": 8,
+      "trained_gap": {
+        "bound_width": 0.0007986647014721626,
+        "attained_width": 0.0007278436288196133,
+        "relaxation_gap": 1.097302593370782,
+        "unstable_relus": 0,
+        "max_containment_violation": 5.329070518200751e-15
+      }
+    },
+    {
+      "variant": "fixnorm",
+      "seed": 1,
+      "curve": [
+        {
+          "step": 0,
+          "loss": 3.48266339302063,
+          "grad_norm": 0.5654205083847046
+        },
+        {
+          "step": 200,
+          "loss": 1.709567666053772,
+          "grad_norm": 1.0209324359893799
+        },
+        {
+          "step": 400,
+          "loss": 1.6151682138442993,
+          "grad_norm": 1.564581274986267
+        },
+        {
+          "step": 600,
+          "loss": 1.378609299659729,
+          "grad_norm": 1.4856139421463013
+        },
+        {
+          "step": 799,
+          "loss": 1.0112754106521606,
+          "grad_norm": 1.4609956741333008
+        }
+      ],
+      "test_accuracy": 0.73095703125,
+      "test_ce": 1.128000259399414,
+      "final_grad_norm": 1.4609956741333008,
+      "frac_margin_negative": 0.9744495786898614,
+      "unsafe_margin_mean": -4.390397548675537,
+      "d_model": 8,
+      "trained_gap": {
+        "bound_width": 0.0006533473706228365,
+        "attained_width": 0.0005618249079699655,
+        "relaxation_gap": 1.1629021094553602,
+        "unstable_relus": 0,
+        "max_containment_violation": 1.4210854715202004e-14
+      }
+    },
+    {
+      "variant": "fixnorm",
+      "seed": 2,
+      "curve": [
+        {
+          "step": 0,
+          "loss": 3.3336193561553955,
+          "grad_norm": 0.4279823899269104
+        },
+        {
+          "step": 200,
+          "loss": 1.5489484071731567,
+          "grad_norm": 1.1383217573165894
+        },
+        {
+          "step": 400,
+          "loss": 1.536362648010254,
+          "grad_norm": 1.0885905027389526
+        },
+        {
+          "step": 600,
+          "loss": 1.3676542043685913,
+          "grad_norm": 1.4849698543548584
+        },
+        {
+          "step": 799,
+          "loss": 0.8921282291412354,
+          "grad_norm": 1.1541036367416382
+        }
+      ],
+      "test_accuracy": 0.73095703125,
+      "test_ce": 1.0601361989974976,
+      "final_grad_norm": 1.1541036367416382,
+      "frac_margin_negative": 0.9584681769147788,
+      "unsafe_margin_mean": -4.886181354522705,
+      "d_model": 8,
+      "trained_gap": {
+        "bound_width": 0.0013756895036358685,
+        "attained_width": 0.0011279064270466321,
+        "relaxation_gap": 1.2196840718764625,
+        "unstable_relus": 0,
+        "max_containment_violation": 7.993605777301127e-15
+      }
+    },
+    {
+      "variant": "fixnorm",
+      "seed": 3,
+      "curve": [
+        {
+          "step": 0,
+          "loss": 3.4972493648529053,
+          "grad_norm": 0.9193909168243408
+        },
+        {
+          "step": 200,
+          "loss": 1.5020077228546143,
+          "grad_norm": 1.085585594177246
+        },
+        {
+          "step": 400,
+          "loss": 1.342147946357727,
+          "grad_norm": 0.8553833365440369
+        },
+        {
+          "step": 600,
+          "loss": 1.218455195426941,
+          "grad_norm": 1.4751070737838745
+        },
+        {
+          "step": 799,
+          "loss": 1.4016575813293457,
+          "grad_norm": 0.8802325129508972
+        }
+      ],
+      "test_accuracy": 0.7159423828125,
+      "test_ce": 1.3775560855865479,
+      "final_grad_norm": 0.8802325129508972,
+      "frac_margin_negative": 0.9674267100977199,
+      "unsafe_margin_mean": -4.052229881286621,
+      "d_model": 8,
+      "trained_gap": {
+        "bound_width": 0.0006074651606553516,
+        "attained_width": 0.0005330992981198435,
+        "relaxation_gap": 1.1394972058634942,
+        "unstable_relus": 0,
+        "max_containment_violation": 5.329070518200751e-15
+      }
+    },
+    {
+      "variant": "fixnorm",
+      "seed": 4,
+      "curve": [
+        {
+          "step": 0,
+          "loss": 3.2928600311279297,
+          "grad_norm": 0.3638814687728882
+        },
+        {
+          "step": 200,
+          "loss": 1.5557295083999634,
+          "grad_norm": 1.2276241779327393
+        },
+        {
+          "step": 400,
+          "loss": 1.347032070159912,
+          "grad_norm": 0.9696670770645142
+        },
+        {
+          "step": 600,
+          "loss": 1.4417973756790161,
+          "grad_norm": 1.134170413017273
+        },
+        {
+          "step": 799,
+          "loss": 1.2276041507720947,
+          "grad_norm": 1.177436351776123
+        }
+      ],
+      "test_accuracy": 0.71435546875,
+      "test_ce": 1.212584137916565,
+      "final_grad_norm": 1.177436351776123,
+      "frac_margin_negative": 0.9740540540540541,
+      "unsafe_margin_mean": -4.693901538848877,
+      "d_model": 8,
+      "trained_gap": {
+        "bound_width": 0.0005153598872622567,
+        "attained_width": 0.0004422812464377479,
+        "relaxation_gap": 1.1652311541877567,
+        "unstable_relus": 0,
+        "max_containment_violation": 7.105427357601002e-15
+      }
+    },
+    {
+      "variant": "fixnorm",
+      "seed": 5,
+      "curve": [
+        {
+          "step": 0,
+          "loss": 3.305814027786255,
+          "grad_norm": 0.33380961418151855
+        },
+        {
+          "step": 200,
+          "loss": 1.4836291074752808,
+          "grad_norm": 1.026391625404358
+        },
+        {
+          "step": 400,
+          "loss": 1.5371983051300049,
+          "grad_norm": 0.9692347645759583
+        },
+        {
+          "step": 600,
+          "loss": 1.362214207649231,
+          "grad_norm": 1.16350519657135
+        },
+        {
+          "step": 799,
+          "loss": 1.3256834745407104,
+          "grad_norm": 1.392709732055664
+        }
+      ],
+      "test_accuracy": 0.7235107421875,
+      "test_ce": 1.321693778038025,
+      "final_grad_norm": 1.392709732055664,
+      "frac_margin_negative": 0.9667747163695299,
+      "unsafe_margin_mean": -3.94810152053833,
+      "d_model": 8,
+      "trained_gap": {
+        "bound_width": 0.0005963370222552555,
+        "attained_width": 0.0005265108624437076,
+        "relaxation_gap": 1.1326205493414934,
+        "unstable_relus": 0,
+        "max_containment_violation": 4.884981308350689e-15
+      }
+    },
+    {
+      "variant": "fixnorm",
+      "seed": 6,
+      "curve": [
+        {
+          "step": 0,
+          "loss": 3.315917491912842,
+          "grad_norm": 0.4520290195941925
+        },
+        {
+          "step": 200,
+          "loss": 1.6645753383636475,
+          "grad_norm": 1.0480709075927734
+        },
+        {
+          "step": 400,
+          "loss": 1.3049993515014648,
+          "grad_norm": 1.0487624406814575
+        },
+        {
+          "step": 600,
+          "loss": 1.2745327949523926,
+          "grad_norm": 0.9400784373283386
+        },
+        {
+          "step": 799,
+          "loss": 1.3589085340499878,
+          "grad_norm": 0.9727790355682373
+        }
+      ],
+      "test_accuracy": 0.7066650390625,
+      "test_ce": 1.3756508827209473,
+      "final_grad_norm": 0.9727790355682373,
+      "frac_margin_negative": 0.9573137574768896,
+      "unsafe_margin_mean": -3.5890324115753174,
+      "d_model": 8,
+      "trained_gap": {
+        "bound_width": 0.000899692698636656,
+        "attained_width": 0.0007867150918308141,
+        "relaxation_gap": 1.1436067618112227,
+        "unstable_relus": 0,
+        "max_containment_violation": 5.329070518200751e-15
+      }
+    },
+    {
+      "variant": "fixnorm",
+      "seed": 7,
+      "curve": [
+        {
+          "step": 0,
+          "loss": 3.4008190631866455,
+          "grad_norm": 0.6041319370269775
+        },
+        {
+          "step": 200,
+          "loss": 1.9641859531402588,
+          "grad_norm": 1.099408507347107
+        },
+        {
+          "step": 400,
+          "loss": 1.668548345565796,
+          "grad_norm": 1.4597724676132202
+        },
+        {
+          "step": 600,
+          "loss": 1.3755316734313965,
+          "grad_norm": 1.5045760869979858
+        },
+        {
+          "step": 799,
+          "loss": 1.3070929050445557,
+          "grad_norm": 1.2476449012756348
+        }
+      ],
+      "test_accuracy": 0.72314453125,
+      "test_ce": 1.382196068763733,
+      "final_grad_norm": 1.2476449012756348,
+      "frac_margin_negative": 0.9708265802269044,
+      "unsafe_margin_mean": -3.7557382583618164,
+      "d_model": 8,
+      "trained_gap": {
+        "bound_width": 0.0004484044205561588,
+        "attained_width": 0.0004080182800958454,
+        "relaxation_gap": 1.0989812036137854,
+        "unstable_relus": 0,
+        "max_containment_violation": 7.105427357601002e-15
+      }
+    },
+    {
+      "variant": "fixnorm",
+      "seed": 8,
+      "curve": [
+        {
+          "step": 0,
+          "loss": 3.378021001815796,
+          "grad_norm": 0.4875393509864807
+        },
+        {
+          "step": 200,
+          "loss": 1.7911536693572998,
+          "grad_norm": 1.241566777229309
+        },
+        {
+          "step": 400,
+          "loss": 1.4723345041275024,
+          "grad_norm": 1.0507174730300903
+        },
+        {
+          "step": 600,
+          "loss": 1.6415337324142456,
+          "grad_norm": 1.70820951461792
+        },
+        {
+          "step": 799,
+          "loss": 1.3138030767440796,
+          "grad_norm": 1.2612190246582031
+        }
+      ],
+      "test_accuracy": 0.718505859375,
+      "test_ce": 1.360647201538086,
+      "final_grad_norm": 1.2612190246582031,
+      "frac_margin_negative": 0.9701168160825863,
+      "unsafe_margin_mean": -3.8845348358154297,
+      "d_model": 8,
+      "trained_gap": {
+        "bound_width": 0.0007535229648345521,
+        "attained_width": 0.0006606498772372404,
+        "relaxation_gap": 1.140578377136307,
+        "unstable_relus": 0,
+        "max_containment_violation": 6.217248937900877e-15
+      }
+    },
+    {
+      "variant": "fixnorm",
+      "seed": 9,
+      "curve": [
+        {
+          "step": 0,
+          "loss": 3.4348249435424805,
+          "grad_norm": 0.5118347406387329
+        },
+        {
+          "step": 200,
+          "loss": 1.8004651069641113,
+          "grad_norm": 0.886647641658783
+        },
+        {
+          "step": 400,
+          "loss": 1.4620929956436157,
+          "grad_norm": 1.8404842615127563
+        },
+        {
+          "step": 600,
+          "loss": 1.224746823310852,
+          "grad_norm": 1.2247825860977173
+        },
+        {
+          "step": 799,
+          "loss": 0.9500455856323242,
+          "grad_norm": 1.356709599494934
+        }
+      ],
+      "test_accuracy": 0.7490234375,
+      "test_ce": 0.9821858406066895,
+      "final_grad_norm": 1.356709599494934,
+      "frac_margin_negative": 0.9716522678185745,
+      "unsafe_margin_mean": -6.735001564025879,
+      "d_model": 8,
+      "trained_gap": {
+        "bound_width": 0.006092843047349916,
+        "attained_width": 0.005517807936064045,
+        "relaxation_gap": 1.1042144123080975,
+        "unstable_relus": 0,
+        "max_containment_violation": 1.4210854715202004e-14
+      }
+    },
+    {
+      "variant": "standard",
+      "seed": 0,
+      "curve": [
+        {
+          "step": 0,
+          "loss": 3.3586513996124268,
+          "grad_norm": 0.5196895599365234
+        },
+        {
+          "step": 200,
+          "loss": 1.1913801431655884,
+          "grad_norm": 0.8824615478515625
+        },
+        {
+          "step": 400,
+          "loss": 1.0030461549758911,
+          "grad_norm": 0.8627355694770813
+        },
+        {
+          "step": 600,
+          "loss": 0.4441949129104614,
+          "grad_norm": 0.7911171913146973
+        },
+        {
+          "step": 799,
+          "loss": 0.07748372852802277,
+          "grad_norm": 0.8106868267059326
+        }
+      ],
+      "test_accuracy": 0.982177734375,
+      "test_ce": 0.07382696121931076,
+      "final_grad_norm": 0.8106868267059326,
+      "frac_margin_negative": 0.9964596949891068,
+      "unsafe_margin_mean": -7.808206558227539,
+      "d_model": 16,
+      "trained_gap": {
+        "bound_width": 0.005142976123221565,
+        "attained_width": 0.00031956405048338965,
+        "relaxation_gap": 16.09372554716973,
+        "unstable_relus": 1,
+        "max_containment_violation": 1.099120794378905e-14
+      }
+    },
+    {
+      "variant": "standard",
+      "seed": 1,
+      "curve": [
+        {
+          "step": 0,
+          "loss": 3.454117774963379,
+          "grad_norm": 0.6671265363693237
+        },
+        {
+          "step": 200,
+          "loss": 1.2124762535095215,
+          "grad_norm": 0.6904821395874023
+        },
+        {
+          "step": 400,
+          "loss": 0.9586448073387146,
+          "grad_norm": 0.9704681038856506
+        },
+        {
+          "step": 600,
+          "loss": 0.6396601796150208,
+          "grad_norm": 0.8175525069236755
+        },
+        {
+          "step": 799,
+          "loss": 0.19299818575382233,
+          "grad_norm": 0.8446261286735535
+        }
+      ],
+      "test_accuracy": 0.9373779296875,
+      "test_ce": 0.2275010049343109,
+      "final_grad_norm": 0.8446261286735535,
+      "frac_margin_negative": 0.9964664310954063,
+      "unsafe_margin_mean": -7.205726146697998,
+      "d_model": 16,
+      "trained_gap": {
+        "bound_width": 0.029636140822184798,
+        "attained_width": 0.0008280137179773606,
+        "relaxation_gap": 35.79184762129159,
+        "unstable_relus": 0,
+        "max_containment_violation": -2.142730437526552e-14
+      }
+    },
+    {
+      "variant": "standard",
+      "seed": 2,
+      "curve": [
+        {
+          "step": 0,
+          "loss": 3.382821798324585,
+          "grad_norm": 0.45632773637771606
+        },
+        {
+          "step": 200,
+          "loss": 1.1273683309555054,
+          "grad_norm": 0.6370835900306702
+        },
+        {
+          "step": 400,
+          "loss": 1.0755263566970825,
+          "grad_norm": 0.7230091691017151
+        },
+        {
+          "step": 600,
+          "loss": 0.5432531833648682,
+          "grad_norm": 0.9807131290435791
+        },
+        {
+          "step": 799,
+          "loss": 0.12627075612545013,
+          "grad_norm": 0.7404873967170715
+        }
+      ],
+      "test_accuracy": 0.9708251953125,
+      "test_ce": 0.1079510897397995,
+      "final_grad_norm": 0.7404873967170715,
+      "frac_margin_negative": 0.9956850053937433,
+      "unsafe_margin_mean": -8.053442001342773,
+      "d_model": 16,
+      "trained_gap": {
+        "bound_width": 0.009056384800258055,
+        "attained_width": 0.0005136927932789526,
+        "relaxation_gap": 17.62996273015676,
+        "unstable_relus": 0,
+        "max_containment_violation": 2.6645352591003757e-15
+      }
+    },
+    {
+      "variant": "standard",
+      "seed": 3,
+      "curve": [
+        {
+          "step": 0,
+          "loss": 3.532907724380493,
+          "grad_norm": 0.6021265983581543
+        },
+        {
+          "step": 200,
+          "loss": 1.0264180898666382,
+          "grad_norm": 0.7506719827651978
+        },
+        {
+          "step": 400,
+          "loss": 0.995856761932373,
+          "grad_norm": 0.840542197227478
+        },
+        {
+          "step": 600,
+          "loss": 0.6269145607948303,
+          "grad_norm": 1.0177507400512695
+        },
+        {
+          "step": 799,
+          "loss": 0.17240217328071594,
+          "grad_norm": 0.6178593039512634
+        }
+      ],
+      "test_accuracy": 0.962158203125,
+      "test_ce": 0.15341736376285553,
+      "final_grad_norm": 0.6178593039512634,
+      "frac_margin_negative": 0.998642779587405,
+      "unsafe_margin_mean": -7.06214714050293,
+      "d_model": 16,
+      "trained_gap": {
+        "bound_width": 0.033233344533787346,
+        "attained_width": 0.0011153023252674643,
+        "relaxation_gap": 29.797610729285935,
+        "unstable_relus": 1,
+        "max_containment_violation": -9.370282327836321e-14
+      }
+    },
+    {
+      "variant": "standard",
+      "seed": 4,
+      "curve": [
+        {
+          "step": 0,
+          "loss": 3.447521686553955,
+          "grad_norm": 0.6101450324058533
+        },
+        {
+          "step": 200,
+          "loss": 1.111487865447998,
+          "grad_norm": 0.837472677230835
+        },
+        {
+          "step": 400,
+          "loss": 0.9795387983322144,
+          "grad_norm": 0.8277465105056763
+        },
+        {
+          "step": 600,
+          "loss": 0.636135995388031,
+          "grad_norm": 0.885879397392273
+        },
+        {
+          "step": 799,
+          "loss": 0.1377662718296051,
+          "grad_norm": 1.1148016452789307
+        }
+      ],
+      "test_accuracy": 0.9725341796875,
+      "test_ce": 0.10508184880018234,
+      "final_grad_norm": 1.1148016452789307,
+      "frac_margin_negative": 0.9970270270270271,
+      "unsafe_margin_mean": -7.805897235870361,
+      "d_model": 16,
+      "trained_gap": {
+        "bound_width": 0.002592053836857122,
+        "attained_width": 0.00023228105368766627,
+        "relaxation_gap": 11.159127254272292,
+        "unstable_relus": 0,
+        "max_containment_violation": 2.220446049250313e-15
+      }
+    },
+    {
+      "variant": "standard",
+      "seed": 5,
+      "curve": [
+        {
+          "step": 0,
+          "loss": 3.4211068153381348,
+          "grad_norm": 0.6051288843154907
+        },
+        {
+          "step": 200,
+          "loss": 1.1118186712265015,
+          "grad_norm": 0.6849102973937988
+        },
+        {
+          "step": 400,
+          "loss": 1.0222816467285156,
+          "grad_norm": 0.7075376510620117
+        },
+        {
+          "step": 600,
+          "loss": 0.7383962273597717,
+          "grad_norm": 0.8438840508460999
+        },
+        {
+          "step": 799,
+          "loss": 0.46975597739219666,
+          "grad_norm": 1.0015981197357178
+        }
+      ],
+      "test_accuracy": 0.8853759765625,
+      "test_ce": 0.4123963713645935,
+      "final_grad_norm": 1.0015981197357178,
+      "frac_margin_negative": 0.9867639113992437,
+      "unsafe_margin_mean": -6.182721138000488,
+      "d_model": 16,
+      "trained_gap": {
+        "bound_width": 0.0022132082111987472,
+        "attained_width": 0.00029159185018157174,
+        "relaxation_gap": 7.59008940003159,
+        "unstable_relus": 0,
+        "max_containment_violation": -1.0613732115416497e-13
+      }
+    },
+    {
+      "variant": "standard",
+      "seed": 6,
+      "curve": [
+        {
+          "step": 0,
+          "loss": 3.4131622314453125,
+          "grad_norm": 0.5976837873458862
+        },
+        {
+          "step": 200,
+          "loss": 1.2725692987442017,
+          "grad_norm": 0.9543901681900024
+        },
+        {
+          "step": 400,
+          "loss": 0.8038561940193176,
+          "grad_norm": 1.070952296257019
+        },
+        {
+          "step": 600,
+          "loss": 0.3061593770980835,
+          "grad_norm": 1.0404797792434692
+        },
+        {
+          "step": 799,
+          "loss": 0.005553290247917175,
+          "grad_norm": 0.03310452401638031
+        }
+      ],
+      "test_accuracy": 0.9998779296875,
+      "test_ce": 0.006043396424502134,
+      "final_grad_norm": 0.03310452401638031,
+      "frac_margin_negative": 1.0,
+      "unsafe_margin_mean": -9.479991912841797,
+      "d_model": 16,
+      "trained_gap": {
+        "bound_width": 0.006594877615720723,
+        "attained_width": 0.0003489292066602978,
+        "relaxation_gap": 18.900331327498208,
+        "unstable_relus": 0,
+        "max_containment_violation": -7.438494264988549e-14
+      }
+    },
+    {
+      "variant": "standard",
+      "seed": 7,
+      "curve": [
+        {
+          "step": 0,
+          "loss": 3.452606201171875,
+          "grad_norm": 0.5318949818611145
+        },
+        {
+          "step": 200,
+          "loss": 1.2134441137313843,
+          "grad_norm": 0.7979286313056946
+        },
+        {
+          "step": 400,
+          "loss": 1.0760210752487183,
+          "grad_norm": 0.673480212688446
+        },
+        {
+          "step": 600,
+          "loss": 0.5313718318939209,
+          "grad_norm": 0.8661966323852539
+        },
+        {
+          "step": 799,
+          "loss": 0.022971762344241142,
+          "grad_norm": 1.8163923025131226
+        }
+      ],
+      "test_accuracy": 0.99609375,
+      "test_ce": 0.029738813638687134,
+      "final_grad_norm": 1.8163923025131226,
+      "frac_margin_negative": 0.9997298757428417,
+      "unsafe_margin_mean": -8.579087257385254,
+      "d_model": 16,
+      "trained_gap": {
+        "bound_width": 0.0018768748140294278,
+        "attained_width": 0.00029139641275532924,
+        "relaxation_gap": 6.440967465187515,
+        "unstable_relus": 0,
+        "max_containment_violation": -1.2789769243681803e-13
+      }
+    },
+    {
+      "variant": "standard",
+      "seed": 8,
+      "curve": [
+        {
+          "step": 0,
+          "loss": 3.394009590148926,
+          "grad_norm": 0.48091721534729004
+        },
+        {
+          "step": 200,
+          "loss": 1.2876287698745728,
+          "grad_norm": 0.8198578357696533
+        },
+        {
+          "step": 400,
+          "loss": 0.896521806716919,
+          "grad_norm": 0.7972458600997925
+        },
+        {
+          "step": 600,
+          "loss": 0.5215895175933838,
+          "grad_norm": 0.8308690786361694
+        },
+        {
+          "step": 799,
+          "loss": 0.00970795564353466,
+          "grad_norm": 0.31626102328300476
+        }
+      ],
+      "test_accuracy": 0.9957275390625,
+      "test_ce": 0.018899446353316307,
+      "final_grad_norm": 0.31626102328300476,
+      "frac_margin_negative": 0.9997283346916599,
+      "unsafe_margin_mean": -8.597188949584961,
+      "d_model": 16,
+      "trained_gap": {
+        "bound_width": 0.020487037730521518,
+        "attained_width": 0.00040653461915085565,
+        "relaxation_gap": 50.394325022832184,
+        "unstable_relus": 0,
+        "max_containment_violation": -7.693845560652335e-14
+      }
+    },
+    {
+      "variant": "standard",
+      "seed": 9,
+      "curve": [
+        {
+          "step": 0,
+          "loss": 3.406177282333374,
+          "grad_norm": 0.5460655689239502
+        },
+        {
+          "step": 200,
+          "loss": 1.2724316120147705,
+          "grad_norm": 0.7678470015525818
+        },
+        {
+          "step": 400,
+          "loss": 0.9520280361175537,
+          "grad_norm": 0.7285937070846558
+        },
+        {
+          "step": 600,
+          "loss": 0.7285374402999878,
+          "grad_norm": 1.2232415676116943
+        },
+        {
+          "step": 799,
+          "loss": 0.03058919683098793,
+          "grad_norm": 0.4479239284992218
+        }
+      ],
+      "test_accuracy": 0.9947509765625,
+      "test_ce": 0.030186383053660393,
+      "final_grad_norm": 0.4479239284992218,
+      "frac_margin_negative": 1.0,
+      "unsafe_margin_mean": -7.737170696258545,
+      "d_model": 16,
+      "trained_gap": {
+        "bound_width": 0.00624798909399038,
+        "attained_width": 0.0004242188024112803,
+        "relaxation_gap": 14.728222932308768,
+        "unstable_relus": 0,
+        "max_containment_violation": 1.1879386363489175e-14
+      }
+    },
+    {
+      "variant": "fixnorm",
+      "seed": 0,
+      "curve": [
+        {
+          "step": 0,
+          "loss": 3.4177188873291016,
+          "grad_norm": 0.7358049750328064
+        },
+        {
+          "step": 200,
+          "loss": 1.2756102085113525,
+          "grad_norm": 1.3429243564605713
+        },
+        {
+          "step": 400,
+          "loss": 0.9977957010269165,
+          "grad_norm": 1.1231496334075928
+        },
+        {
+          "step": 600,
+          "loss": 0.5675535798072815,
+          "grad_norm": 0.9020319581031799
+        },
+        {
+          "step": 799,
+          "loss": 0.28176748752593994,
+          "grad_norm": 1.1454042196273804
+        }
+      ],
+      "test_accuracy": 0.91455078125,
+      "test_ce": 0.2946101427078247,
+      "final_grad_norm": 1.1454042196273804,
+      "frac_margin_negative": 0.9926470588235294,
+      "unsafe_margin_mean": -10.149028778076172,
+      "d_model": 16,
+      "trained_gap": {
+        "bound_width": 0.0028775959727234124,
+        "attained_width": 0.0025681351724653467,
+        "relaxation_gap": 1.1205001993571042,
+        "unstable_relus": 0,
+        "max_containment_violation": 8.881784197001252e-15
+      }
+    },
+    {
+      "variant": "fixnorm",
+      "seed": 1,
+      "curve": [
+        {
+          "step": 0,
+          "loss": 3.412832260131836,
+          "grad_norm": 0.6355257630348206
+        },
+        {
+          "step": 200,
+          "loss": 1.1582081317901611,
+          "grad_norm": 1.1091716289520264
+        },
+        {
+          "step": 400,
+          "loss": 1.109501600265503,
+          "grad_norm": 1.5547000169754028
+        },
+        {
+          "step": 600,
+          "loss": 1.1398963928222656,
+          "grad_norm": 1.0880157947540283
+        },
+        {
+          "step": 799,
+          "loss": 0.5263027548789978,
+          "grad_norm": 0.8698243498802185
+        }
+      ],
+      "test_accuracy": 0.809814453125,
+      "test_ce": 0.6673266887664795,
+      "final_grad_norm": 0.8698243498802185,
+      "frac_margin_negative": 0.9850502854036423,
+      "unsafe_margin_mean": -6.570864677429199,
+      "d_model": 16,
+      "trained_gap": {
+        "bound_width": 0.0006954452644292175,
+        "attained_width": 0.0006205316143663708,
+        "relaxation_gap": 1.1207249531344854,
+        "unstable_relus": 0,
+        "max_containment_violation": 8.881784197001252e-15
+      }
+    },
+    {
+      "variant": "fixnorm",
+      "seed": 2,
+      "curve": [
+        {
+          "step": 0,
+          "loss": 3.380948543548584,
+          "grad_norm": 0.47959044575691223
+        },
+        {
+          "step": 200,
+          "loss": 1.171545147895813,
+          "grad_norm": 1.2042595148086548
+        },
+        {
+          "step": 400,
+          "loss": 1.116959571838379,
+          "grad_norm": 0.8892951011657715
+        },
+        {
+          "step": 600,
+          "loss": 0.6478846669197083,
+          "grad_norm": 0.6780961155891418
+        },
+        {
+          "step": 799,
+          "loss": 0.2361208200454712,
+          "grad_norm": 0.8037006855010986
+        }
+      ],
+      "test_accuracy": 0.9052734375,
+      "test_ce": 0.31228771805763245,
+      "final_grad_norm": 0.8037006855010986,
+      "frac_margin_negative": 0.9900215749730313,
+      "unsafe_margin_mean": -11.971611022949219,
+      "d_model": 16,
+      "trained_gap": {
+        "bound_width": 0.0014195859192567273,
+        "attained_width": 0.0011757074320579708,
+        "relaxation_gap": 1.2074312712065356,
+        "unstable_relus": 0,
+        "max_containment_violation": 7.993605777301127e-15
+      }
+    },
+    {
+      "variant": "fixnorm",
+      "seed": 3,
+      "curve": [
+        {
+          "step": 0,
+          "loss": 3.532904624938965,
+          "grad_norm": 0.7504130005836487
+        },
+        {
+          "step": 200,
+          "loss": 1.1527302265167236,
+          "grad_norm": 0.9762961864471436
+        },
+        {
+          "step": 400,
+          "loss": 1.0366344451904297,
+          "grad_norm": 1.113396406173706
+        },
+        {
+          "step": 600,
+          "loss": 0.5717135071754456,
+          "grad_norm": 0.899833083152771
+        },
+        {
+          "step": 799,
+          "loss": 0.4503658413887024,
+          "grad_norm": 1.183296799659729
+        }
+      ],
+      "test_accuracy": 0.860107421875,
+      "test_ce": 0.4968755543231964,
+      "final_grad_norm": 1.183296799659729,
+      "frac_margin_negative": 0.9834419109663409,
+      "unsafe_margin_mean": -8.8136625289917,
+      "d_model": 16,
+      "trained_gap": {
+        "bound_width": 0.0006764268683703278,
+        "attained_width": 0.0005995391251349957,
+        "relaxation_gap": 1.1282447466927528,
+        "unstable_relus": 0,
+        "max_containment_violation": 1.9539925233402755e-14
+      }
+    },
+    {
+      "variant": "fixnorm",
+      "seed": 4,
+      "curve": [
+        {
+          "step": 0,
+          "loss": 3.4251816272735596,
+          "grad_norm": 0.5446496605873108
+        },
+        {
+          "step": 200,
+          "loss": 1.0837986469268799,
+          "grad_norm": 1.0559909343719482
+        },
+        {
+          "step": 400,
+          "loss": 1.077212929725647,
+          "grad_norm": 1.363718867301941
+        },
+        {
+          "step": 600,
+          "loss": 0.7892609238624573,
+          "grad_norm": 1.0427830219268799
+        },
+        {
+          "step": 799,
+          "loss": 0.2896057963371277,
+          "grad_norm": 1.075792908668518
+        }
+      ],
+      "test_accuracy": 0.9180908203125,
+      "test_ce": 0.2910773456096649,
+      "final_grad_norm": 1.075792908668518,
+      "frac_margin_negative": 0.994054054054054,
+      "unsafe_margin_mean": -10.336885452270508,
+      "d_model": 16,
+      "trained_gap": {
+        "bound_width": 0.0012964519135003627,
+        "attained_width": 0.0011833182587879243,
+        "relaxation_gap": 1.0956071233349525,
+        "unstable_relus": 0,
+        "max_containment_violation": 7.993605777301127e-15
+      }
+    },
+    {
+      "variant": "fixnorm",
+      "seed": 5,
+      "curve": [
+        {
+          "step": 0,
+          "loss": 3.4221384525299072,
+          "grad_norm": 0.6539683938026428
+        },
+        {
+          "step": 200,
+          "loss": 1.1256005764007568,
+          "grad_norm": 1.1188316345214844
+        },
+        {
+          "step": 400,
+          "loss": 0.9901419281959534,
+          "grad_norm": 0.970018744468689
+        },
+        {
+          "step": 600,
+          "loss": 0.7226254940032959,
+          "grad_norm": 1.0052087306976318
+        },
+        {
+          "step": 799,
+          "loss": 0.5259420275688171,
+          "grad_norm": 1.0413516759872437
+        }
+      ],
+      "test_accuracy": 0.86865234375,
+      "test_ce": 0.44414007663726807,
+      "final_grad_norm": 1.0413516759872437,
+      "frac_margin_negative": 0.9870340356564019,
+      "unsafe_margin_mean": -10.677691459655762,
+      "d_model": 16,
+      "trained_gap": {
+        "bound_width": 0.0003829251880489437,
+        "attained_width": 0.0003335301564852955,
+        "relaxation_gap": 1.1480976475535756,
+        "unstable_relus": 0,
+        "max_containment_violation": 9.769962616701378e-15
+      }
+    },
+    {
+      "variant": "fixnorm",
+      "seed": 6,
+      "curve": [
+        {
+          "step": 0,
+          "loss": 3.42948317527771,
+          "grad_norm": 0.6607614159584045
+        },
+        {
+          "step": 200,
+          "loss": 1.2804832458496094,
+          "grad_norm": 1.1578400135040283
+        },
+        {
+          "step": 400,
+          "loss": 0.8871345520019531,
+          "grad_norm": 1.399773120880127
+        },
+        {
+          "step": 600,
+          "loss": 0.46482133865356445,
+          "grad_norm": 1.0138535499572754
+        },
+        {
+          "step": 799,
+          "loss": 0.11177565902471542,
+          "grad_norm": 1.106561303138733
+        }
+      ],
+      "test_accuracy": 0.96044921875,
+      "test_ce": 0.1385471522808075,
+      "final_grad_norm": 1.106561303138733,
+      "frac_margin_negative": 0.9956498096791735,
+      "unsafe_margin_mean": -13.978004455566406,
+      "d_model": 16,
+      "trained_gap": {
+        "bound_width": 0.0006681629559111002,
+        "attained_width": 0.0005571876391012864,
+        "relaxation_gap": 1.1991704571709647,
+        "unstable_relus": 0,
+        "max_containment_violation": 1.0658141036401503e-14
+      }
+    },
+    {
+      "variant": "fixnorm",
+      "seed": 7,
+      "curve": [
+        {
+          "step": 0,
+          "loss": 3.4708824157714844,
+          "grad_norm": 0.6157139539718628
+        },
+        {
+          "step": 200,
+          "loss": 1.2237305641174316,
+          "grad_norm": 1.1076219081878662
+        },
+        {
+          "step": 400,
+          "loss": 1.0773359537124634,
+          "grad_norm": 0.8698136210441589
+        },
+        {
+          "step": 600,
+          "loss": 0.5797144174575806,
+          "grad_norm": 0.8099769949913025
+        },
+        {
+          "step": 799,
+          "loss": 0.3442508280277252,
+          "grad_norm": 0.8833509683609009
+        }
+      ],
+      "test_accuracy": 0.8800048828125,
+      "test_ce": 0.4151434004306793,
+      "final_grad_norm": 0.8833509683609009,
+      "frac_margin_negative": 0.9864937871420854,
+      "unsafe_margin_mean": -10.744540214538574,
+      "d_model": 16,
+      "trained_gap": {
+        "bound_width": 0.0005086788799886222,
+        "attained_width": 0.0004606993399014492,
+        "relaxation_gap": 1.104145015917402,
+        "unstable_relus": 0,
+        "max_containment_violation": 1.0658141036401503e-14
+      }
+    },
+    {
+      "variant": "fixnorm",
+      "seed": 8,
+      "curve": [
+        {
+          "step": 0,
+          "loss": 3.405917167663574,
+          "grad_norm": 0.5813761353492737
+        },
+        {
+          "step": 200,
+          "loss": 1.2537399530410767,
+          "grad_norm": 1.066123366355896
+        },
+        {
+          "step": 400,
+          "loss": 0.9975810050964355,
+          "grad_norm": 1.0277462005615234
+        },
+        {
+          "step": 600,
+          "loss": 0.6848588585853577,
+          "grad_norm": 0.7963269948959351
+        },
+        {
+          "step": 799,
+          "loss": 0.14986202120780945,
+          "grad_norm": 3.1319868564605713
+        }
+      ],
+      "test_accuracy": 0.9642333984375,
+      "test_ce": 0.1328197419643402,
+      "final_grad_norm": 3.1319868564605713,
+      "frac_margin_negative": 0.9970116816082586,
+      "unsafe_margin_mean": -14.259310722351074,
+      "d_model": 16,
+      "trained_gap": {
+        "bound_width": 0.0017651745513231898,
+        "attained_width": 0.0014854422664282163,
+        "relaxation_gap": 1.1883158243286,
+        "unstable_relus": 0,
+        "max_containment_violation": 1.5987211554602254e-14
+      }
+    },
+    {
+      "variant": "fixnorm",
+      "seed": 9,
+      "curve": [
+        {
+          "step": 0,
+          "loss": 3.4114348888397217,
+          "grad_norm": 0.593132734298706
+        },
+        {
+          "step": 200,
+          "loss": 1.2586703300476074,
+          "grad_norm": 1.2640787363052368
+        },
+        {
+          "step": 400,
+          "loss": 0.8275818824768066,
+          "grad_norm": 0.9010124206542969
+        },
+        {
+          "step": 600,
+          "loss": 0.48248323798179626,
+          "grad_norm": 1.1751337051391602
+        },
+        {
+          "step": 799,
+          "loss": 0.017405489459633827,
+          "grad_norm": 0.46693429350852966
+        }
+      ],
+      "test_accuracy": 0.9947509765625,
+      "test_ce": 0.026482535526156425,
+      "final_grad_norm": 0.46693429350852966,
+      "frac_margin_negative": 0.9994600431965442,
+      "unsafe_margin_mean": -14.304790496826172,
+      "d_model": 16,
+      "trained_gap": {
+        "bound_width": 0.0014070467549194277,
+        "attained_width": 0.0012064431262501785,
+        "relaxation_gap": 1.1662769046500832,
+        "unstable_relus": 0,
+        "max_containment_violation": 4.085620730620576e-14
+      }
+    }
+  ],
+  "summary": {
+    "8": {
+      "standard": {
+        "n_seeds": 10,
+        "test_accuracy_mean": 0.72349853515625,
+        "test_accuracy_std": 0.00931695879158072,
+        "test_accuracy_sem": 0.0029462810647325087,
+        "test_accuracy_ci95": [
+          0.7177238242693742,
+          0.7292732460431257
+        ],
+        "test_ce_mean": 1.3218877792358399,
+        "relaxation_gap_median": 15.996176372689312,
+        "frac_margin_negative_mean": 0.9690710653998217,
+        "max_containment_violation": 2.6645352591003757e-15
+      },
+      "fixnorm": {
+        "n_seeds": 10,
+        "test_accuracy_mean": 0.724462890625,
+        "test_accuracy_std": 0.01186823691362284,
+        "test_accuracy_sem": 0.003753066045753522,
+        "test_accuracy_ci95": [
+          0.7171068811753232,
+          0.7318189000746769
+        ],
+        "test_ce_mean": 1.2601916670799256,
+        "relaxation_gap_median": 1.1400377914999007,
+        "frac_margin_negative_mean": 0.9678130588014124,
+        "max_containment_violation": 1.4210854715202004e-14
+      },
+      "baseline_accuracy": 0.72349853515625,
+      "baseline_in_band": true,
+      "penalty_points": -0.09643554687500666,
+      "penalty_ci95_points": [
+        -1.0316262271682652,
+        0.838755133418252
+      ],
+      "penalty_significant": false,
+      "gap_gain": 14.031268517549583
+    },
+    "16": {
+      "standard": {
+        "n_seeds": 10,
+        "test_accuracy_mean": 0.96968994140625,
+        "test_accuracy_std": 0.03541727299264735,
+        "test_accuracy_sem": 0.01119992511687336,
+        "test_accuracy_ci95": [
+          0.9477380881771782,
+          0.9916417946353218
+        ],
+        "test_ce_mean": 0.11650426792912186,
+        "relaxation_gap_median": 16.861844138663244,
+        "frac_margin_negative_mean": 0.9970503059926434,
+        "max_containment_violation": 1.1879386363489175e-14
+      },
+      "fixnorm": {
+        "n_seeds": 10,
+        "test_accuracy_mean": 0.9075927734375,
+        "test_accuracy_std": 0.05563314966324219,
+        "test_accuracy_sem": 0.017592746634487476,
+        "test_accuracy_ci95": [
+          0.8731109900339046,
+          0.9420745568410954
+        ],
+        "test_ce_mean": 0.3219310356304049,
+        "relaxation_gap_median": 1.1381711971231643,
+        "frac_margin_negative_mean": 0.9910864241503061,
+        "max_containment_violation": 4.085620730620576e-14
+      },
+      "baseline_accuracy": 0.96968994140625,
+      "baseline_in_band": false,
+      "penalty_points": 6.209716796874998,
+      "penalty_ci95_points": [
+        2.1220802586255654,
+        10.29735333512443
+      ],
+      "penalty_significant": true,
+      "gap_gain": 14.81485753749801
+    }
+  },
+  "trend": {
+    "penalty_points": {
+      "8": -0.09643554687500666,
+      "16": 6.209716796874998
+    },
+    "gap_gain": {
+      "8": 14.031268517549583,
+      "16": 14.81485753749801
+    },
+    "both_widths_in_band": false,
+    "interpretation": "NOT INTERPRETABLE as a capacity trend. The baseline is outside the discriminatory band (0.7, 0.95) at d_model=16 (accuracy 0.9697). A saturated baseline reports a shrinking penalty whether or not one exists -- this is exactly the artifact c20 exposed. To read a capacity trend the task must be re-tuned so the baseline stays off the ceiling at every width."
+  },
+  "note": "fixnorm_tanh dropped: c20 showed it dominated (3 more accuracy points lost, no additional verifiability). Step count is 2000 here versus 3000 in c20, so absolute accuracies are not directly comparable across the two experiments; the within-experiment comparison is."
+}

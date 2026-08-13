@@ -1,0 +1,36 @@
+=== launched 2026-08-05T05:00:57Z ===
+[wrap] sleep inhibit ON
+[wrap] === c25_certified_parts ===
+[      0.0s] device=cpu eps_train=0.05 ramp=100+1000 kappa_final=0.5 vocab=65
+[      0.0s]   L2_d32_standard_lr0.001_s0 CACHED
+[      3.7s]   L2_d32_standard_lr0.001_s1 ppl=nan div=True 0ms/step [1s]
+[      5.1s]   L2_d32_standard_lr0.001_s2 ppl=nan div=True 0ms/step [1s]
+[      5.1s]   L2_d32_standard_lr0.003_s0 CACHED
+[      6.5s]   L2_d32_standard_lr0.003_s1 ppl=nan div=True 0ms/step [1s]
+[      7.7s]   L2_d32_standard_lr0.003_s2 ppl=nan div=True 0ms/step [1s]
+[      7.8s]   L2_d32_standard_lr0.01_s0 CACHED
+[      9.1s]   L2_d32_standard_lr0.01_s1 ppl=nan div=True 0ms/step [1s]
+[     10.6s]   L2_d32_standard_lr0.01_s2 ppl=nan div=True 0ms/step [1s]
+[     10.6s]   L2_d32_fixnorm_lr0.001_s0 CACHED
+[    284.6s]   L2_d32_fixnorm_lr0.001_s1 ppl=10.7194 div=False 91ms/step [274s]
+[    285.0s]   L2_d32_fixnorm_lr0.001_s1 gap=1.13 meaningful=True unstable=0 viol=+4.4e-15
+[    531.3s]   L2_d32_fixnorm_lr0.001_s2 ppl=10.9259 div=False 82ms/step [246s]
+[    531.7s]   L2_d32_fixnorm_lr0.001_s2 gap=1.191 meaningful=True unstable=0 viol=+1.8e-15
+[    531.7s]   L2_d32_fixnorm_lr0.003_s0 CACHED
+[    746.8s]   L2_d32_fixnorm_lr0.003_s1 ppl=9.9207 div=False 72ms/step [215s]
+[    747.2s]   L2_d32_fixnorm_lr0.003_s1 gap=1.135 meaningful=True unstable=0 viol=+7.1e-15
+[    963.6s]   L2_d32_fixnorm_lr0.003_s2 ppl=9.8317 div=False 72ms/step [216s]
+[    964.0s]   L2_d32_fixnorm_lr0.003_s2 gap=1.187 meaningful=True unstable=0 viol=+5.3e-15
+[    964.0s]   L2_d32_fixnorm_lr0.01_s0 CACHED
+[   1179.1s]   L2_d32_fixnorm_lr0.01_s1 ppl=9.1624 div=False 72ms/step [215s]
+[   1179.5s]   L2_d32_fixnorm_lr0.01_s1 gap=1.131 meaningful=True unstable=0 viol=+1.1e-14
+[   1182.4s]   L2_d32_fixnorm_lr0.01_s2 ppl=nan div=True 1ms/step [3s]
+[   1182.4s] done: 36 parts in C:\Users\sehaj\experiments\ai_safety_lyapunov\results\c25_certified_parts
+[wrap] === c25_control_parts ===
+[      0.0s] device=cpu eps_train=0.0 ramp=100+1000 kappa_final=0.5 vocab=65
+[      0.0s]   L2_d32_standard_lr0.001_s0 CACHED
+[     64.5s]   L2_d32_standard_lr0.001_s1 ppl=8.1671 div=False 21ms/step [62s]
+[     64.9s]   L2_d32_standard_lr0.001_s1 gap=5.844e+05 meaningful=False unstable=176 viol=+4.0e-15
+[    126.2s]   L2_d32_standard_lr0.001_s2 ppl=8.1793 div=False 20ms/step [61s]
+[    126.6s]   L2_d32_standard_lr0.001_s2 gap=1.938e+08 meaningful=False unstable=229 viol=+3.8e-15
+[    126.6s]   L2_d32_standard_lr0.003_s0 CACHED

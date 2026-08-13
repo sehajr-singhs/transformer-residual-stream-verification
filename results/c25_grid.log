@@ -1,0 +1,32 @@
+=== launched 2026-08-05T00:15:44Z ===
+[wrap] sleep inhibit ON
+[      0.0s] device=cpu eps_train=0.05 ramp=100+1000 kappa_final=0.5 vocab=65
+[      5.8s]   L2_d32_standard_lr0.001_s0 ppl=nan div=True 1ms/step [3s]
+[      9.8s]   L2_d32_standard_lr0.003_s0 ppl=nan div=True 1ms/step [4s]
+[     12.7s]   L2_d32_standard_lr0.01_s0 ppl=nan div=True 1ms/step [3s]
+[    229.5s]   L2_d32_fixnorm_lr0.001_s0 ppl=10.8461 div=False 72ms/step [217s]
+[    230.0s]   L2_d32_fixnorm_lr0.001_s0 gap=1.225 meaningful=True unstable=0 viol=+1.8e-15
+[    426.4s]   L2_d32_fixnorm_lr0.003_s0 ppl=9.9139 div=False 65ms/step [196s]
+[    426.9s]   L2_d32_fixnorm_lr0.003_s0 gap=1.205 meaningful=True unstable=0 viol=+3.6e-15
+[    605.1s]   L2_d32_fixnorm_lr0.01_s0 ppl=9.0745 div=False 59ms/step [178s]
+[    605.5s]   L2_d32_fixnorm_lr0.01_s0 gap=1.131 meaningful=True unstable=0 viol=+5.7e-15
+[    608.0s]   L2_d64_standard_lr0.001_s0 ppl=nan div=True 1ms/step [2s]
+[    610.5s]   L2_d64_standard_lr0.003_s0 ppl=nan div=True 1ms/step [2s]
+[    613.1s]   L2_d64_standard_lr0.01_s0 ppl=nan div=True 1ms/step [2s]
+[    615.4s]   L2_d64_fixnorm_lr0.001_s0 ppl=nan div=True 1ms/step [2s]
+[    617.9s]   L2_d64_fixnorm_lr0.003_s0 ppl=nan div=True 1ms/step [2s]
+[    619.9s]   L2_d64_fixnorm_lr0.01_s0 ppl=nan div=True 1ms/step [2s]
+[    623.2s]   L4_d32_standard_lr0.001_s0 ppl=nan div=True 1ms/step [3s]
+[    626.9s]   L4_d32_standard_lr0.003_s0 ppl=nan div=True 1ms/step [4s]
+[    630.0s]   L4_d32_standard_lr0.01_s0 ppl=nan div=True 1ms/step [3s]
+[    636.7s]   L4_d32_fixnorm_lr0.001_s0 ppl=nan div=True 2ms/step [6s]
+[    640.9s]   L4_d32_fixnorm_lr0.003_s0 ppl=nan div=True 1ms/step [4s]
+[    644.1s]   L4_d32_fixnorm_lr0.01_s0 ppl=nan div=True 1ms/step [3s]
+[    648.4s]   L4_d64_standard_lr0.001_s0 ppl=nan div=True 1ms/step [4s]
+[    652.7s]   L4_d64_standard_lr0.003_s0 ppl=nan div=True 1ms/step [4s]
+[    657.1s]   L4_d64_standard_lr0.01_s0 ppl=nan div=True 1ms/step [4s]
+[    661.4s]   L4_d64_fixnorm_lr0.001_s0 ppl=nan div=True 1ms/step [4s]
+[    665.4s]   L4_d64_fixnorm_lr0.003_s0 ppl=nan div=True 1ms/step [4s]
+[    670.1s]   L4_d64_fixnorm_lr0.01_s0 ppl=nan div=True 1ms/step [4s]
+[    670.1s] done: 24 parts in C:\Users\sehaj\experiments\ai_safety_lyapunov\results\c25_certified_parts
+[wrap] exit=0 elapsed=676s

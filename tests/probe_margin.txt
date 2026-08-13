@@ -1,0 +1,12 @@
+nominal unsafe-logit margin at anchor: -11.3505
+
+single-pass sound margin bound (no branching):
+  rho=0.002  bound=+6.0594e-01  sampled_max=-11.3499  slack=+1.1956e+01  proved=False
+  rho=0.005  bound=+3.1558e+00  sampled_max=-11.3489  slack=+1.4505e+01  proved=False
+  rho=0.01   bound=+3.0032e+04  sampled_max=-11.3473  slack=+3.0044e+04  proved=False
+  rho=0.02   bound=+7.4948e+08  sampled_max=-11.3440  slack=+7.4948e+08  proved=False
+  rho=0.05   bound=+4.4658e+05  sampled_max=-11.3339  slack=+4.4659e+05  proved=False
+  rho=0.1    bound=+1.1101e+11  sampled_max=-11.3159  slack=+1.1101e+11  proved=False
+  rho=0.25   bound=+3.7596e+11  sampled_max=-11.2563  slack=+3.7596e+11  proved=False
+
+with branch-and-bound:

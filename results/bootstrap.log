@@ -1,0 +1,45 @@
+[   0.0s] 1/8  toy transformer
+[   0.0s]      loaded checkpoint
+[   0.2s]      acc=1.0000  worst safe-prompt margin=-9.565
+[   0.3s] 2/8  invariant coordinate frame
+[   0.3s]      LN mean-direction symmetry: max logit deviation 2.86e-06 (exact, 5 dims removed for free)
+[   0.3s] 3/8  sparse autoencoder
+[   0.9s]      rel recon err 0.0228  L0 49.7/64  FVU 5.91e-04
+[   0.9s] 4/8  well-posedness: is the deviation dynamics contractive?
+[   1.7s]      spectral radius on span(U) = 1.273  => contraction possible: False
+[   1.7s] 5/8  ICNN Lyapunov function (minimum-growth objective)
+[   1.7s]      V(0)=0.0e+00 (exact)  sampled gamma=1.4884
+[   1.7s] 6/8  soundness harness (trying to break our own bounds)
+[   2.6s]      ALL_SOUND = True (no sampled point escaped any bound)
+[   2.6s] 7/8  certification
+[  19.9s]      [icnn          ] rho=0.005  per-layer gamma=[None, None]  composite=None
+[  36.4s]      [quadratic_only] rho=0.005  per-layer gamma=[None, None]  composite=None
+[  36.4s]      margin rho=0.005  certified_safe=True  worst=n/a  boxes=0
+[  37.3s]      margin rho=0.01   certified_safe=True  worst=n/a  boxes=7
+[  46.9s]      margin rho=0.02   certified_safe=True  worst=n/a  boxes=127
+[ 169.9s]      margin rho=0.03   certified_safe=True  worst=n/a  boxes=1023
+[ 434.0s]      margin rho=0.04   certified_safe=True  worst=n/a  boxes=2047
+[ 741.1s]      margin rho=0.06   certified_safe=False  worst=38.57617300579857  boxes=8191
+[ 744.9s]      PGD rho=0.04   max margin=-11.3371  broken=False
+[ 749.1s]      PGD rho=0.3    max margin=-11.2328  broken=False
+[ 754.9s]      PGD rho=1.0    max margin=-10.6418  broken=False
+[ 761.4s]      PGD rho=3.0    max margin=-3.6818  broken=False
+[ 765.6s]      PGD rho=10.0   max margin=+4.0048  broken=True
+[ 765.6s] 8/8  compositional dissipativity + stress
+
+==============================================================================
+BASELINE SUMMARY
+==============================================================================
+  task accuracy                 1.0000
+  SAE rel. recon error          0.0228
+  all bounds sound              True
+  contraction possible          False (spectral radius 1.273)
+  sampled growth factor         1.4884
+  certified growth @ rho=0.005  None
+  max certified safe rho        0.04
+  PGD breaks at rho            10.0
+  geometric gap                 certificate covers 0.40% of true robust radius
+  small-gain composition        False (product 5562.9)
+  runtime                       766s
+
+  wrote results/baseline.json

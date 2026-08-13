@@ -1,0 +1,16 @@
+single-pass margin bound vs radius (ln_k=48 default config):
+  rho=5.0e-03  bound=-7.8110e+00  proved=True
+  rho=7.0e-03  bound=+9.8339e+00  proved=False
+  rho=8.0e-03  bound=+7.9791e+01  proved=False
+  rho=9.0e-03  bound=+2.1573e+04  proved=False
+  rho=1.0e-02  bound=+3.7607e+04  proved=False
+  rho=1.2e-02  bound=+1.2593e+05  proved=False
+  rho=1.5e-02  bound=+1.5535e+07  proved=False
+
+BaB (capped budgets so it cannot run away):
+      rho  proved        worst   boxes     reason    sec
+  8.0e-03    True   0.0000e+00       3     proved    0.1
+  1.0e-02    True   0.0000e+00       7     proved    0.2
+  1.5e-02    True   0.0000e+00      63     proved    4.3
+  2.0e-02    True   0.0000e+00     127     proved    8.6
+  3.0e-02   False   2.0562e+00    1023  max_boxes   38.1

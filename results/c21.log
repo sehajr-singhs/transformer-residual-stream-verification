@@ -1,0 +1,36 @@
+C:\Users\sehaj\experiments\ai_safety_lyapunov\audit\c20_expressivity.py:166: UserWarning: Converting a tensor with requires_grad=True to a scalar may lead to unexpected behavior.
+Consider using tensor.detach() first. (Triggered internally at C:\actions-runner\_work\pytorch\pytorch\pytorch\torch\csrc\autograd\generated\python_variable_methods.cpp:837.)
+  curve.append({"step": step, "loss": float(loss), "grad_norm": gn})
+[  483.4s]   d=  8 standard  acc=0.7235+-0.0088 n=10
+[ 1046.9s]   d=  8 fixnorm   acc=0.7245+-0.0113 n=10
+[ 1583.4s]   d= 16 standard  acc=0.9697+-0.0336 n=10
+[ 2111.4s]   d= 16 fixnorm   acc=0.9076+-0.0528 n=10
+[ 2111.4s] wrote C:\Users\sehaj\experiments\ai_safety_lyapunov\results\c21.json
+{
+  "summary": {
+    "8": {
+      "baseline_accuracy": 0.72349853515625,
+      "in_band": true,
+      "penalty_points": -0.09643554687500666,
+      "gap_gain": 14.031268517549583
+    },
+    "16": {
+      "baseline_accuracy": 0.96968994140625,
+      "in_band": false,
+      "penalty_points": 6.209716796874998,
+      "gap_gain": 14.81485753749801
+    }
+  },
+  "trend": {
+    "penalty_points": {
+      "8": -0.09643554687500666,
+      "16": 6.209716796874998
+    },
+    "gap_gain": {
+      "8": 14.031268517549583,
+      "16": 14.81485753749801
+    },
+    "both_widths_in_band": false,
+    "interpretation": "NOT INTERPRETABLE as a capacity trend. The baseline is outside the discriminatory band (0.7, 0.95) at d_model=16 (accuracy 0.9697). A saturated baseline reports a shrinking penalty whether or not one exists -- this is exactly the artifact c20 exposed. To read a capacity trend the task must be re-tuned so the baseline stays off the ceiling at every width."
+  }
+}

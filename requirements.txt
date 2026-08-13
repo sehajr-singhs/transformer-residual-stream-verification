@@ -1,0 +1,11 @@
+# Verified against the environment this was developed on:
+#   Python 3.13.9 (Anaconda), Windows 11
+numpy>=2.0            # 2.3.5
+torch>=2.4            # 2.11.0+cpu  (CPU is sufficient; nothing here needs CUDA)
+scipy>=1.13           # 1.16.3      (interconnection LP via scipy.optimize.linprog)
+
+# OPTIONAL, and absent in this environment. The verifier runs entirely on its own
+# hybrid-zonotope branch-and-bound; these would provide an INDEPENDENT prover
+# cross-check, which is currently missing. See verifier.backend_report().
+# z3-solver
+# dreal

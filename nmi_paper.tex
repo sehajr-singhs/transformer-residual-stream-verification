@@ -1,0 +1,538 @@
+\documentclass[sn-nature,pdflatex]{sn-jnl}
+\usepackage{graphicx}
+\usepackage{multirow}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{amsthm}
+\usepackage{textcomp}
+\usepackage{manyfoot}
+\usepackage{booktabs,siunitx}
+\usepackage{caption}
+\sisetup{output-exponent-marker=\ensuremath{\mathrm{e}}}
+\raggedbottom
+\begin{document}
+\title[Bounded-growth certification]{Bounded-growth certification of a transformer residual stream}
+\author*[1]{\fnm{Sehaj Randhir} \sur{Singh}}
+\affil*[1]{\orgname{Independent Researcher}}
+\abstract{A transformer's residual stream is a dynamical system, and the standard safety certificate shows the system contracts, so deviations shrink layer over layer. This paper measures that property directly: the deviation dynamics carry a spectral radius of 1.273, above the threshold of 1 a contraction certificate requires, so no strict-decrease Lyapunov function exists. The provable obligation instead is bounded growth over a finite horizon, traced here to an architectural cause: LayerNorm's data-dependent rescaling turns growth into runaway blowup with width and depth, and a fixed affine replacement removes roughly eight orders of magnitude of it at under two percent perplexity cost. Applying the same fix during training collapses a verification bound that is otherwise a 1705-fold seed lottery down to 1.08-fold, at the one width tested so far. An adversarial search inflates the training-time bound 17-fold, a shift that does not transfer to the certifying prover itself.}
+\keywords{neural network verification, interval bound propagation, hybrid zonotope, Lyapunov stability, activation steering, certified training}
+\maketitle
+
+\section{Results}
+
+\subsection{A contraction certificate is infeasible}
+
+Figure~1 lays out the three measurements this paper rests on. Panel a shows the deviation dynamics' spectral radius on the certified subspace, 1.273, against the boundary a contraction certificate needs, which is 1. A positive-definite Lyapunov function with strict decrease exists if and only if that radius sits below the boundary, so the measurement alone rules out strict contraction for this model, independent of which metric or search procedure is used to look for one. Two such searches were run anyway, a learned convex metric and the trivial quadratic, and both certified nothing, for a structural reason: the ratio obligation $V(e')/V(e)$ is scale-invariant, so shrinking the numerator by bisection shrinks the denominator by the same factor. What is provable instead is bounded growth over a finite horizon, and the certified radius delivered under that weaker obligation is $\rho=0.04$ by sound hybrid-zonotope branch-and-bound.
+
+\subsection{LayerNorm is the architectural bottleneck}
+
+Panel b traces that growth to its architectural source across a family of character-language models trained on TinyShakespeare. At four layers, the standard architecture's relaxation gap runs $1.25\times10^{10}$, $8.11\times10^{15}$, and $5.82\times10^{22}$ across $d_{\text{model}}$ 64, 128, and 256, crossing the informativeness threshold of 1000 at the very first width tested and never coming back under it. Replacing LayerNorm's data-dependent rescaling with a fixed affine scale, calibrated once to each site's nominal activation RMS, holds the same row to 1.67, 213.2, and 291.7, a curve with a 128-fold step between the first two widths and only a 1.37-fold step between the last two, inconsistent with a smooth power law and not something three points can localise an onset for. The fix costs perplexity: at $d_{\text{model}}$ 32 and 64 on the same corpus, the fixed-scale variant scores 1.82\% and 1.78\% worse held-out perplexity than the standard model, for verifiability gains of 83-fold and 879-fold measured on the certifying gap.
+
+\subsection{Certified training collapses seed variance}
+
+Panel c is where fixing the architecture and fixing the training procedure meet. Putting the same interval bound into the training loss as a robust loss term, rather than applying it only at evaluation time, was tried at $d_{\text{model}}$ 32 and 64, at two depths, and at three learning rates, 24 cells in total. Only one converged reliably, $L=2$, $d_{\text{model}}=32$, and at that cell certified training collapses what is otherwise a wide lottery. Nine runs of ordinary training pooled across the three learning rates put the certified gap anywhere from 2.51 to 4274.9, a 1705-fold spread, with three of those nine runs landing above the informativeness threshold outright. Eight runs of certified training at the same cell land between 1.13 and 1.22, a 1.08-fold spread, every one informative, with zero unstable ReLUs on every converged run. The other 18 cells in the grid, both variants, both remaining depths and widths, diverged at every learning rate under the one epsilon-ramp schedule tested.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.98\linewidth]{nmi_fig1_main.png}
+\caption{\textbf{The obligation, its architectural cause, and a training-time fix.} \textbf{a}, Measured deviation spectral radius (1.273) against the contraction boundary (spectral radius $=1$); above this line no strict-decrease Lyapunov certificate exists. \textbf{b}, Relaxation gap at $L=4$ across $d_{\text{model}}$, standard versus a fixed-scale (fixnorm) replacement for LayerNorm; dashed line is the informativeness threshold. \textbf{c}, Relaxation gap at $L=2$, $d_{\text{model}}=32$ under ordinary versus certified-by-construction training, real per-seed measurements.}
+\end{figure}
+
+\subsection{The training signal and the certificate disagree}
+
+Figure~2 checks whether either of the above generalises past the exact inputs used to measure them. A Gumbel-Softmax search over context tokens, run against the differentiable training-time bound because the certifying prover isn't a computation graph a gradient can reach, converged in five of five restarts on repeated-token, out-of-distribution contexts and inflated that bound's gap 17-fold over natural text (panel a). Handing the same winning context to the actual certifying prover, black-box, at the real certified radius of 0.02, moves the gap from 1.09 to 1.15, a 1.05-fold shift, with containment holding at both points to float precision (panel b).
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.78\linewidth]{nmi_fig2_fuzzer.png}
+\caption{\textbf{An adversarial context that breaks the training signal does not break the certificate.} \textbf{a}, Relaxation gap under the differentiable torch interval-bound engine (the training signal), natural versus adversarially-optimised context. \textbf{b}, The same two contexts evaluated black-box against the actual certifying engine, the NumPy hybrid-zonotope prover, at the real certified $\rho=0.02$.}
+\end{figure}
+
+\section{Discussion}
+
+The honest reading of these three results together is that verifiability and expressivity trade against each other in a way that can be priced rather than assumed. LayerNorm's data-dependent scale buys the network conditioning it needs to train well, and the fixed-scale replacement gives some of that back for a bound a branch-and-bound prover can actually close, at an exchange rate here of under two percent perplexity for eight orders of magnitude of relaxation gap at $d_{\text{model}}=256$. That's a good rate on this model, and there's no reason yet to expect it holds at production widths, since the sweep only reaches $d_{\text{model}}=256$, itself six times narrower than GPT-2 small.
+
+Certified training is the more interesting result precisely because of what it doesn't yet do. It doesn't converge at $d_{\text{model}}=64$ or at four layers under the epsilon schedule tested in the main sweep, and 18 of 18 cells outside the one converging configuration diverged at every learning rate tried. That raised an obvious question: is this a schedule artifact or a harder wall. Three deliberately gentler schedules were tried directly at $d_{\text{model}}=64$, a smaller target radius, a slower ramp, and both combined, three seeds each, nine runs in total. All nine diverged. That doesn't prove no schedule converges at this width, since the space of possible schedules is large and only three points in it were tried, but it does mean the two most obvious fixes, a smaller target and a slower approach to it, don't rescue this configuration on their own. The variance-collapse result stays a demonstration at one width, not yet a recipe, and whatever makes $d_{\text{model}}=32$ special for this training procedure is not simply that the ramp is too fast.
+
+The adversarial finding closes the loop on both results above. A search that only reaches the differentiable training-time bound found a context that blows that bound up 17-fold over natural text, which by itself would read as an alarming discovery about the certified training result. Checking the same context against the prover that actually produces every number labelled a certificate anywhere in this paper drops that discrepancy from 17-fold to a 1.05-fold shift, with containment holding at both points. The training-time bound and the certifying bound are different objects that happen to share an optimiser, and conflating them is the easiest way to misread this kind of result. Between the two open questions this paper leaves, whether the training-signal gap generalises past one context and whether certified training generalises past one width, the second is now the harder one: the first was checked directly and held up (Fig.~2b), while the second was checked directly and did not.
+
+\section{Methods}
+
+All results are measured on two independent toy systems, the model stated at first use in each result: a 26,144-parameter, two-layer, $d_{\text{model}}=32$ transformer trained on a synthetic feature-routing task for the contraction and margin results, and a family of up to four-layer, $d_{\text{model}}$ up to 256, at most 300,000-parameter character-language models trained on 1.1 million characters of TinyShakespeare for the architectural and training results. Certification throughout uses a hybrid-zonotope prover that keeps first-order correlations between perturbation directions exact via shared noise symbols and closes remaining nonlinearity by branch-and-bound; this is the only engine any number labelled a certified radius or relaxation gap comes from. Certified-by-construction training instead puts a plain interval-bound-propagation term, looser but differentiable, into the training loss with a Gowal-style kappa/epsilon ramp, and every resulting model is still certified post hoc by the unmodified zonotope prover, so the two training arms are compared on one measuring instrument. The adversarial search in Figure~2 optimises a Gumbel-Softmax relaxation over context tokens against the differentiable interval bound by gradient ascent, snaps to the discrete argmax context, and re-evaluates exactly on the snapped tokens against both engines. Full configuration, seed counts, and per-cell divergence counts are given in Extended Data alongside every table this paper's numbers are drawn from.
+
+\begin{thebibliography}{00}
+\bibitem{gowal2018ibp} S. Gowal et al., ``On the Effectiveness of Interval Bound Propagation for Training Verifiably Robust Models,'' arXiv:1810.12715, 2018.
+\bibitem{zhang2020crownibp} H. Zhang et al., ``Towards Stable and Efficient Training of Verifiably Robust Neural Networks,'' ICLR, 2020.
+\bibitem{shi2020transformers} Z. Shi, H. Zhang, K.-W. Chang, M. Huang, and C.-J. Hsieh, ``Robustness Verification for Transformers,'' ICLR, 2020.
+\bibitem{xu2020autolirpa} K. Xu et al., ``Automatic Perturbation Analysis for Scalable Certified Robustness and Beyond,'' NeurIPS, 2020.
+\bibitem{singh2019deepz} G. Singh, T. Gehr, M. P{\"u}schel, and M. Vechev, ``An Abstract Domain for Certifying Neural Networks,'' Proc. ACM Program. Lang., vol. 3, no. POPL, 2019.
+\bibitem{turner2023actadd} A. Turner et al., ``Activation Addition: Steering Language Models Without Optimization,'' arXiv:2308.10248, 2023.
+\bibitem{demoura2008z3} L. de Moura and N. Bj{\o}rner, ``Z3: An Efficient SMT Solver,'' TACAS, 2008.
+\end{thebibliography}
+
+\clearpage
+\section{Extended Data}
+
+This section carries the full audit trail the Results and Discussion sections above summarise: every table this paper's numbers are drawn from, and the complete walkthrough of the architectural sweep, the independent-verification cross-checks, and the scope limits, in the same detail as the underlying repository's own audit record.
+
+\subsection{Independent Verification and Falsification Testing}
+Replaying the prover's own box decomposition reproduces the baseline verdict at every radius: across \textbf{3209 discharged boxes} (2048 samples each plus 30-step PGD confined to each box), no sampled point exceeded the bound claimed for its own box, and coverage of \texttt{[-rho,rho]\textasciicircum{}4} by discharged boxes is exactly 1.0000. 
+Independently, \textbf{z3 over exact rationals} confirms the margin readout at 8/8 sound and 7/8 tight, though ReLU (0/3) and LayerNorm (0/2) containment exceeded the solver budget and remain unconfirmed rather than refuted. It is the \emph{tightness} query, not soundness, that detects the patched readout bug: the original \texttt{max\_u L\_u - min\_j L\_j} is still a \textbf{sound} upper bound even in its buggy form, so only tightness -- not a soundness-only regression test -- sees the \textasciitilde{}11.7-logit inflation. 
+The LayerNorm attribution turns out to run backwards: the unsplit bound crosses zero at \texttt{rho = 0.00699}, where the variance bracket is still tight (spread 1.22) and only degrades an order of magnitude later, which places the unstable-ReLU count as the driver and the LayerNorm cliff as a downstream consequence. The bound is also not monotone in \texttt{rho}, because \texttt{promote\_E\_topk}/\texttt{compact} are radius-dependent heuristics that let a larger box receive a luckier promotion, so radius sweeps must be plotted raw rather than fitted.
+
+\begin{table}[t]
+\centering
+\caption*{\textbf{Extended Data Table 1.} Independent audit of the monolithic margin certificate. The replay reproduces the baseline verdict at every radius. Coverage is the fraction of \num{20000} uniform points in $[-\rho,\rho]^4$ landing in some discharged box, so $1.0$ confirms the per-box claims tile the threat set. $\Delta$ is the largest amount by which any sampled point exceeded the bound claimed for its own box; it must remain negative. The final column is a from-scratch interval engine, which closes nothing at any radius.}
+\label{edtab:audit}
+\begin{tabular}{S[table-format=1.3] c c S[table-format=4.0] S[table-format=1.4] S[table-format=+2.4] S[table-format=+1.3e2] c}
+\toprule
+{$\rho$} & proved & agrees & {boxes} & {coverage} & {max true margin} & {$\Delta$} & {IBP closed} \\
+\midrule
+0.005 & yes & yes & 1 & 1.0000 & -11.3489 & -3.538e+00 & 0/1 \\
+0.010 & yes & yes & 8 & 1.0000 & -11.3472 & -9.590e+00 & 0/8 \\
+0.020 & yes & yes & 128 & 1.0000 & -11.3439 & -9.387e+00 & 0/128 \\
+0.030 & yes & yes & 1024 & 1.0000 & -11.3405 & -5.526e+00 & 0/1024 \\
+0.040 & yes & yes & 2048 & 1.0000 & -11.3371 & -8.930e+00 & 0/2048 \\
+0.060 & no & yes & 0 & 0.0000 & {--} & {--} & 0/0 \\
+\bottomrule
+\end{tabular}
+\par\vspace{2pt}\noindent\footnotesize 2048 samples per box plus 30-step PGD confined to each box; \num{3209} boxes total, \SI{1882}{\second}. $\rho=0.06$ discharges no boxes because the prover fails there.
+\end{table}
+
+
+\begin{table}[t]
+\centering
+\caption*{\textbf{Extended Data Table 2.} Failure causality in the monolithic margin bound. The bound crosses zero at $\rho\approx\num{0.00699}$, where the LayerNorm variance bracket is still essentially tight (spread \num{1.22}). The bracket only leaves that regime at $\rho\ge\num{0.01367}$, by which point the bound has already reached \num{4.970e+05}. The unstable-ReLU count is therefore the driver and the LayerNorm cliff a downstream consequence. Bounds are \emph{unsplit} (no branch-and-bound); the certificate reaches $\rho=0.04$ only by splitting into 2048 boxes.}
+\label{edtab:causality}
+\begin{tabular}{S[table-format=1.5] S[table-format=+1.3e2] S[table-format=3.0] S[table-format=1.3e2]}
+\toprule
+{$\rho$} & {margin bound} & {unstable ReLUs} & {LN spread (max)} \\
+\midrule
+0.00229 & -1.089e+01 & 4 & 1.016e+00 \\
+0.00286 & -1.061e+01 & 6 & 1.025e+00 \\
+0.00358 & -1.011e+01 & 9 & 1.039e+00 \\
+0.00447 & -8.916e+00 & 23 & 1.064e+00 \\
+0.00559 & -5.908e+00 & 44 & 1.112e+00 \\
+0.00699 & +9.632e+00 & 77 & 1.218e+00 \\
+0.00874 & +1.004e+03 & 116 & 1.493e+00 \\
+0.01093 & +6.378e+04 & 128 & 2.553e+00 \\
+0.01367 & +4.970e+05 & 128 & 1.384e+01 \\
+0.01710 & +1.317e+08 & 128 & 3.119e+03 \\
+0.02138 & +4.109e+09 & 128 & 9.017e+04 \\
+0.02674 & +2.149e+10 & 128 & 4.707e+05 \\
+\bottomrule
+\end{tabular}
+\par\vspace{2pt}\noindent\footnotesize Unstable ReLUs out of 640 at the layer-1 \texttt{ln2} MLP input.
+\end{table}
+
+
+\begin{table}[t]
+\centering
+\caption*{\textbf{Extended Data Table 3.} The bound is not monotone in the perturbation radius. \texttt{promote\_E\_topk} and \texttt{compact} are radius-dependent heuristics, so a larger box can receive a more favourable promotion. Any radius sweep must be plotted raw rather than fitted.}
+\label{edtab:nonmonotone}
+\begin{tabular}{S[table-format=1.5] S[table-format=1.3e2] S[table-format=1.5] S[table-format=1.3e2]}
+\toprule
+\multicolumn{2}{c}{smaller radius} & \multicolumn{2}{c}{larger radius} \\
+\cmidrule(lr){1-2}\cmidrule(lr){3-4}
+{$\rho$} & {bound} & {$\rho$} & {bound} \\
+\midrule
+0.02674 & 2.149e+10 & 0.03343 & 3.455e+04 \\
+0.08176 & 9.619e+10 & 0.10224 & 1.429e+09 \\
+\bottomrule
+\end{tabular}
+\par\vspace{2pt}\noindent\footnotesize 2 monotonicity violations across 36 radii spanning $[\num{0.0001}, \num{0.25}]$.
+\end{table}
+
+\subsection{The end-to-end cross-check remains open}
+Three independent reference engines were built and validated against torch (exact at a point to \textasciitilde{}1e-9 or better, sound on boxes, intermediate containment verified):
+The first two fail for a measured reason: any decorrelating abstraction amplifies by \textbf{4.7e8} through two blocks, so the final LayerNorm's structural clamp is all that keeps the bound finite.
+The CROWN engine was built specifically to fix that, and it does keep the 4-dimensional structure exactly. It still loses, and the loss is localised: at \texttt{rho=0.0001} it tracks the prover through \texttt{L0 ln1} (both 1.61x the attainable width) and then diverges at \textbf{\texttt{L0 attn}} (39.5x attainable versus the prover's 3.86x).
+The cause is specific: softmax uncertainty enters as interval coefficients on \texttt{V}. Recovering \texttt{sum\_s p\_s = 1} exactly (re-centring the output on the nominal so only deviations pay) and adding a mean-value form for the softmax Jacobian improved the end-to-end bound by 15x, which was not nearly enough. The prover keeps softmax linear in its noise symbols and sits at 3.9x.
+So the honest status of \texttt{independent\_cross\_check} is \textbf{partially closed}: primitives confirmed by exact SMT, end-to-end still resting on the native engine. Closing it needs a linear relaxation of softmax that is competitive with the prover's Jacobian bracket, not merely a correlation-preserving engine -- that much was necessary but is not sufficient.
+
+\begin{table}[t]
+\centering
+\caption*{\textbf{Extended Data Table 4.} Where the independent linear-relaxation prover loses, at $\rho=\num{0.0001}$. \textsc{true} is the attained width under dense sampling of the exact model, a lower bound on what any sound method can report. The CROWN engine keeps the four steering coefficients exactly and tracks the prover through the first LayerNorm, then diverges at \texttt{L0 attn}, where softmax uncertainty enters as interval coefficients on $V$. The loss compounds through layer~1. It closes no box that the prover closes, so the end-to-end cross-check remains open.}
+\label{edtab:crown}
+\begin{tabular}{l S[table-format=1.3e2] S[table-format=1.3e2] S[table-format=1.3e2] S[table-format=2.2] S[table-format=1.2e2]}
+\toprule
+stage & {true} & {zonotope} & {CROWN} & {zono/true} & {CROWN/true} \\
+\midrule
+\texttt{L0 ln1} & 2.930e-04 & 4.707e-04 & 4.706e-04 & 1.61 & 1.61e+00 \\
+\texttt{L0 attn} & 3.482e-05 & 1.344e-04 & 1.375e-03 & 3.86 & 3.95e+01 \\
+\texttt{L0 resid1} & 1.979e-04 & 2.997e-04 & 1.520e-03 & 1.51 & 7.68e+00 \\
+\texttt{L0 ln2} & 2.523e-04 & 6.588e-04 & 7.665e-03 & 2.61 & 3.04e+01 \\
+\texttt{L0 out} & 2.166e-04 & 6.370e-04 & 5.091e-02 & 2.94 & 2.35e+02 \\
+\texttt{L1 ln1} & 2.982e-04 & 2.111e-03 & 3.522e-01 & 7.08 & 1.18e+03 \\
+\texttt{L1 attn} & 2.887e-05 & 3.866e-04 & 1.748e+00 & 13.39 & 6.06e+04 \\
+\texttt{L1 resid1} & 2.186e-04 & 9.250e-04 & 1.790e+00 & 4.23 & 8.19e+03 \\
+\texttt{L1 ln2} & 1.527e-04 & 1.357e-03 & 8.236e+00 & 8.88 & 5.39e+04 \\
+\texttt{L1 out} & 2.488e-04 & 1.896e-03 & 1.017e+02 & 7.62 & 4.09e+05 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{From anchor to prompt distribution}
+The baseline certificate covers a single prompt anchor. Two generalisations, both run:
+\begin{itemize}
+\item \textbf{Per-prompt} (exact, N times the cost): the guarantee over the set is the minimum, \textbf{rho = 0.02}. Radii differ across anchors, so a single-anchor number does not transfer.
+\item \textbf{Box hull} (one proof for all N): mean hull width 1.6593, adding 160 generators. Max certified rho \textbf{None}.
+\item \textbf{The hull certified nothing on the grid.} This is the expected failure: the hull is a full-dimensional box over the residual stream, which \texttt{baseline.json} already reports inflates catastrophically. Context bounding by box hull does not work here; per-prompt certification does.
+
+\begin{table}[t]
+\centering
+\caption*{\textbf{Extended Data Table 5.} From a single anchor to a prompt distribution. Certifying each anchor separately is exact but costs $N$ proofs and the guarantee is the minimum over anchors. Replacing the nominal streams by a single box hull gives one proof for all $N$ at the cost of containing streams no prompt produces.}
+\label{edtab:distribution}
+\begin{tabular}{l l}
+\toprule
+anchor & {max certified $\rho$} \\
+\midrule
+prompt 0 & 0.02 \\
+prompt 1 & 0.03 \\
+prompt 2 & 0.05 \\
+prompt 3 & 0.05 \\
+prompt 4 & 0.05 \\
+\midrule
+worst case over anchors & 0.02 \\
+box hull (one proof) & {none} \\
+\bottomrule
+\end{tabular}
+\par\vspace{2pt}\noindent\footnotesize The hull certified nothing on the grid: it is a full-dimensional box over the residual stream, the regime the baseline already reports as catastrophic.
+\end{table}
+
+\end{itemize}
+\subsection{ReLU-guided branching}
+BaB branches in alpha space, so "split on an unstable ReLU" is not directly expressible. The faithful translation is to pick the alpha coordinate whose bisection most reduces layer-0 unstable-ReLU mass, instead of the widest coordinate.
+\begin{itemize}
+\item \textbf{It is worse.} The targeted rule certifies 0.80x the radius of the widest-coordinate rule and takes 1.45x as long. The conservativeness bound moves the wrong way, from 200x to 250x.
+\item Unstable ReLUs being the \emph{driver} of the bound explosion does not imply that ReLU-targeted \emph{branching} helps. Always splitting the coordinate carrying the most unstable-ReLU mass is greedy: it can keep bisecting one coordinate while the others stay wide, and the bound depends on all four. The widest-coordinate rule keeps the box near-cubical, which bounds every coordinate's contribution at once. A correct diagnosis of the failure mechanism does not automatically yield a better search heuristic.
+\item Measured at \texttt{max\_boxes=4096} (recovered from c16\_budget4096.log (max\_boxes=4096)); the distribution sweep above used a smaller budget, so the two sets of radii are not directly comparable.
+
+\begin{table}[t]
+\centering
+\caption*{\textbf{Extended Data Table 6.} Branching rule. Unstable ReLUs drive the bound explosion, but branch-and-bound splits in $\alpha$ space, so the targeted rule picks the coordinate whose bisection most reduces layer-0 unstable-ReLU mass rather than the widest coordinate. It does not improve the certified radius: with only four steering coordinates the widest-coordinate rule already removes comparable unstable-ReLU mass.}
+\label{edtab:branching}
+\begin{tabular}{l l S[table-format=4.0]}
+\toprule
+rule & {max certified $\rho$} & {seconds} \\
+\midrule
+\texttt{widest} & 0.05 & 559 \\
+\texttt{relu\_guided} & 0.04 & 808 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\end{itemize}
+\subsection{A better softmax relaxation does not close the gap (6a)}
+c16 concluded that closing the end-to-end cross-check needed a softmax relaxation competitive with the prover's Jacobian bracket. That was tested by implementing one and ablating against an interval enclosure at layer-0 attention, \texttt{rho = 0.0001}:
+\begin{itemize}
+\item \textbf{The relaxation buys 0.3\%.} Softmax relaxation quality is not the bottleneck, and the c16 conclusion was wrong.
+\item The bottleneck is the \textbf{representation}. Two-sided linear bounds must relax the product \texttt{p*v}; a zonotope carries \texttt{p} and \texttt{v} as affine forms over \emph{shared noise symbols}, keeps the first-order cross terms exactly, and pays only at second order. No amount of per-operation relaxation quality recovers that. An independent engine competitive with the prover would have to adopt a shared-symbol representation, at which point its independence is much weaker.
+
+\begin{table}[t]
+\centering
+\caption*{\textbf{Extended Data Table 7.} Softmax relaxation ablation at layer-0 attention, $\rho=\num{0.0001}$. Replacing an interval enclosure of the attention probabilities with a full Shi-style linear relaxation (exp secant/tangent, reciprocal secant/tangent, McCormick product) reduces the gap by \SI{0.3}{\percent}. Softmax relaxation quality is therefore \emph{not} the bottleneck: the two-sided linear-bound representation must relax the product $p\cdot v$, whereas a zonotope carries $p$ and $v$ over shared noise symbols and keeps the first-order cross terms exactly.}
+\label{edtab:softmax}
+\begin{tabular}{l S[table-format=1.3e2] S[table-format=2.2]}
+\toprule
+method & {width} & {$\times$ attainable} \\
+\midrule
+attained (sampling) & 3.482e-05 & 1.00 \\
+hybrid zonotope & 1.344e-04 & 3.86 \\
+CROWN, interval softmax & 1.544e-03 & 44.35 \\
+CROWN, linear softmax & 1.539e-03 & 44.21 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\end{itemize}
+\subsection{Width scaling (6b)}
+Randomly initialised transformers at increasing \texttt{d\_model}. \textbf{Not trained}, so this measures how the relaxation scales with width, not certified radius on a trained model of that width.
+\begin{itemize}
+\item At the smallest radius tested (\texttt{rho=1e-4}), amplification runs 2.89e+01 -> 6.50e+02 -> 4.24e+09 for \texttt{d\_model} 32/64/128. The growth is faster than any power of width that would keep the method usable.
+\item The unstable-ReLU fraction saturates at \texttt{1/T = 0.2} (only the final token is perturbed, so 0.200 means every unit at that position is unstable). By \texttt{d\_model=128} it is already saturated at \texttt{rho=1e-4}.
+\item \texttt{d\_model=128} is still 6x narrower than GPT-2 small. On this evidence the approach does not reach production widths, and the obstruction is the unstable-ReLU cascade rather than any tunable constant.
+
+\begin{table}[t]
+\centering
+\caption*{\textbf{Extended Data Table 8.} Width scaling of the relaxation on \emph{randomly initialised} transformers. These measure how the relaxation behaves as $d_{\text{model}}$ grows, not certified radius on a trained model. Amplification is final stream width over input width. Unstable-ReLU fraction saturates at $1/T=0.2$ because only the final token is perturbed, so $0.200$ means every unit at that position is unstable.}
+\label{edtab:widthscaling}
+\begin{tabular}{S[table-format=3.0] S[table-format=1.4] S[table-format=1.3e2] S[table-format=1.3] S[table-format=1.3e2]}
+\toprule
+{$d_{\text{model}}$} & {$\rho$} & {amplification} & {L1 unstable frac} & {L1 LN spread} \\
+\midrule
+32 & 0.0001 & 2.894e+01 & 0.000 & 1.001e+00 \\
+32 & 0.0010 & 5.832e+01 & 0.006 & 1.016e+00 \\
+32 & 0.0100 & 5.889e+06 & 0.200 & 4.444e+03 \\
+64 & 0.0001 & 6.498e+02 & 0.006 & 1.006e+00 \\
+64 & 0.0010 & 7.822e+03 & 0.182 & 1.300e+00 \\
+64 & 0.0100 & 2.984e+09 & 0.200 & 8.127e+05 \\
+128 & 0.0001 & 4.242e+09 & 0.200 & 2.883e+03 \\
+128 & 0.0010 & 3.853e+08 & 0.200 & 2.766e+03 \\
+128 & 0.0100 & 3.910e+11 & 0.200 & 2.537e+07 \\
+\bottomrule
+\end{tabular}
+\par\vspace{2pt}\noindent\footnotesize Anchor sweep: 47/50 anchors certified at $\rho=0.02$ with a 512-box budget.
+\end{table}
+
+\end{itemize}
+\subsection{Anchor sweep (6c)}
+\begin{itemize}
+\item 47/50 anchors (\textbf{94\%}) certified at \texttt{rho = 0.02} with a 512-box budget; failures at anchors [17, 31, 49].
+\item SEQ\_LEN is fixed at 5 by the task, so sequence length could not be varied without retraining; only the attention map varies, through token content.
+\end{itemize}
+\subsection{Which part of the architecture causes the scaling wall (6d)}
+Two candidate mechanisms were isolated by construction rather than by argument, on randomly initialised transformers up to \texttt{d\_model=256}:
+\begin{itemize}
+\item \textbf{\texttt{fixnorm}} replaces LayerNorm's data-dependent \texttt{1/sqrt(var+eps)} with a fixed constant scale calibrated to the nominal RMS at that site. The resulting map is exactly affine, so its relaxation error is identically zero.
+\item \textbf{\texttt{fixnorm\_tanh}} additionally replaces ReLU with tanh, whose secant relaxation error is second order in the box width rather than a kink at every unstable unit.
+\end{itemize}
+The quantity reported is the \textbf{relaxation gap}: bound width divided by the width actually attained under sampling. Bound width alone is confounded, because a variant can shrink its bound merely by being a less sensitive function. Attained sensitivity is near-identical across all three variants (log-log slope about -0.1), so the gap isolates verifiability.
+\begin{itemize}
+\item \textbf{Normalization is the dominant driver.} At \texttt{d\_model=256} the gap falls from 1.68e+10 to 240, roughly eight orders of magnitude, at essentially unchanged attained sensitivity. The width exponent drops from 11.12 to 2.46.
+\item \textbf{The smooth activation adds nothing.} \texttt{fixnorm\_tanh} is slightly \emph{worse} than \texttt{fixnorm} (2.59 versus 2.46). Once normalization is affine, replacing ReLU does not buy further headroom at these widths.
+\item \textbf{The wall is delayed, not removed.} A slope of 2.46 is still super-linear: the gap grows from 1.12 at \texttt{d=32} to 240 at \texttt{d=256}, and unstable ReLUs reappear in the \texttt{fixnorm} variant at \texttt{d=256}. Extrapolating the fitted exponent to \texttt{d=768} gives a gap in the low thousands. That is a different regime from \texttt{1.7e10}, but it is not a solved problem.
+
+\begin{table}[t]
+\centering
+\caption*{\textbf{Extended Data Table 9.} Relaxation gap (bound width divided by attained width) against $d_{\text{model}}$, on randomly initialised transformers at $\rho=\num{1e-4}$. The gap, not the bound width, is the right metric: a variant can shrink its bound merely by being a less sensitive function, and attained sensitivity here is near-identical across variants (log-log slope about $-0.1$). Replacing LayerNorm's data-dependent scale with a fixed affine one removes about eight orders of magnitude at $d=256$; adding a smooth activation on top buys nothing. The wall is delayed, not removed: the exponent falls from 11.12 to 2.46, which is still super-linear.}
+\label{edtab:variants}
+\begin{tabular}{l S[table-format=1.2e2] S[table-format=1.2e2] S[table-format=1.2e2] S[table-format=1.2e2] S[table-format=2.2]}
+\toprule
+variant & {$d{=}32$} & {$d{=}64$} & {$d{=}128$} & {$d{=}256$} & {gap slope} \\
+\midrule
+\texttt{standard} & 1.96e+01 & 5.59e+02 & 2.63e+09 & 1.68e+10 & 11.12 \\
+\texttt{fixnorm} & 1.12e+00 & 1.14e+00 & 2.94e+00 & 2.40e+02 & 2.46 \\
+\texttt{fixnorm\_tanh} & 1.12e+00 & 1.18e+00 & 4.46e+00 & 2.86e+02 & 2.59 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\end{itemize}
+\subsection{What this does and does not license}
+Supported: \emph{on randomly initialised 2-layer transformers, the data-dependent scale in LayerNorm is the dominant cause of relaxation blow-up with width, and replacing it with a fixed affine normalizer removes about eight orders of magnitude of relaxation gap at \texttt{d\_model=256} without reducing the network's sensitivity.}
+Not supported, and deliberately not claimed:
+\begin{itemize}
+\item That a fixed-scale normalizer trains to comparable task performance. Nothing here was trained. LayerNorm's scale is data-dependent for optimization reasons, and a variant that verifies well but trains badly is not a contribution. This is the first thing a referee will ask and the experiment has not been run.
+\item That the result holds at depth. Two layers were tested; the wall is a compounding phenomenon and depth is the other axis.
+\item That standard transformers 'must be replaced'. The measurement is a conditional: IF one wants this family of relaxation-based certificates to scale in width, THEN the data-dependent normalizer is the first thing to change. That is an engineering lead, not a directive to the field.
+\item That the wall is removed. The exponent falls from 11.12 to 2.46; it does not fall to zero, or to one.
+\end{itemize}
+\subsection{Does the verification-friendly variant train? (6e)}
+This is the experiment that decides whether 6d is a contribution or an artifact. LayerNorm's scale is data-dependent for optimization reasons, so a variant that verifies well and trains badly is a worse model, not a better one. All three variants were trained on the same task with identical seeds, batch stream, optimizer and step count (3000 steps, batch 256, lr 0.003, 3 seeds, \texttt{d\_model=32}). The frozen scale is calibrated once before training and never receives gradient.
+\begin{itemize}
+\item \textbf{No accuracy penalty.} All three reach 1.0000 test accuracy with zero variance across seeds, and every variant keeps the unsafe-logit margin negative on 100\% of safe prompts.
+\item \textbf{Convergence is not slower; it is slightly faster.} Mean training loss at step 300 is 0.0016 for \texttt{standard} against 0.0001 for both fixed-norm variants, and final test cross-entropy is 2.37e-05 versus 9.37e-07.
+\item \textbf{The verifiability gain survives training}, at 5.3x on trained weights at \texttt{d\_model=32}. Note this is smaller than the \textasciitilde{}17x seen at the same width on random initialisation in 6d: training moves weights into a regime where the standard model is somewhat better conditioned, so the random-init figures overstate the benefit.
+
+\begin{table}[t]
+\centering
+\caption*{\textbf{Extended Data Table 10.} Trainability at $d_{\text{model}}=32$: 3000 steps, batch 256, lr 0.003, 3 seeds, identical batch stream across variants. The frozen scale is calibrated once before training and never receives gradient. \textbf{The task saturates} -- every variant reaches 100\% accuracy -- so this shows the absence of a penalty here and cannot bound the penalty on a harder task.}
+\label{edtab:trainability}
+\begin{tabular}{l S[table-format=1.4] S[table-format=1.2e2] S[table-format=1.3] S[table-format=2.1]}
+\toprule
+variant & {test acc} & {test CE} & {trained gap} & {gap gain} \\
+\midrule
+\texttt{standard} & 1.0000 & 2.37e-05 & 5.869 & 1.0 \\
+\texttt{fixnorm} & 1.0000 & 9.37e-07 & 1.113 & 5.3 \\
+\texttt{fixnorm\_tanh} & 1.0000 & 2.05e-06 & 1.156 & 5.1 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\end{itemize}
+\subsection{The load-bearing caveat}
+\textbf{The task is saturated.} All three variants reach 100\% accuracy, so this experiment can demonstrate the \emph{absence} of a penalty on this task but cannot bound the penalty on a harder one. A task every architecture solves perfectly has no power to discriminate trainability. The correct reading is 'no penalty detected at \texttt{d\_model=32} on a task that saturates', not 'no penalty exists'. Language modelling at scale is where LayerNorm's data-dependent scale actually earns its keep, and that has not been tested here.
+Also untested: the width scaling of 6d was measured on random initialisation only. The trained comparison exists at \texttt{d\_model=32} alone, so the claim that the gain grows with width is an extrapolation across two different weight regimes.
+\subsection{Expressivity boundaries: the penalty appears once the task stops saturating (6f)}
+6e could only report the absence of a penalty on a task every variant solved perfectly. This repeats the comparison on a task built to sit below saturation: a two-hop routing rule where the value read by the first hop indexes the second, with 12 distractor features triggering a non-linear fallback branch, \texttt{SEQ\_LEN=8}, \texttt{N\_FEAT=20}, vocabulary 26, at \texttt{d\_model=8}. Baseline accuracy lands at \textbf{0.8973}, inside the intended discriminatory band.
+\textbf{There is a real accuracy penalty, and 6e did not detect it.} \texttt{fixnorm} loses 5.7 accuracy points against \texttt{standard} (0.8399 versus 0.8973), and cross-entropy is 1.61x worse. \texttt{fixnorm\_tanh} loses 8.9 points. The saturated task in 6e reported a delta of exactly zero for both. That is what task saturation does: it does not reduce a penalty, it hides one.
+\textbf{The verifiability gain also grows}, from 5.3x on the saturated task to 17.1x here. So the trade is not marginal in either direction: pushing the network to use its capacity makes the standard model harder to verify AND makes the fixed-norm model measurably worse at the task.
+
+\begin{table}[t]
+\centering
+\caption*{\textbf{Extended Data Table 11.} Expressivity boundary at $d_{\text{model}}=8$ on a \emph{non-saturated} two-hop routing task (12 distractor features, $T=8$, vocabulary 26, 3 seeds). Baseline accuracy \num{0.8973} sits inside the discriminatory band, and a penalty appears that the saturated task of Table~\ref{tab:trainability} reported as exactly zero. Task saturation does not reduce a penalty, it hides one.}
+\label{edtab:expressivity}
+\begin{tabular}{l S[table-format=1.4] S[table-format=+1.4] S[table-format=1.4] S[table-format=2.3] S[table-format=2.1]}
+\toprule
+variant & {test acc} & {$\Delta$} & {test CE} & {trained gap} & {gap gain} \\
+\midrule
+\texttt{standard} & 0.8973 & +0.0000 & 0.3363 & 19.550 & 1.0 \\
+\texttt{fixnorm} & 0.8399 & -0.0574 & 0.5419 & 1.142 & 17.1 \\
+\texttt{fixnorm\_tanh} & 0.8084 & -0.0888 & 0.6625 & 1.170 & 16.7 \\
+\bottomrule
+\end{tabular}
+\par\vspace{2pt}\noindent\footnotesize Pareto exchange: \num{17.1}$\times$ verifiability for \num{5.7} accuracy points. \texttt{fixnorm\_tanh} is dominated.
+\end{table}
+
+\subsection{The Pareto frontier, stated plainly}
+At \texttt{d\_model=8} on a non-saturated two-hop task, replacing LayerNorm's data-dependent scale with a fixed calibrated constant buys \textbf{17.1x verifiability for 5.7 points of accuracy}. Whether that exchange is worth making is a deployment question with no architecture-independent answer, and this measurement does not settle it. What it does settle is that the exchange is real and has to be priced, which the saturated experiment could not show.
+Adding tanh on top costs a further 3.1 points and buys no additional verifiability (16.7x versus 17.1x). It is dominated and should be dropped.
+Caveats specific to this section:
+\begin{itemize}
+\item Accuracy variance across seeds is not small (0.0665 for \texttt{standard} against 0.0246 for \texttt{fixnorm}), and only 3 seeds were run. The direction of the penalty is consistent across every seed, but its magnitude is not tightly bounded.
+\item The safety property survives in all variants: the unsafe-logit margin stays negative on about 98.5\% of safe prompts for every architecture, so the penalty is in task capability, not in the safety readout.
+\item The CROWN-side gap was NOT computed. \texttt{audit/crown\_reference.py} implements LayerNorm and ReLU only; extending it to the fixed-norm and tanh variants would be new unvalidated code, and an unvalidated second engine is worse than none. Only the hybrid-zonotope gap is reported, and its soundness was re-checked here (max containment violation 4.3e-14).
+\item This remains a synthetic task at d\_model=8. It shows a penalty exists and is measurable; it does not give its size for a real model.
+\end{itemize}
+\subsection{Does the penalty shrink with capacity? (6g)}
+The Pareto exchange of 6f was measured at one width. This repeats it at \texttt{d\_model} 8 and 16 with 10 seeds each, dropping the dominated \texttt{fixnorm\_tanh}. Step count is 800 here against 3000 in 6f, so absolute accuracies are not comparable across the two sections; the within-section comparison is.
+\begin{itemize}
+\item Penalty: \textbf{-0.10 pts} at \texttt{d\_model=8} -> \textbf{6.21 pts} at \texttt{d\_model=16}.
+\item Verifiability gain: \textbf{14.0x} -> \textbf{14.8x}.
+
+\begin{table}[t]
+\centering
+\caption*{\textbf{Extended Data Table 12.} Pareto exchange against capacity: 10 seeds per cell, 800 training steps, same non-saturated two-hop task. Intervals are 95\% on the mean. \textbf{The trend is not interpretable as a capacity effect: the baseline leaves the discriminatory band, and a saturated baseline reports a shrinking penalty whether or not one exists.}}
+\label{edtab:pareto}
+\begin{tabular}{S[table-format=2.0] l S[table-format=1.4] S[table-format=1.4] S[table-format=2.3] c}
+\toprule
+{$d_{\text{model}}$} & variant & {test acc} & {SEM} & {gap} & {in band} \\
+\midrule
+8 & \texttt{standard} & 0.7235 & 0.0029 & 15.996 & yes \\
+8 & \texttt{fixnorm} & 0.7245 & 0.0038 & 1.140 & yes \\
+16 & \texttt{standard} & 0.9697 & 0.0112 & 16.862 & no \\
+16 & \texttt{fixnorm} & 0.9076 & 0.0176 & 1.138 & no \\
+\bottomrule
+\end{tabular}
+\par\vspace{2pt}\noindent\footnotesize Penalty \num{-0.10} to \num{6.21} points; verifiability gain \num{14.0}$\times$ to \num{14.8}$\times$.
+\end{table}
+
+\end{itemize}
+\subsection{This trend is not interpretable as a capacity effect}
+NOT INTERPRETABLE as a capacity trend. The baseline is outside the discriminatory band (0.7, 0.95) at d\_model=16 (accuracy 0.9697). A saturated baseline reports a shrinking penalty whether or not one exists -- this is exactly the artifact c20 exposed. To read a capacity trend the task must be re-tuned so the baseline stays off the ceiling at every width.
+This is the same failure mode as 6e, arriving through a different door. A width sweep on a fixed task drifts toward saturation as capacity grows, and a saturated baseline reports a shrinking penalty whether or not the penalty is shrinking. Reading these two numbers as an asymptotic scaling law would be the single easiest thing for a referee to break. Answering the question properly requires re-tuning task difficulty at each width so the baseline stays off the ceiling, which is a different and larger experiment than this one.
+\subsection{Both widths are confounded, in opposite directions}
+The reduced step count (800) leaves the narrow model \textbf{undertrained}: \texttt{standard} reaches 0.7235 here against 0.8973 at 3000 steps in 6f. So the narrow cell compares two models that have not converged, which measures early-training speed rather than capacity. The wide cell has the opposite problem: the baseline is at 0.9697, above the band.
+Neither cell is a clean read, and they fail in opposite directions, so this experiment does \textbf{not} answer whether the penalty shrinks with capacity. What it does establish is that there is no evidence the penalty vanishes: the only statistically significant penalty measured here is the larger one, at the wider model.
+Either way, two things hold across every width and every training budget measured so far: the verifiability gain is large, stable and survives training (14.0x and 14.8x here, 17.1x in 6f, 5.3x on the saturated task), and the safety readout is unaffected (unsafe-logit margin negative on 97-100\% of safe prompts for both architectures).
+\subsection{Why the synthetic routing track was abandoned (6h)}
+6g could not answer the capacity question because its two cells were confounded in opposite directions. The fix attempted in c22 was to re-tune task difficulty per width so the \texttt{standard} baseline lands inside (0.8, 0.9) at every capacity. That attempt failed, and it failed for a structural reason rather than a tuning one. This section records the negative result and the evidence for it, because it is what makes the move to language modelling in 6i necessary rather than decorative.
+Two difficulty knobs were tried and both were abandoned before the main sweep ran:
+\begin{itemize}
+\item \textbf{\texttt{n\_feat} (vocabulary size)} is a cliff, not a dial: measured accuracy at \texttt{d\_model=8} runs 0.9520 at \texttt{n\_feat=8} and 0.2142 at \texttt{n\_feat=70}, with no resolution inside the target band. Evidence: \texttt{results/c22\_coarseknob.log}.
+\item \textbf{\texttt{TWO\_HOP\_P} (fraction of two-hop examples)} is smooth and monotone and holds the class count fixed, but its range is too narrow. At \texttt{d\_model=8} with \texttt{distractor\_frac=0.2} it spans accuracy 1.0000 (\texttt{p=0.0}) down to only 0.9620 (\texttt{p=1.0}), so even its hardest setting sits above the band. Evidence: \texttt{results/c22\_smoothknob.log}.
+\end{itemize}
+The decisive measurement is the accuracy FLOOR of the whole family: the lowest accuracy reachable at each width across the hardest settings tried, at \texttt{distractor\_frac=0.6}. Where that floor is still above the band, no knob inside the family can reach the band, because the family cannot make the task any harder.
+The obstruction is at the WIDE end, not the narrow one. At d\_model 16, 32 the hardest setting the family can produce still scores 0.9985, 1.0000 -- the model solves the task outright and the measured penalty collapses to whatever headroom is left, which is exactly the c19 saturation artifact that 6f was written to escape.
+Note what this table does not say. d\_model 8 IS normalisable -- 0.8157 at \texttt{n\_feat=20} sits inside the band. The synthetic family was not abandoned because the narrow model saturated; it was abandoned because the family cannot hold the baseline off the ceiling at the wider capacities the question is actually about. A capacity trend needs at least two comparable widths, and this family can supply one.
+The root cause is that accuracy is bounded above by 1.0. Any task a wider model can simply solve stops measuring capacity. The requirement is therefore a task with \textbf{no accuracy ceiling} -- which is what perplexity provides, and what 6i moves to.
+Evidence: \texttt{results/c22\_ceiling.json}, \texttt{results/c22\_ceiling.log}. The main c22 sweep (\texttt{audit/c22\_asymptotic.py}) was killed before producing \texttt{results/c22.json} and no such file is claimed.
+\subsection{The exchange on natural language (6i)}
+6h established that the synthetic family cannot hold the baseline off the ceiling at the wider capacities. This section repeats the comparison on character-level language modelling, where there is no ceiling to hit: the loss floor is the conditional entropy of English given the context, which is strictly positive, so the \texttt{standard} baseline cannot saturate at any width.
+Corpus: TinyShakespeare, 1,115,394 characters, 65-symbol vocabulary, contiguous 90/10 by position (1,003,854 train / 111,540 held out), SHA-256 \texttt{86c4e6aa9db7c042...}. Model context is fixed at SEQ\_LEN=8; 2 layers, 4 heads. 3000 steps, batch 256, lr 0.003, 5 seeds per cell, identical batch streams and initialisation per seed. Perplexity is measured on one fixed held-out set of 131,072 next-character predictions, drawn once and shared by every run.
+The difference column is \texttt{fixnorm - standard}, so positive is a cost to \texttt{fixnorm} and negative means the fixed normalizer is the better language model.
+Perplexity is reported RAW. Unlike every accuracy cell in 6e-6h, neither the baseline nor the variant is anywhere near a ceiling, so the penalty column measures the expressivity cost of a data-independent normalizer and nothing else.
+Held-out perplexity trajectory (median across seeds):
+The perplexity penalty is statistically significant at d\_model 32, 64. The Pareto exchange of 6f is therefore real on natural text and not an artifact of the synthetic task: a data-independent normalizer costs measurable expressivity, and the exchange survives removal of the ceiling confound that made 6e-6h unreadable.
+Across capacity, the perplexity difference goes +1.82\% -> +1.78\% and the verifiability gain goes 83.2x -> 879.3x from d\_model 32 to 64. Both cells are unsaturated, so unlike 6g this is a like-for-like comparison.
+Scope. This is a 2-layer model with an 8-character context on a 1 MB corpus. It is a language-modelling task in the sense that matters here -- no accuracy ceiling, so the measurement stays interpretable as capacity grows -- and in no other sense. Nothing about frontier-scale language models follows.
+Method. Strictly post-hoc: no differentiable verification penalty was used, \texttt{src/bounds.py} is unmodified, and the gaps come from the same sound NumPy hybrid-zonotope engine as 6d-6h, at rho=0.0001 on 4 perturbation directions at the final residual-stream position. Soundness held on every run: maximum containment violation 6.4e-14 (float noise; a positive value here would mean an unsound bound). There is no safety-margin readout in this section -- the unsafe-token designation was a property of the synthetic task, and no character of English has a counterpart, so the column is dropped rather than invented.
+
+\begin{table}[t]
+\centering
+\caption*{\textbf{Extended Data Table 13.} Expressivity cost of a data-independent normalizer on natural text. Character-level language modelling on tinyshakespeare (\num{1115394} characters, 65-symbol vocabulary), context $T=8$, 5 seeds per cell, 3000 steps. Perplexity is raw and held out on \num{131072} next-character predictions; unlike the accuracy tasks it has no ceiling, so no cell is confounded by saturation. The gap is the post-hoc hybrid-zonotope bound width divided by the attained width at $\rho=\num{0.0001}$.}
+\label{edtab:language}
+\begin{tabular}{S[table-format=2.0] l S[table-format=2.4] S[table-format=1.4] S[table-format=4.3] c}
+\toprule
+{$d_{\text{model}}$} & variant & {held-out ppl} & {SEM} & {gap} & {vs.\ standard} \\
+\midrule
+32 & \texttt{standard} & 7.3039 & 0.0309 & 95.500 & {--} \\
+32 & \texttt{fixnorm} & 7.4369 & 0.0295 & 1.147 & penalty \\
+64 & \texttt{standard} & 6.6971 & 0.0165 & 1053.245 & {--} \\
+64 & \texttt{fixnorm} & 6.8164 & 0.0162 & 1.198 & penalty \\
+\bottomrule
+\end{tabular}
+\par\vspace{2pt}\noindent\footnotesize Perplexity penalty \num{1.82}\% to \num{1.78}\%; verifiability gain \num{83.2}$\times$ to \num{879.3}$\times$ across $d_{\text{model}}=32$ to $64$. Maximum containment violation \num{6.4e-14} (float noise; the bound is sound on every run).
+\end{table}
+
+\subsection{Depth and width: where the certifiable region ends (6j)}
+Extending the sweep to $L=4$ (Table \texttt{tab:depthwidth}) separates the two variants categorically rather than by ratio. Across $d_{\text{model}}=64,128,256$ the standard arm's median gap runs 1.25e+10, 8.11e+15, 5.82e+22 with 312, 1026 and 2075 unstable ReLUs; every one of those bounds is above the 1e+03 informativeness threshold, so the standard model is not certifiable anywhere on the row. The fixnorm arm stays below it at every width with a median of zero unstable ReLUs. No gain ratio is quoted, because a ratio whose denominator is itself uninformative is not a measurement.
+The fixnorm row is 1.67, 213.2, 291.7. That is a factor 128 between $d=64$ and $d=128$ and a factor 1.37 between $d=128$ and $d=256$. The comparable $L=2$ row is 1.18, 2.38, 2.41, a factor 2.0 across the same fourfold width change. Three widths are enough to say the $L=4$ curve is inconsistent with a smooth power law and to place a large step between the first two widths; they are not enough to localise where that step begins, and no width exponent is fitted to them. The earlier c18 exponents (standard 11.12, fixnorm 2.46) were fitted at $L=2$ on random initialisation and should not be extrapolated to depth.
+Two cells on this row have a perplexity comparison that does not hold: ($L=4$, $d=64$) and ($L=4$, $d=256$) trained their two arms on different devices. Measured CUDA-versus-CPU drift at $L=4$, $d=128$ fixnorm is 6.4245 against 6.3851, about 0.62\% of baseline, which is the same order as the 1 to 2.5\% perplexity penalties being reported. The gap column is unaffected: the two arms there differ by twenty orders of magnitude and a 0.6\% drift cannot move that conclusion. Only the $L=4$, $d=128$ penalty is quoted as a valid pairing.
+
+\begin{table}[t]
+\centering
+\caption*{\textbf{Extended Data Table 14.} Depth and width scaling of the relaxation gap on character-level TinyShakespeare, $T=8$, 3 seeds per cell, \num{3000} steps, $\rho=\num{1e-4}$. Gap is the post-hoc hybrid-zonotope bound width over the attained width; medians, because run-to-run spread at fixed configuration reaches \num{2.4}$\times$. Cells marked {--} were not verified: $d=512$ lies outside the verification subgrid and $L=12$, $d=512$ diverged on every seed. A gap above \num{1e+03} means the bound is not informative, so no gain ratio is quoted. The pairing column flags cells whose two arms trained on different devices, where the measured CUDA/CPU perplexity drift (\num{0.62}\%) is comparable to the penalty being reported and the perplexity comparison is therefore not valid.}
+\label{edtab:depthwidth}
+\begin{tabular}{S[table-format=2.0] S[table-format=3.0] l l l l l}
+\toprule
+{$L$} & {$d_{\text{model}}$} & {standard gap} & {unstable} & {fixnorm gap} & {unstable} & {ppl pairing} \\
+\midrule
+2 & 64 & \num{1.16e+03} & 2 & \num{1.18} & 0 & valid \\
+2 & 128 & \num{2.07e+04} & 37 & \num{2.38} & 0 & valid \\
+2 & 256 & \num{5.55e+04} & 40 & \num{2.41} & 0 & valid \\
+2 & 512 & {--} & {--} & {--} & {--} & valid \\
+4 & 64 & \num{1.25e+10} & 312 & \num{1.67} & 0 & cross-device \\
+4 & 128 & \num{8.11e+15} & 1026 & \num{213} & 0 & valid \\
+4 & 256 & \num{5.82e+22} & 2075 & \num{292} & 0 & cross-device \\
+12 & 512 & {--} & {--} & {--} & {--} & incomplete \\
+\bottomrule
+\end{tabular}
+\par\vspace{2pt}\noindent\footnotesize The fixnorm row at $L=4$ reads \num{1.67}, \num{213.2}, \num{291.7} across $d=64,128,256$: a factor \num{128} between the first two widths and \num{1.37} between the last two. Three widths are consistent with an onset between $d=64$ and $d=128$ and are inconsistent with a smooth power law, but they cannot localise the onset; no width exponent is fitted.
+\end{table}
+
+\subsection{Optimising the bound during training collapses its variance (6k)}
+Sections 6d-6j measure a bound after training. This section puts an interval-bound (IBP) upper bound on the loss into the objective itself, with the standard kappa/epsilon ramp, and asks what changes. The training-time bound is plain interval arithmetic and is far looser than the hybrid zonotope; it is a training signal only. Every gap reported here is still measured post hoc by the same sound NumPy prover used throughout, so the two arms are certified by one engine. Note the radius differs from 6d-6j: certification here is at $\rho=0.02$, where ordinary training frequently fails to certify at all, rather than the $\rho=10^{-4}$ used earlier.
+At $L=2$, $d_{\text{model}}=32$, pooled over three learning rates, the control's fixnorm gap spans 2.51 to 4.27e+03, a factor of 1705 across $n=9$ runs, and only 6 of those 9 fall below the informativeness threshold. The certified arm spans 1.13 to 1.22, a factor of 1.08 across $n=8$ runs, all 8 informative, with zero unstable ReLUs on every run. The primary effect is therefore on the SPREAD, not on the median alone: ordinary training at this radius produces a bound whose quality is a lottery across seeds, and certified training produces the same bound every time.
+The median ratio is deliberately not quoted. Its denominator moves by a factor of 1705 across seeds, so the ratio is a statement about which seed the control happened to draw. A single-seed version of this experiment reported 2.08x at one learning rate where three seeds give a median control gap three orders of magnitude higher; that discrepancy is the reason the ratio is withheld and the spread is reported instead.
+The exchange is paid in perplexity: 13.3\% to 28.0\% above the matched control across the three learning rates. That is an order of magnitude larger than the 1 to 2.5\% cost of the fixed normaliser alone.
+Two facts bound how far this generalises, and they cut in opposite directions. The standard variant diverged on all three seeds at all 3 learning rates, so it has no certified arm to compare against even at $L=2$, $d_{\text{model}}=32$. And the failure is not confined to that one variant: all 18 of the 18 other cell configurations attempted under active certified training -- spanning both the standard and fixnorm variants at $d=64$ and $L=4$ -- diverged at every learning rate tested, under the one fixed epsilon-ramp schedule used throughout this grid. The supportable claim is therefore narrow: at the one cell where certified training converges at all, it converges for fixnorm and not for standard, and it makes the resulting bound reproducible. These data do not show that a fixed normaliser is a prerequisite for certified training, and they do not show that certified training scales past the smallest configuration tested. Locating the epsilon at which $d=64$ becomes trainable was tested directly rather than left open.
+Three deliberately gentler schedules were run at $L=2$, $d_{\text{model}}=64$, fixnorm, three seeds each: a smaller target radius ($\epsilon=0.02$, same 100+1000 ramp) (3/3 seeds diverged); the original target radius on a much slower ramp (200+2500) (3/3 seeds diverged); both combined ($\epsilon=0.02$, 200+2500 ramp) (3/3 seeds diverged). All 9 runs diverged. This rules out the two most obvious fixes, a smaller target and a slower approach to it, without ruling out every possible schedule in a space too large to search exhaustively here; the supportable claim stays that certified training reproduces one configuration, not that a schedule search would fail in general.
+
+\begin{table}[t]
+\centering
+\caption*{\textbf{Extended Data Table 15.} Certified training versus ordinary training, $L=2$, $d_{\text{model}}=32$, $\rho=\num{0.02}$, \num{3000} steps, 3 seeds per arm. Control is the identical recipe with the robust term disabled. The certified arm optimises an interval-bound upper bound on the loss; the gap column is still measured post hoc by the hybrid-zonotope prover, so the two arms are certified by the same engine. Standard diverges under certified training at every learning rate, so it has no certified arm.}
+\label{edtab:certified}
+\begin{tabular}{l l S[table-format=1.3] l l l l}
+\toprule
+{lr} & variant & {arm} & {converged} & {ppl (SEM)} & {gap median} & {gap range} \\
+\midrule
+\num{0.001} & \texttt{fixnorm} & {control} & 3/3 & \num{8.463} (\num{0.007}) & \num{19.5} & \num{14.8}--\num{76.3} \\
+\num{0.001} & \texttt{fixnorm} & {certified} & 3/3 & \num{10.830} (\num{0.060}) & \num{1.19} & \num{1.13}--\num{1.22} \\
+\num{0.001} & \texttt{standard} & {control} & 3/3 & \num{8.181} (\num{0.008}) & \num{1.94e+08} & \num{5.84e+05}--\num{4.4e+08} \\
+\num{0.001} & \texttt{standard} & {certified} & 0/3 & {--} & {--} & {diverged} \\
+\midrule
+\num{0.003} & \texttt{fixnorm} & {control} & 3/3 & \num{7.994} (\num{0.036}) & \num{1.27e+03} & \num{2.51}--\num{1.65e+03} \\
+\num{0.003} & \texttt{fixnorm} & {certified} & 3/3 & \num{9.889} (\num{0.029}) & \num{1.19} & \num{1.14}--\num{1.2} \\
+\num{0.003} & \texttt{standard} & {control} & 3/3 & \num{7.890} (\num{0.018}) & \num{1.39e+09} & \num{1.29e+09}--\num{3.19e+09} \\
+\num{0.003} & \texttt{standard} & {certified} & 0/3 & {--} & {--} & {diverged} \\
+\midrule
+\num{0.01} & \texttt{fixnorm} & {control} & 3/3 & \num{8.051} (\num{0.067}) & \num{49.3} & \num{8.26}--\num{4.27e+03} \\
+\num{0.01} & \texttt{fixnorm} & {certified} & 2/3 & \num{9.118} (\num{0.044}) & \num{1.13} & \num{1.13}--\num{1.13} \\
+\num{0.01} & \texttt{standard} & {control} & 3/3 & \num{7.931} (\num{0.064}) & \num{1.85e+08} & \num{1.09e+07}--\num{1.42e+10} \\
+\num{0.01} & \texttt{standard} & {certified} & 0/3 & {--} & {--} & {diverged} \\
+\bottomrule
+\end{tabular}
+\par\vspace{2pt}\noindent\footnotesize Pooled over all three learning rates, the control's fixnorm gap spans \num{2.51} to \num{4.27e+03} (\num{1705}$\times$, $n=9$, of which 6 fall below the \num{1e+03} informativeness threshold), while the certified arm spans \num{1.13} to \num{1.22} (\num{1.08}$\times$, $n=8$, all 8 informative). The effect is a collapse of spread, not only of the median; the median ratio itself is withheld because its denominator is unstable.
+\end{table}
+
+\subsection{An honest adversarial stress test, and what it does and does not show (6l)}
+Section 6k's bound is not differentiable -- it comes from the NumPy hybrid-zonotope prover, a discrete branch-and-bound search, not a computation graph -- so a gradient-based adversary cannot attack it directly. What IS differentiable is \texttt{src/torch\_bounds.py}, the plain interval-arithmetic engine used as the certified-training signal in 6k. This section trains a Gumbel-Softmax relaxation over the $L=2$, $d_{\text{model}}=32$ certified fixnorm cell's SEQ\textbackslash\{\}\_LEN context tokens to maximise that engine's bound width by gradient ascent, snaps to the discrete argmax context, and re-evaluates exactly (no relaxation) on the snapped tokens. This is a search for slack in the training signal, not an attack on the certificate itself, and a failure to find a large gap would demonstrate only that this search failed, not that no gap exists.
+Over 5 independent restarts of 300 steps each, the search converged on repeated-token, out-of-distribution contexts (e.g. \texttt{ zQQQQQ.}) with a torch-engine relaxation gap of 107 (median across restarts, max 113), against a median of 6.69 on 8 natural TinyShakespeare contexts -- a 16.9x increase, reproduced in 5 of 5 restarts rather than appearing once. This is a real, repeatable OOD sensitivity in the interval-arithmetic training signal, consistent with IBP's known looseness away from the calibration distribution.
+Whether this transfers to the certificate that is actually reported is a separate question, checked here black-box (the zonotope prover was never part of the gradient search): the same adversarial context, evaluated by the unmodified NumPy prover at the real certified $\rho=0.02$, gives a gap of 1.15 against 1.09 on a natural context -- a 1.05x shift, not the 17x found in the training-signal engine. Both remain far inside the certifiable band, both show zero unstable ReLUs, and containment holds at both points (worst violation 8.9e-15, float noise, consistent with the containment checks elsewhere in this project). The interpretation offered is that the correlation-preserving zonotope -- which keeps first-order cross-terms across the softmax product exactly, unlike the interval engine (section 1) -- is why the OOD slack found in the training signal does not carry over to the certifying engine on this one context. This is one context pair, not a swept claim, and it is not evidence that no context defeats the zonotope prover, only that this particular search, run against this particular engine, did not find one that does.
+Scope, stated plainly: only the fixnorm+ReLU architecture was attacked, because it is the only architecture with an actual banked NumPy-certified cell -- the golden-section GeLU/SiLU engine in \texttt{src/torch\_bounds.py} has never been NumPy-zonotope certified (\texttt{arch.certifiable()} skips it by construction) and attacking it would be attacking a code path nothing in this manuscript has claimed a certificate for. The search ran on one trained seed, one learning rate, one radius, and one temperature schedule. None of this is a proof of immunity, in either direction.
+\subsection{Limitations}
+\begin{itemize}
+\item This is a 26,144-parameter toy transformer on a synthetic task. Nothing has been shown to scale, and the unstable-ReLU mechanism worsens with width and depth.
+\item The empirical radius is an UPPER bound on the true robust radius. PGD breaking at rho=10 shows the true radius is at most 10; PGD failing at rho=3 shows nothing, because PGD is incomplete. The true radius lies in (certified, 10]. The conservativeness gap is therefore 'at most 250x', and it is a property of this prover on this model, not a general tax for formal guarantees.
+\item The end-to-end bound has no independent confirmation (section 4).
+\item Safety is an unsafe-logit margin over a designated token subset.
+\item The certificate covers a fixed discrete context; only the continuous perturbation is quantified over.
+\item The language-modelling evidence in 6i removes the accuracy ceiling that confounded 6e-6h, but it does not add scale: 2 layers, an 8-character context, and a 1 MB corpus. It licenses claims about the penalty-versus-verifiability exchange being measurable on natural text, not claims about language models.
+\item 6i reports no safety margin. The unsafe-logit readout that carries sections 1-6h has no counterpart in text, so the verifiability half of 6i is a relaxation gap only, not a certified safety property.
+\item 6l's adversarial search only reaches the differentiable torch IBP engine, never the NumPy zonotope prover directly; the zonotope result there is a single black-box context pair, not a swept adversarial evaluation of the certifying engine itself.
+\end{itemize}
+\subsection{Methods and Reproduction}
+Python 3.14.3, numpy 2.4.2, torch 2.10.0+cpu, scipy 1.16.3, z3 4.15.6, cvxpy 1.9.2. dReal absent. Seed 0 throughout; \texttt{results/environment.json} records every seed and a SHA-256 for each checkpoint and result file.
+\begin{verbatim}
+python stages/a0_bootstrap.py       # full pipeline -> results/baseline.json
+python audit/c14_crosscheck.py      # falsification + coverage
+python audit/z3_primitives.py       # exact SMT on the primitives
+python audit/sweep_layernorm.py     # bracket cliff
+python audit/c16_experiments.py     # prompt distribution + branching
+python audit/crown_stagewise.py     # CROWN vs prover, per stage
+python audit/c23_language.py        # char-LM penalty vs gap -> results/c23.json
+python audit/c29_fuzzer.py          # adversarial stress test -> results/c29_fuzz.json
+python audit/verify_bundle.py       # gate: presence, sync, hashes
+\end{verbatim}
+\end{document}

@@ -1,0 +1,32 @@
+{
+  "variant": "standard",
+  "seed": 0,
+  "d_model": 32,
+  "n_layers": 4,
+  "lr": 0.003,
+  "eps_train": 0.05,
+  "kappa_final": 0.5,
+  "steps_run": 3000,
+  "curve": [
+    {
+      "step": 0,
+      "eps": 0.0,
+      "kappa": 1.0,
+      "clean_ce": 4.265719890594482,
+      "robust_ce": 0.0,
+      "grad_norm": 1.0673794746398926,
+      "val_ce": 4.26978874206543,
+      "val_ppl": 71.50652770209109
+    }
+  ],
+  "diverged": true,
+  "val_ce": NaN,
+  "val_ppl": NaN,
+  "val_bpc": NaN,
+  "train_seconds": 3.6303632259368896,
+  "sec_per_step": 0.0012101210753122965,
+  "n_params": 54784,
+  "certified": {
+    "skipped": "diverged"
+  }
+}

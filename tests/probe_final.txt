@@ -1,0 +1,14 @@
+sampled gamma (ICNN V, alpha=0.5): 1.4884
+
+=== effect of the clamped floor (rho=0.005, layer 0) ===
+  ICNN            V0=[-6.107e-04,+1.361e-03] floor=0.000e+00  V1_hi=5.426e-02
+                  correlated=+5.416e-02  clamped=+5.426e-02  used=+5.416e-02
+  quadratic-only  V0=[+0.000e+00,+1.391e-04] floor=0.000e+00  V1_hi=4.362e-03
+                  correlated=+4.362e-03  clamped=+4.362e-03  used=+4.362e-03
+
+=== BaB with a meaningful inner exclusion ===
+metric              rho  inner   gamma  proved       worst   boxes    sec
+quadratic-only    0.005    0.3    1.50   False   1.624e-04    1023   97.2
+quadratic-only    0.005    0.3    2.50   False   1.533e-04    1023   55.3
+quadratic-only    0.005    0.3    4.00   False   1.447e-04    1023   39.9
+quadratic-only    0.005    0.5    1.50   False   1.624e-04     975   34.5

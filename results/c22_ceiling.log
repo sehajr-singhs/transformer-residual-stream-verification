@@ -1,0 +1,14 @@
+C:\Users\sehaj\experiments\ai_safety_lyapunov\audit\c20_expressivity.py:180: UserWarning: Converting a tensor with requires_grad=True to a scalar may lead to unexpected behavior.
+Consider using tensor.detach() first. (Triggered internally at C:\actions-runner\_work\pytorch\pytorch\pytorch\torch\csrc\autograd\generated\python_variable_methods.cpp:837.)
+  curve.append({"step": step, "loss": float(loss), "grad_norm": gn})
+[  305.2s] d=  8 n_feat= 20 frac=0.6 acc=0.8157
+[  604.0s] d=  8 n_feat= 60 frac=0.6 acc=0.7185
+[  715.5s] d= 16 n_feat= 20 frac=0.6 acc=1.0000
+[ 1013.8s] d= 16 n_feat= 60 frac=0.6 acc=0.9985
+[ 1151.8s] d= 32 n_feat= 20 frac=0.6 acc=1.0000
+[21425.1s] d= 32 n_feat= 60 frac=0.6 acc=1.0000
+{
+  "8": 0.718505859375,
+  "16": 0.99853515625,
+  "32": 1.0
+}

@@ -1,0 +1,114 @@
+[    0.0s] soundness check on the new primitives
+[    0.6s]   max containment violation = +2.665e-15
+[    1.2s]   d=  32 standard      rho=0.0001  amp=3.350e+01 attained=1.705e+00 gap=1.965e+01  unstable=0
+[    1.6s]   d=  32 standard      rho=0.001   amp=8.234e+01 attained=1.705e+00 gap=4.829e+01  unstable=7
+[    2.0s]   d=  32 standard      rho=0.01    amp=3.065e+07 attained=1.705e+00 gap=1.798e+07  unstable=128
+[    2.4s]   d=  32 fixnorm       rho=0.0001  amp=1.817e+00 attained=1.611e+00 gap=1.118e+00  unstable=0
+[    2.9s]   d=  32 fixnorm       rho=0.001   amp=1.873e+00 attained=1.611e+00 gap=1.180e+00  unstable=0
+[    3.7s]   d=  32 fixnorm       rho=0.01    amp=2.864e+00 attained=1.611e+00 gap=1.788e+00  unstable=4
+[    4.5s]   d=  32 fixnorm_tanh  rho=0.0001  amp=1.655e+00 attained=1.540e+00 gap=1.120e+00  unstable=0
+[    5.4s]   d=  32 fixnorm_tanh  rho=0.001   amp=1.719e+00 attained=1.540e+00 gap=1.186e+00  unstable=0
+[    6.3s]   d=  32 fixnorm_tanh  rho=0.01    amp=2.863e+00 attained=1.540e+00 gap=1.950e+00  unstable=0
+[   11.8s]   d=  64 standard      rho=0.0001  amp=9.986e+02 attained=1.386e+00 gap=5.590e+02  unstable=9
+[   17.1s]   d=  64 standard      rho=0.001   amp=3.903e+04 attained=1.386e+00 gap=1.951e+04  unstable=256
+[   22.5s]   d=  64 standard      rho=0.01    amp=1.055e+06 attained=1.386e+00 gap=5.111e+05  unstable=256
+[   28.6s]   d=  64 fixnorm       rho=0.0001  amp=1.639e+00 attained=1.341e+00 gap=1.145e+00  unstable=1
+[   37.1s]   d=  64 fixnorm       rho=0.001   amp=2.052e+00 attained=1.341e+00 gap=1.530e+00  unstable=1
+[   57.2s]   d=  64 fixnorm       rho=0.01    amp=4.844e+01 attained=1.350e+00 gap=3.587e+01  unstable=34
+[   70.7s]   d=  64 fixnorm_tanh  rho=0.0001  amp=1.808e+00 attained=1.478e+00 gap=1.184e+00  unstable=0
+[   86.1s]   d=  64 fixnorm_tanh  rho=0.001   amp=2.366e+00 attained=1.478e+00 gap=1.605e+00  unstable=0
+[  107.3s]   d=  64 fixnorm_tanh  rho=0.01    amp=1.037e+02 attained=1.478e+00 gap=7.286e+01  unstable=0
+[  225.0s]   d= 128 standard      rho=0.0001  amp=5.294e+09 attained=1.431e+00 gap=2.630e+09  unstable=512
+[  312.0s]   d= 128 standard      rho=0.001   amp=2.782e+08 attained=1.431e+00 gap=1.290e+08  unstable=512
+[  391.5s]   d= 128 standard      rho=0.01    amp=5.115e+11 attained=1.431e+00 gap=3.627e+11  unstable=512
+[  494.7s]   d= 128 fixnorm       rho=0.0001  amp=5.394e+00 attained=1.386e+00 gap=2.939e+00  unstable=0
+[  587.6s]   d= 128 fixnorm       rho=0.001   amp=4.916e+01 attained=1.386e+00 gap=3.050e+01  unstable=3
+[  645.4s]   d= 128 fixnorm       rho=0.01    amp=3.971e+04 attained=1.385e+00 gap=2.726e+04  unstable=512
+[  737.7s]   d= 128 fixnorm_tanh  rho=0.0001  amp=6.425e+00 attained=1.475e+00 gap=4.464e+00  unstable=0
+[  827.4s]   d= 128 fixnorm_tanh  rho=0.001   amp=8.044e+01 attained=1.475e+00 gap=5.589e+01  unstable=0
+[  915.8s]   d= 128 fixnorm_tanh  rho=0.01    amp=1.358e+06 attained=1.475e+00 gap=9.437e+05  unstable=0
+[ 1153.9s]   d= 256 standard      rho=0.0001  amp=1.744e+10 attained=1.233e+00 gap=1.679e+10  unstable=1024
+[ 1392.8s]   d= 256 standard      rho=0.001   amp=2.519e+11 attained=1.233e+00 gap=2.425e+11  unstable=1024
+[ 1653.3s]   d= 256 standard      rho=0.01    amp=2.843e+13 attained=1.233e+00 gap=2.306e+13  unstable=1024
+[ 1821.5s]   d= 256 fixnorm       rho=0.0001  amp=2.614e+02 attained=1.197e+00 gap=2.402e+02  unstable=1
+[ 2132.7s]   d= 256 fixnorm       rho=0.001   amp=3.067e+03 attained=1.194e+00 gap=2.767e+03  unstable=93
+[ 2333.2s]   d= 256 fixnorm       rho=0.01    amp=2.699e+06 attained=1.185e+00 gap=2.516e+06  unstable=1024
+[ 2611.1s]   d= 256 fixnorm_tanh  rho=0.0001  amp=3.851e+02 attained=1.348e+00 gap=2.856e+02  unstable=0
+[ 2833.4s]   d= 256 fixnorm_tanh  rho=0.001   amp=4.913e+03 attained=1.348e+00 gap=3.643e+03  unstable=0
+[ 3001.2s]   d= 256 fixnorm_tanh  rho=0.01    amp=3.619e+09 attained=1.348e+00 gap=2.784e+09  unstable=0
+[ 3001.4s] wrote C:\Users\sehaj\experiments\ai_safety_lyapunov\results\c18.json
+{
+  "standard": {
+    "rho": 0.0001,
+    "bound_amplification_by_width": {
+      "32": 33.501401993594534,
+      "64": 998.5993015646723,
+      "128": 5293652334.524161,
+      "256": 17438779982.30274
+    },
+    "attained_amplification_by_width": {
+      "32": 1.7052110506099547,
+      "64": 1.3857568046911077,
+      "128": 1.431303078804864,
+      "256": 1.2328598338575836
+    },
+    "relaxation_gap_by_width": {
+      "32": 19.646484217663886,
+      "64": 559.0035284800931,
+      "128": 2629778147.636176,
+      "256": 16788158098.423439
+    },
+    "log_log_slope_bound": 10.920414569842153,
+    "log_log_slope_attained": -0.13571694668283962,
+    "log_log_slope_gap": 11.117715731087868
+  },
+  "fixnorm": {
+    "rho": 0.0001,
+    "bound_amplification_by_width": {
+      "32": 1.8173259137205882,
+      "64": 1.638748323324937,
+      "128": 5.394048724339715,
+      "256": 261.3763431709219
+    },
+    "attained_amplification_by_width": {
+      "32": 1.611066546787014,
+      "64": 1.3410537782533962,
+      "128": 1.3857908455408028,
+      "256": 1.1970217743685925
+    },
+    "relaxation_gap_by_width": {
+      "32": 1.1175196550804798,
+      "64": 1.1445868278386464,
+      "128": 2.938902077025205,
+      "256": 240.2012227016882
+    },
+    "log_log_slope_bound": 2.32232770162738,
+    "log_log_slope_attained": -0.12383576361183993,
+    "log_log_slope_gap": 2.460384881660636
+  },
+  "fixnorm_tanh": {
+    "rho": 0.0001,
+    "bound_amplification_by_width": {
+      "32": 1.6550057365178807,
+      "64": 1.8079478990802358,
+      "128": 6.424819988819942,
+      "256": 385.0549650820687
+    },
+    "attained_amplification_by_width": {
+      "32": 1.5399119420672047,
+      "64": 1.4782888586991068,
+      "128": 1.4748032048186839,
+      "256": 1.348343993006244
+    },
+    "relaxation_gap_by_width": {
+      "32": 1.1199675408772924,
+      "64": 1.1840921009932162,
+      "128": 4.463763901360571,
+      "256": 285.5762083558194
+    },
+    "log_log_slope_bound": 2.5415556045141185,
+    "log_log_slope_attained": -0.05783834850912782,
+    "log_log_slope_gap": 2.5897304604826785
+  },
+  "_reading": "log_log_slope_gap is the number that matters. The bound slope alone is confounded: a variant can shrink its bound by being a less sensitive function, which the attained slope exposes. Only if the GAP slope falls does the variant become genuinely easier to verify rather than merely quieter."
+}

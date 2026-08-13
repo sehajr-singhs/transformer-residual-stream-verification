@@ -1,0 +1,11 @@
+=== launched 2026-08-04T16:10:05Z ===
+[wrap] sleep inhibit ON
+[wrap] C:\Users\sehaj\AppData\Local\Python\pythoncore-3.14-64\python.exe C:\Users\sehaj\experiments\ai_safety_lyapunov\audit\c24_scaling.py --layers 4 --widths 256 --variants fixnorm --seeds 3 --steps 3000 --device cpu --threads 4 --cache C:\Users\sehaj\experiments\ai_safety_lyapunov\results\c24_cache_local --out C:\Users\sehaj\experiments\ai_safety_lyapunov\results\c24_parts\c24_L4_d256_fixnorm.json --verify-layers 2,4 --verify-widths 64,128,256
+[     0.3s] device=cpu [cpu] fp_train=d22561792a22e50a fp_verify=74289f0b8fc9fa14 vocab=65 val_tokens=131072
+[     0.3s]   L= 4 d=256 fixnorm  s=0 CACHED-TRAIN ppl=6.3512  !! DEVICE MISMATCH (unknown)
+[     0.3s]   L= 4 d=256 fixnorm  s=1 CACHED-TRAIN ppl=6.3707  !! DEVICE MISMATCH (unknown)
+[  3108.5s]   L= 4 d=256 fixnorm  s=2 ppl=6.3585 bpc=2.6687 div=False [3107s train]
+[  3131.2s]   L= 4 d=256 fixnorm  s=2 gap=268.5 meaningful=True unstable=0 viol=+4.7e-15 [22.7s]
+[  3131.3s] wrote C:\Users\sehaj\experiments\ai_safety_lyapunov\results\c24_parts\c24_L4_d256_fixnorm.json
+[wrap] sleep inhibit released
+[wrap] exit=0 elapsed=3135.3s

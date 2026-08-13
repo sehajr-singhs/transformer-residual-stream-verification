@@ -1,0 +1,3 @@
+[     0.7s] device=cpu [cpu] fp_train=d22561792a22e50a fp_verify=74289f0b8fc9fa14 vocab=65 val_tokens=131072
+[     0.7s]   L= 4 d=256 fixnorm  s=0 CACHED-TRAIN ppl=6.3512
+[     0.7s]   L= 4 d=256 fixnorm  s=1 CACHED-TRAIN ppl=6.3707

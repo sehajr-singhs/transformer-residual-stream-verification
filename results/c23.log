@@ -1,0 +1,132 @@
+[     0.2s] config fingerprint 6f81eafa258c8065, threads 4, cache results\c23_cache
+[    96.1s]   d= 32 standard  seed=0 ppl=7.3130 bpc=2.8705 gap=98.13 viol=+1.8e-14 [96s train, 0.3s gap]
+[   476.4s]   d= 32 standard  seed=1 ppl=7.2574 bpc=2.8595 gap=95.5 viol=-1.8e-12 [380s train, 0.6s gap]
+[ 28091.0s]   d= 32 standard  seed=2 ppl=7.2418 bpc=2.8563 gap=63.3 viol=+3.2e-14 [27614s train, 0.3s gap]
+[     0.4s] config fingerprint 6f81eafa258c8065, threads 4, cache results\c23_cache, sleep_inhibited=True
+[     0.4s]   d= 32 standard  seed=0 CACHED ppl=7.3130
+[     0.4s]   d= 32 standard  seed=1 CACHED ppl=7.2574
+[     0.4s]   d= 32 standard  seed=2 CACHED ppl=7.2418
+[   133.2s]   d= 32 standard  seed=3 ppl=7.4168 bpc=2.8908 gap=53.62 viol=+4.4e-14 [132s train, 0.4s gap]
+[   235.9s]   d= 32 standard  seed=4 ppl=7.2902 bpc=2.8660 gap=115.1 viol=-1.2e-11 [102s train, 0.5s gap]
+[   331.2s]   d= 32 fixnorm   seed=0 ppl=7.4148 bpc=2.8904 gap=1.128 viol=+1.1e-14 [95s train, 0.4s gap]
+[   418.9s]   d= 32 fixnorm   seed=1 ppl=7.4505 bpc=2.8973 gap=1.15 viol=+8.0e-15 [87s train, 0.4s gap]
+[ 13174.6s]   d= 32 fixnorm   seed=2 ppl=7.5170 bpc=2.9102 gap=1.117 viol=+6.2e-15 [12755s train, 0.3s gap]
+[ 13229.1s]   d= 32 fixnorm   seed=3 ppl=7.4635 bpc=2.8998 gap=1.183 viol=+5.3e-15 [54s train, 0.3s gap]
+[     0.5s] config fingerprint 6f81eafa258c8065, threads 4, cache results\c23_cache, sleep_inhibited=True
+[     0.5s]   d= 32 standard  seed=0 CACHED ppl=7.3130
+[     0.5s]   d= 32 standard  seed=1 CACHED ppl=7.2574
+[     0.5s]   d= 32 standard  seed=2 CACHED ppl=7.2418
+[     0.5s]   d= 32 standard  seed=3 CACHED ppl=7.4168
+[     0.5s]   d= 32 standard  seed=4 CACHED ppl=7.2902
+[     0.5s]   d= 32 fixnorm   seed=0 CACHED ppl=7.4148
+[     0.5s]   d= 32 fixnorm   seed=1 CACHED ppl=7.4505
+[     0.5s]   d= 32 fixnorm   seed=2 CACHED ppl=7.5170
+[     0.5s]   d= 32 fixnorm   seed=3 CACHED ppl=7.4635
+[   124.9s]   d= 32 fixnorm   seed=4 ppl=7.3388 bpc=2.8755 gap=1.147 viol=+5.8e-15 [124s train, 0.7s gap]
+[   271.6s]   d= 64 standard  seed=0 ppl=6.6502 bpc=2.7334 gap=5388 viol=+1.8e-14 [146s train, 0.7s gap]
+[   397.6s]   d= 64 standard  seed=1 ppl=6.6846 bpc=2.7408 gap=1050 viol=+6.4e-14 [125s train, 0.7s gap]
+[   534.5s]   d= 64 standard  seed=2 ppl=6.7399 bpc=2.7527 gap=773.8 viol=+8.0e-15 [136s train, 1.3s gap]
+[   745.1s]   d= 64 standard  seed=3 ppl=6.6818 bpc=2.7402 gap=1053 viol=-8.3e-11 [210s train, 0.9s gap]
+[   905.0s]   d= 64 standard  seed=4 ppl=6.7289 bpc=2.7504 gap=3067 viol=-2.1e-11 [159s train, 0.8s gap]
+[  1021.2s]   d= 64 fixnorm   seed=0 ppl=6.7786 bpc=2.7610 gap=1.181 viol=+6.2e-15 [116s train, 0.6s gap]
+[  1129.2s]   d= 64 fixnorm   seed=1 ppl=6.7827 bpc=2.7619 gap=1.162 viol=+8.0e-15 [107s train, 0.6s gap]
+[  1235.8s]   d= 64 fixnorm   seed=2 ppl=6.8570 bpc=2.7776 gap=1.208 viol=+5.3e-15 [106s train, 0.6s gap]
+[  1343.8s]   d= 64 fixnorm   seed=3 ppl=6.8154 bpc=2.7688 gap=1.198 viol=+7.1e-15 [107s train, 0.6s gap]
+[  1448.4s]   d= 64 fixnorm   seed=4 ppl=6.8484 bpc=2.7758 gap=1.241 viol=+4.9e-15 [104s train, 0.6s gap]
+[  1448.5s] wrote C:\Users\sehaj\experiments\ai_safety_lyapunov\results\c23.json
+{
+  "32": {
+    "standard": {
+      "n_seeds": 5,
+      "val_ppl_mean": 7.303856088033102,
+      "val_ppl_std": 0.06898322189011598,
+      "val_ppl_sem": 0.03085023469065017,
+      "val_ppl_ci95": [
+        7.243389628039428,
+        7.364322548026776
+      ],
+      "val_ce_mean": 1.9883669435977935,
+      "val_bpc_mean": 2.868607128996082,
+      "relaxation_gap_median": 95.49961083962828,
+      "relaxation_gap_min": 53.61854482544779,
+      "relaxation_gap_max": 115.08856372157133,
+      "unstable_relus_median": 0.0,
+      "max_containment_violation": 4.436728762158282e-14,
+      "n_params": 29632
+    },
+    "fixnorm": {
+      "n_seeds": 5,
+      "val_ppl_mean": 7.436901799476348,
+      "val_ppl_std": 0.0659926659857217,
+      "val_ppl_sem": 0.02951281743210238,
+      "val_ppl_ci95": [
+        7.3790566773094275,
+        7.4947469216432685
+      ],
+      "val_ce_mean": 2.006422770023346,
+      "val_bpc_mean": 2.8946561802393784,
+      "relaxation_gap_median": 1.147341706326496,
+      "relaxation_gap_min": 1.1172324296986644,
+      "relaxation_gap_max": 1.183092313604047,
+      "unstable_relus_median": 0.0,
+      "max_containment_violation": 1.1102230246251565e-14,
+      "n_params": 29632
+    },
+    "ppl_penalty": 0.13304571144324573,
+    "ppl_penalty_ci95": [
+      0.049366257915676656,
+      0.2167251649708148
+    ],
+    "ppl_penalty_significant": true,
+    "ppl_penalty_pct": 1.8215817759776587,
+    "gap_gain": 83.23554379051937,
+    "baseline_saturated": false
+  },
+  "64": {
+    "standard": {
+      "n_seeds": 5,
+      "val_ppl_mean": 6.697077654085499,
+      "val_ppl_std": 0.03684236099353131,
+      "val_ppl_sem": 0.01647640472662454,
+      "val_ppl_ci95": [
+        6.664783900821314,
+        6.729371407349683
+      ],
+      "val_ce_mean": 1.9016591548919677,
+      "val_bpc_mean": 2.743514232223739,
+      "relaxation_gap_median": 1053.2451766242007,
+      "relaxation_gap_min": 773.7678156036093,
+      "relaxation_gap_max": 5388.08742720781,
+      "unstable_relus_median": 7.0,
+      "max_containment_violation": 6.394884621840902e-14,
+      "n_params": 108416
+    },
+    "fixnorm": {
+      "n_seeds": 5,
+      "val_ppl_mean": 6.816414756917672,
+      "val_ppl_std": 0.036168866825745744,
+      "val_ppl_sem": 0.016175208978300906,
+      "val_ppl_ci95": [
+        6.784711347320202,
+        6.848118166515142
+      ],
+      "val_ce_mean": 1.9193223774433137,
+      "val_bpc_mean": 2.768996875804684,
+      "relaxation_gap_median": 1.1977548953983044,
+      "relaxation_gap_min": 1.1622752467820687,
+      "relaxation_gap_max": 1.241355447913128,
+      "unstable_relus_median": 0.0,
+      "max_containment_violation": 7.993605777301127e-15,
+      "n_params": 108416
+    },
+    "ppl_penalty": 0.1193371028321728,
+    "ppl_penalty_ci95": [
+      0.07408234971172215,
+      0.16459185595262346
+    ],
+    "ppl_penalty_significant": true,
+    "ppl_penalty_pct": 1.781928013920701,
+    "gap_gain": 879.3495068738182,
+    "baseline_saturated": false
+  }
+}

@@ -1,0 +1,5 @@
+[    0.1s] experiment 3: branching rule (anchor prompt 0)
+[  559.0s]   widest       max rho = 0.05  (559s)
+[ 1366.7s]   relu_guided  max rho = 0.04  (808s)
+[ 1366.7s] experiment 1: 5-prompt distribution
+[ 2045.7s]   prompt 0: max rho = 0.05

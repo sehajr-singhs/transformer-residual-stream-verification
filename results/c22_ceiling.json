@@ -1,0 +1,55 @@
+{
+  "rows": [
+    {
+      "d_model": 8,
+      "n_feat": 20,
+      "distractor_frac": 0.6,
+      "accuracy": 0.815673828125
+    },
+    {
+      "d_model": 8,
+      "n_feat": 60,
+      "distractor_frac": 0.6,
+      "accuracy": 0.718505859375
+    },
+    {
+      "d_model": 16,
+      "n_feat": 20,
+      "distractor_frac": 0.6,
+      "accuracy": 1.0
+    },
+    {
+      "d_model": 16,
+      "n_feat": 60,
+      "distractor_frac": 0.6,
+      "accuracy": 0.99853515625
+    },
+    {
+      "d_model": 32,
+      "n_feat": 20,
+      "distractor_frac": 0.6,
+      "accuracy": 1.0
+    },
+    {
+      "d_model": 32,
+      "n_feat": 60,
+      "distractor_frac": 0.6,
+      "accuracy": 1.0
+    }
+  ],
+  "hardest_accuracy_by_width": {
+    "8": 0.718505859375,
+    "16": 0.99853515625,
+    "32": 1.0
+  },
+  "band": [
+    0.8,
+    0.9
+  ],
+  "any_width_in_band": {
+    "8": false,
+    "16": false,
+    "32": false
+  },
+  "conclusion": "Lowest accuracy reachable by this synthetic family at each width, at the hardest settings tried. Where this stays above 0.90 the family cannot capacity-normalise and no difficulty knob inside it will fix that."
+}

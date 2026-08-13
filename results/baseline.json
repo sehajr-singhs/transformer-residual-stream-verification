@@ -1,0 +1,649 @@
+{
+  "config": {
+    "seed": 0,
+    "k_dirs": 4,
+    "rho_train": 0.02,
+    "alpha": 0.5,
+    "formulation": "certified finite-horizon growth (not decrease)"
+  },
+  "model": {
+    "d_model": 32,
+    "n_heads": 4,
+    "n_layers": 2,
+    "seq_len": 5,
+    "d_mlp": 128,
+    "params": 26144,
+    "eval": {
+      "acc_all": 1.0,
+      "acc_safe_prompts": 1.0,
+      "unsafe_margin_mean_safe": -11.132277488708496,
+      "unsafe_margin_max_safe": -9.564689636230469,
+      "unsafe_margin_frac_negative_safe": 1.0,
+      "unsafe_margin_mean_all": -5.962247371673584
+    }
+  },
+  "frame": {
+    "projector": {
+      "sym_err": 0.0,
+      "idem_err": 0.0,
+      "kills_ones": 0.0,
+      "ok": true
+    },
+    "gauge": {
+      "ones_norm_after_P": 2.482534153247273e-16,
+      "projector_rank": 31,
+      "d_model": 32,
+      "certified_subspace_dim": 31
+    },
+    "mean_equivariance": {
+      "max_logit_deviation": 2.86102294921875e-06,
+      "max_stream_drift_from_pure_shift": 1.3485550880432129e-06,
+      "shift_magnitude": 0.44829586148262024,
+      "n_prompts": 64
+    }
+  },
+  "sae": {
+    "bridge_gap": {
+      "abs_recon_err_mean": 0.1176285669207573,
+      "abs_recon_err_p99": 0.24317461252212524,
+      "rel_recon_err_mean": 0.02277354896068573,
+      "rel_recon_err_p99": 0.04183090105652809,
+      "fvu": 0.0005910004256293178,
+      "l0_mean": 49.67529296875,
+      "l0_p99": 57.0,
+      "d_dict": 64,
+      "dead_features": 0
+    }
+  },
+  "threat_model": {
+    "kind": "activation steering along k SAE decoder directions at the final token",
+    "k": 4,
+    "feature_ids": [
+      8,
+      31,
+      7,
+      50
+    ],
+    "set": "e = sum_j alpha_j U_j,  |alpha_j| <= rho",
+    "why": "a full box over the residual stream needs T*d_model = 160 generators and inflates ~2x per dense map regardless of propagation tightness; steering attacks move the stream along a few interpretable directions"
+  },
+  "well_posedness": {
+    "layer0": {
+      "sigma_max": 3.682469502721924,
+      "spectral_radius": 2.5932393083372802,
+      "growth_on_U": [
+        0.9559116346827713,
+        0.9950994792661964,
+        1.1060248730529545,
+        1.1488811605673033
+      ]
+    },
+    "layer1": {
+      "sigma_max": 5.630741121660796,
+      "spectral_radius": 2.387359813035328,
+      "growth_on_U": [
+        1.162662113235773,
+        1.0600152487433863,
+        1.1636644699990735,
+        1.0779826817732485
+      ]
+    },
+    "composite": {
+      "sigma_max": 8.653176725698511,
+      "spectral_radius": 2.3452117804511254,
+      "growth_on_U": [
+        1.106068931763212,
+        1.1202838709003469,
+        1.3430146266799443,
+        1.284206601699595
+      ]
+    },
+    "composite_restricted_to_span_U": {
+      "spectral_radius": 1.2732484598731995,
+      "eigenvalues": [
+        1.2732484598731995,
+        1.2732484598731995,
+        0.8065529324871923,
+        0.8065529324871923
+      ]
+    },
+    "contraction_possible": false,
+    "conclusion": "A positive-definite V with V(e') <= gamma V(e), gamma < 1, exists IFF the deviation spectral radius is < 1. It is 1.273 > 1 on the certified subspace, so the strict-decrease obligation is INFEASIBLE for this model -- not merely hard to relax. The certificate is therefore stated as bounded finite-horizon growth, which is true and still sufficient for a safety guarantee."
+  },
+  "lyapunov": {
+    "form": "V(e) = ReLU(g(W_enc e) - g(0)) + alpha*||P e||^2, g an ICNN",
+    "V_at_origin": 0.0,
+    "positive_definite_by_construction": true,
+    "convex_in_state": true,
+    "sampled_growth_factor": 1.4883981943130493,
+    "alpha": 0.5
+  },
+  "soundness": {
+    "primitives": {
+      "relu": {
+        "max_violation": 0.0,
+        "sound": true
+      },
+      "layernorm": {
+        "max_violation": -0.2453426737355554,
+        "sound": true
+      },
+      "softmax": {
+        "max_violation": 0.0,
+        "sound": true
+      }
+    },
+    "v_bounds": {
+      "max_violation": -2.831881723222102,
+      "sound": true,
+      "bound_lo": -2.8249908637672316,
+      "bound_hi": 9.379514908597331,
+      "sampled_min": 0.006890859454870224,
+      "sampled_max": 3.4647560119628906,
+      "relaxation_gap_upper": 5.91475889663444,
+      "V_at_origin": 0.0
+    },
+    "block_bounds": {
+      "layer0": {
+        "max_violation": -0.47129097737709763,
+        "sound": true,
+        "mean_bound_width": 1.4477733988748596,
+        "mean_attained_width": 0.011992997074969846,
+        "wrapping_factor": 120.71823163339674
+      },
+      "layer1": {
+        "max_violation": -259026.45357138346,
+        "sound": true,
+        "mean_bound_width": 1033613.0797428463,
+        "mean_attained_width": 0.022627030101212597,
+        "wrapping_factor": 45680457.184146956
+      }
+    },
+    "growth_bound_subspace": {
+      "layer0_rho0.01": {
+        "sound_bound": 0.3621443655033882,
+        "attained_max_sampled": 6.702358950860798e-05,
+        "max_violation": -0.3620773419138796,
+        "sound": true,
+        "relaxation_gap": 0.3620773419138796
+      },
+      "layer0_rho0.05": {
+        "sound_bound": 471.57496802059404,
+        "attained_max_sampled": 7.719441782683134e-05,
+        "max_violation": -471.5748908261762,
+        "sound": true,
+        "relaxation_gap": 471.5748908261762
+      },
+      "layer1_rho0.01": {
+        "sound_bound": 0.31129423048754423,
+        "attained_max_sampled": 8.671180694364011e-05,
+        "max_violation": -0.3112075186806006,
+        "sound": true,
+        "relaxation_gap": 0.3112075186806006
+      },
+      "layer1_rho0.05": {
+        "sound_bound": 84.979435551096,
+        "attained_max_sampled": 0.0006213507149368525,
+        "max_violation": -84.97881420038107,
+        "sound": true,
+        "relaxation_gap": 84.97881420038107
+      }
+    },
+    "ALL_SOUND": true
+  },
+  "certification": {
+    "per_layer_growth": {
+      "0.005": {
+        "layer0": {
+          "gamma_certified": null,
+          "stats": {
+            "reason": "even gamma_hi unprovable",
+            "gamma_hi": 6.0,
+            "stats": {
+              "proved": false,
+              "reason": "max_boxes",
+              "worst": 0.0037702836492678167,
+              "boxes_touched": 511,
+              "surviving": 256,
+              "gamma": 6.0,
+              "rho": 0.005,
+              "layer": 0,
+              "k": 4
+            }
+          }
+        },
+        "layer1": {
+          "gamma_certified": null,
+          "stats": {
+            "reason": "even gamma_hi unprovable",
+            "gamma_hi": 6.0,
+            "stats": {
+              "proved": false,
+              "reason": "max_boxes",
+              "worst": 0.0035906997462643478,
+              "boxes_touched": 511,
+              "surviving": 256,
+              "gamma": 6.0,
+              "rho": 0.005,
+              "layer": 1,
+              "k": 4
+            }
+          }
+        },
+        "composite_growth_bound": null
+      }
+    },
+    "monolithic_safety": {
+      "0.005": {
+        "certified_safe": true,
+        "stats": {
+          "proved": true,
+          "iterations": 1,
+          "boxes_touched": 0,
+          "peak_boxes": 0,
+          "rho": 0.005,
+          "margin": 0.0,
+          "k": 4
+        }
+      },
+      "0.01": {
+        "certified_safe": true,
+        "stats": {
+          "proved": true,
+          "iterations": 4,
+          "boxes_touched": 7,
+          "peak_boxes": 8,
+          "rho": 0.01,
+          "margin": 0.0,
+          "k": 4
+        }
+      },
+      "0.02": {
+        "certified_safe": true,
+        "stats": {
+          "proved": true,
+          "iterations": 8,
+          "boxes_touched": 127,
+          "peak_boxes": 128,
+          "rho": 0.02,
+          "margin": 0.0,
+          "k": 4
+        }
+      },
+      "0.03": {
+        "certified_safe": true,
+        "stats": {
+          "proved": true,
+          "iterations": 11,
+          "boxes_touched": 1023,
+          "peak_boxes": 1024,
+          "rho": 0.03,
+          "margin": 0.0,
+          "k": 4
+        }
+      },
+      "0.04": {
+        "certified_safe": true,
+        "stats": {
+          "proved": true,
+          "iterations": 12,
+          "boxes_touched": 2047,
+          "peak_boxes": 2048,
+          "rho": 0.04,
+          "margin": 0.0,
+          "k": 4
+        }
+      },
+      "0.06": {
+        "certified_safe": false,
+        "stats": {
+          "proved": false,
+          "reason": "max_boxes",
+          "worst": 38.57617300579857,
+          "boxes_touched": 8191,
+          "surviving": 4096,
+          "rho": 0.06,
+          "margin": 0.0,
+          "k": 4
+        }
+      }
+    },
+    "metric_ablation": {
+      "icnn": {
+        "0.005": {
+          "layer0": {
+            "gamma_certified": null,
+            "stats": {
+              "reason": "even gamma_hi unprovable",
+              "gamma_hi": 6.0,
+              "stats": {
+                "proved": false,
+                "reason": "max_boxes",
+                "worst": 0.0037702836492678167,
+                "boxes_touched": 511,
+                "surviving": 256,
+                "gamma": 6.0,
+                "rho": 0.005,
+                "layer": 0,
+                "k": 4
+              }
+            }
+          },
+          "layer1": {
+            "gamma_certified": null,
+            "stats": {
+              "reason": "even gamma_hi unprovable",
+              "gamma_hi": 6.0,
+              "stats": {
+                "proved": false,
+                "reason": "max_boxes",
+                "worst": 0.0035906997462643478,
+                "boxes_touched": 511,
+                "surviving": 256,
+                "gamma": 6.0,
+                "rho": 0.005,
+                "layer": 1,
+                "k": 4
+              }
+            }
+          },
+          "composite_growth_bound": null
+        }
+      },
+      "quadratic_only": {
+        "0.005": {
+          "layer0": {
+            "gamma_certified": null,
+            "stats": {
+              "reason": "even gamma_hi unprovable",
+              "gamma_hi": 6.0,
+              "stats": {
+                "proved": false,
+                "reason": "max_boxes",
+                "worst": 0.00018528543187116555,
+                "boxes_touched": 511,
+                "surviving": 256,
+                "gamma": 6.0,
+                "rho": 0.005,
+                "layer": 0,
+                "k": 4
+              }
+            }
+          },
+          "layer1": {
+            "gamma_certified": null,
+            "stats": {
+              "reason": "even gamma_hi unprovable",
+              "gamma_hi": 6.0,
+              "stats": {
+                "proved": false,
+                "reason": "max_boxes",
+                "worst": 0.00013371246136325473,
+                "boxes_touched": 511,
+                "surviving": 256,
+                "gamma": 6.0,
+                "rho": 0.005,
+                "layer": 1,
+                "k": 4
+              }
+            }
+          },
+          "composite_growth_bound": null
+        }
+      }
+    },
+    "inner_frac": 0.3,
+    "inner_region_note": "The inner region |alpha_j| <= inner_frac*rho is NOT covered by the growth condition: V(e_l) has no positive floor there, so V(e') <= gamma V(e) is unsatisfiable for every gamma. It is discharged separately by the margin certificate below, which is the standard practical-stability formulation. Its size is a reported parameter, not a hidden knob.",
+    "max_certified_safe_rho": 0.04,
+    "pgd_attack": {
+      "0.04": {
+        "pgd_max_margin": -11.337119102478027,
+        "broken": false
+      },
+      "0.3": {
+        "pgd_max_margin": -11.232792854309082,
+        "broken": false
+      },
+      "1.0": {
+        "pgd_max_margin": -10.641752243041992,
+        "broken": false
+      },
+      "3.0": {
+        "pgd_max_margin": -3.6818017959594727,
+        "broken": false
+      },
+      "10.0": {
+        "pgd_max_margin": 4.004795551300049,
+        "broken": true
+      }
+    },
+    "empirical_robust_radius": 10.0,
+    "geometric_gap_fraction": 0.004
+  },
+  "dissipativity": {
+    "subblock_gains": [
+      {
+        "layer": 0,
+        "gamma_heads": [
+          9.81352024516944,
+          15.502419796201448,
+          12.92371531415857,
+          13.194744632742248
+        ],
+        "gamma_attn_joint": 39.25103667466563,
+        "gamma_heads_sum": 51.43439998827171,
+        "gamma_mlp": 25.830908793582772,
+        "gamma_layer_upper": 66.08194546824839
+      },
+      {
+        "layer": 1,
+        "gamma_heads": [
+          14.932510739906512,
+          21.928926318065717,
+          15.013357167282917,
+          17.703093160489775
+        ],
+        "gamma_attn_joint": 53.08264154819604,
+        "gamma_heads_sum": 69.57788738574492,
+        "gamma_mlp": 30.09937754696904,
+        "gamma_layer_upper": 84.18201909516507
+      }
+    ],
+    "gain_report": {
+      "per_layer_gain_upper": [
+        66.08194546824839,
+        84.18201909516507
+      ],
+      "cascade_gain_product": 5562.911595253743,
+      "small_gain_satisfied": false,
+      "obstruction": "identity path forces gamma_layer >= 1, so no norm-gain composition can certify contraction of a residual stream; contraction must come from sign-aware cancellation, i.e. from V's cross terms",
+      "parallel_head_slack": [
+        12.18336331360608,
+        16.49524583754888
+      ]
+    },
+    "supply_rate_lp": {
+      "feasible": false,
+      "status": "The problem is infeasible. (HiGHS Status 8: model_status is Infeasible; primal_status is None)",
+      "lambda": null,
+      "kappa": 0.02,
+      "interpretation": "feasible => norm-based compositional certificate exists; infeasible => must use the learned-V route"
+    }
+  },
+  "stress": {
+    "unstable_relu_vs_rho": [
+      {
+        "rho": 0.005,
+        "layers": [
+          {
+            "layer": 0,
+            "perturbation_to_signal_ratio": 0.004150681148004167,
+            "unstable_relus": 2,
+            "of_total": 640,
+            "out_width": 0.006318800833134942
+          },
+          {
+            "layer": 1,
+            "perturbation_to_signal_ratio": 0.021316374457208787,
+            "unstable_relus": 29,
+            "of_total": 640,
+            "out_width": 0.11206187762335043
+          }
+        ]
+      },
+      {
+        "rho": 0.01,
+        "layers": [
+          {
+            "layer": 0,
+            "perturbation_to_signal_ratio": 0.008301362296008334,
+            "unstable_relus": 8,
+            "of_total": 640,
+            "out_width": 0.017594923910625632
+          },
+          {
+            "layer": 1,
+            "perturbation_to_signal_ratio": 0.060176585657788044,
+            "unstable_relus": 128,
+            "of_total": 640,
+            "out_width": 2.5924033965640207
+          }
+        ]
+      },
+      {
+        "rho": 0.02,
+        "layers": [
+          {
+            "layer": 0,
+            "perturbation_to_signal_ratio": 0.016602724592016668,
+            "unstable_relus": 32,
+            "of_total": 640,
+            "out_width": 0.06975041041863628
+          },
+          {
+            "layer": 1,
+            "perturbation_to_signal_ratio": 0.23863381597393213,
+            "unstable_relus": 128,
+            "of_total": 640,
+            "out_width": 80608.67888929475
+          }
+        ]
+      },
+      {
+        "rho": 0.05,
+        "layers": [
+          {
+            "layer": 0,
+            "perturbation_to_signal_ratio": 0.041506811480041664,
+            "unstable_relus": 123,
+            "of_total": 640,
+            "out_width": 0.9995396691238605
+          },
+          {
+            "layer": 1,
+            "perturbation_to_signal_ratio": 4.136082285395846,
+            "unstable_relus": 128,
+            "of_total": 640,
+            "out_width": 588.1024983873824
+          }
+        ]
+      },
+      {
+        "rho": 0.1,
+        "layers": [
+          {
+            "layer": 0,
+            "perturbation_to_signal_ratio": 0.08301362296008333,
+            "unstable_relus": 128,
+            "of_total": 640,
+            "out_width": 27.954129081008244
+          },
+          {
+            "layer": 1,
+            "perturbation_to_signal_ratio": 12.13491463283405,
+            "unstable_relus": 128,
+            "of_total": 640,
+            "out_width": 17834595.086983956
+          }
+        ]
+      },
+      {
+        "rho": 0.25,
+        "layers": [
+          {
+            "layer": 0,
+            "perturbation_to_signal_ratio": 0.20753405740020833,
+            "unstable_relus": 128,
+            "of_total": 640,
+            "out_width": 21743.802035731485
+          },
+          {
+            "layer": 1,
+            "perturbation_to_signal_ratio": 11.828449712311766,
+            "unstable_relus": 128,
+            "of_total": 640,
+            "out_width": 58053590.99560018
+          }
+        ]
+      }
+    ],
+    "subspace_dim_scaling": [
+      {
+        "k": 1,
+        "rho": 0.01,
+        "final_width": 0.019217711805528746,
+        "finite": true
+      },
+      {
+        "k": 2,
+        "rho": 0.01,
+        "final_width": 0.1386379565118931,
+        "finite": true
+      },
+      {
+        "k": 4,
+        "rho": 0.01,
+        "final_width": 2.5924033965640207,
+        "finite": true
+      },
+      {
+        "k": 8,
+        "rho": 0.01,
+        "final_width": 107177.8471315831,
+        "finite": true
+      },
+      {
+        "k": 16,
+        "rho": 0.01,
+        "final_width": 9.816765845248112,
+        "finite": true
+      }
+    ],
+    "propagation_ablation": [
+      {
+        "mode": "hybrid+promotion",
+        "final_width": 2.5924033965640207
+      },
+      {
+        "mode": "no promotion",
+        "final_width": 4.44808523846335
+      }
+    ],
+    "sae_bridge_sensitivity": {
+      "rel_recon_err_mean": 0.02277354896068573,
+      "note": "the encoder is used as a READOUT (V is a function of e, not of Dec(Enc(e))), so reconstruction error does NOT enter the proved dynamics; it bounds only how well V's level sets align with feature semantics. If anyone closes the loop through Dec, this number becomes the soundness bottleneck."
+    },
+    "full_box_baseline": {
+      "rho": 0.002,
+      "n_generators": 160,
+      "final_width": 1033613.0797428463
+    }
+  },
+  "backends": {
+    "native_hzono_bab": true,
+    "z3": false,
+    "dreal": false,
+    "independent_cross_check": false
+  },
+  "runtime_sec": 766.4308195114136
+}

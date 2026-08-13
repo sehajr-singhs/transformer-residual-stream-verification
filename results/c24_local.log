@@ -1,0 +1,35 @@
+=== local chunk L4_d64_fixnorm @ 15:21:47 ===
+[     6.4s] device=cpu [cpu] fp_train=d22561792a22e50a fp_verify=74289f0b8fc9fa14 vocab=65 val_tokens=131072
+[  1610.5s]   L= 4 d= 64 fixnorm  s=0 ppl=6.5659 bpc=2.7150 div=False [1604s train]
+[  1617.5s]   L= 4 d= 64 fixnorm  s=0 gap=5.21 meaningful=True unstable=0 viol=+7.3e-15 [7.1s]
+[  2896.1s]   L= 4 d= 64 fixnorm  s=1 ppl=6.6778 bpc=2.7394 div=False [1278s train]
+[  2902.8s]   L= 4 d= 64 fixnorm  s=1 gap=2.369 meaningful=True unstable=0 viol=+8.0e-15 [6.7s]
+[  5313.7s]   L= 4 d= 64 fixnorm  s=2 ppl=6.7016 bpc=2.7445 div=False [2411s train]
+[  5317.5s]   L= 4 d= 64 fixnorm  s=2 gap=1.589 meaningful=True unstable=0 viol=+9.3e-15 [3.8s]
+[  5317.6s] wrote C:/Users/sehaj/experiments/ai_safety_lyapunov/results/c24_parts/c24_L4_d64_fixnorm.json
+=== local chunk L4_d128_standard @ 16:52:37 ===
+[     0.4s] device=cpu [cpu] fp_train=d22561792a22e50a fp_verify=74289f0b8fc9fa14 vocab=65 val_tokens=131072
+[  9094.7s]   L= 4 d=128 standard s=0 ppl=6.2458 bpc=2.6429 div=False [9094s train]
+[  9101.4s]   L= 4 d=128 standard s=0 gap=8.107e+15 meaningful=False unstable=1047 viol=-5.5e-10 [6.7s]
+[ 10685.4s]   L= 4 d=128 standard s=1 ppl=6.2991 bpc=2.6551 div=False [1583s train]
+[ 10697.7s]   L= 4 d=128 standard s=1 gap=2.832e+12 meaningful=False unstable=1026 viol=+7.1e-14 [12.2s]
+[ 11967.2s]   L= 4 d=128 standard s=2 ppl=6.2974 bpc=2.6548 div=False [1269s train]
+[ 11976.9s]   L= 4 d=128 standard s=2 gap=1.42e+16 meaningful=False unstable=1026 viol=-4.7e-09 [9.7s]
+[ 11977.0s] wrote C:/Users/sehaj/experiments/ai_safety_lyapunov/results/c24_parts/c24_L4_d128_standard.json
+=== local chunk L4_d128_fixnorm @ 20:12:29 ===
+[     0.4s] device=cpu [cpu] fp_train=d22561792a22e50a fp_verify=74289f0b8fc9fa14 vocab=65 val_tokens=131072
+[  1579.8s]   L= 4 d=128 fixnorm  s=0 ppl=6.3374 bpc=2.6639 div=False [1579s train]
+[  1585.8s]   L= 4 d=128 fixnorm  s=0 gap=372.5 meaningful=True unstable=0 viol=+8.0e-15 [6.0s]
+[  3334.9s]   L= 4 d=128 fixnorm  s=1 ppl=6.4389 bpc=2.6868 div=False [1748s train]
+[  3345.9s]   L= 4 d=128 fixnorm  s=1 gap=213.2 meaningful=True unstable=1 viol=+1.1e-14 [11.0s]
+[  5241.9s]   L= 4 d=128 fixnorm  s=2 ppl=6.3791 bpc=2.6734 div=False [1895s train]
+[  5252.6s]   L= 4 d=128 fixnorm  s=2 gap=85.46 meaningful=True unstable=0 viol=+4.4e-15 [10.7s]
+[  5252.7s] wrote C:/Users/sehaj/experiments/ai_safety_lyapunov/results/c24_parts/c24_L4_d128_fixnorm.json
+[skip] L4_d256_standard
+=== local chunk L4_d256_fixnorm @ 21:40:14 ===
+[     0.4s] device=cpu [cpu] fp_train=d22561792a22e50a fp_verify=74289f0b8fc9fa14 vocab=65 val_tokens=131072
+[  7233.1s]   L= 4 d=256 fixnorm  s=0 ppl=6.3512 bpc=2.6670 div=False [7232s train]
+[  7255.9s]   L= 4 d=256 fixnorm  s=0 gap=291.7 meaningful=True unstable=0 viol=+6.2e-15 [22.8s]
+[ 10928.9s]   L= 4 d=256 fixnorm  s=1 ppl=6.3707 bpc=2.6715 div=False [3671s train]
+[ 10959.8s]   L= 4 d=256 fixnorm  s=1 gap=556.6 meaningful=True unstable=2 viol=+7.1e-15 [30.9s]
+=== local subgrid done: 14/32 parts ===

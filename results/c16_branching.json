@@ -1,0 +1,24 @@
+{
+  "branching": {
+    "widest": {
+      "max_certified_rho": 0.05,
+      "seconds": 559.0,
+      "per_rho": null
+    },
+    "relu_guided": {
+      "max_certified_rho": 0.04,
+      "seconds": 808.0,
+      "per_rho": null
+    },
+    "max_boxes": 4096,
+    "grid_top": 0.05,
+    "provenance": "recovered from c16_budget4096.log (max_boxes=4096)",
+    "verdict": {
+      "improved": false,
+      "radius_ratio": 0.7999999999999999,
+      "gap_before": 200.0,
+      "gap_after": 250.0,
+      "slowdown": 1.445438282647585
+    }
+  }
+}

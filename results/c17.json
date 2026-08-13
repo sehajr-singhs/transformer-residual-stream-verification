@@ -1,0 +1,829 @@
+{
+  "config": {
+    "widths": "32,64,128",
+    "n_prompts": 50,
+    "prompt_rho": 0.02,
+    "prompt_max_boxes": 512
+  },
+  "softmax_ablation": {
+    "rho": 0.0001,
+    "true_width": 3.4821478951646556e-05,
+    "zonotope": {
+      "width": 0.00013435273287282223,
+      "over_true": 3.8583293104633993
+    },
+    "modes": {
+      "interval": {
+        "width": 0.0015444962045798594,
+        "over_true": 44.35469862508028,
+        "margin": 525226.9366672671
+      },
+      "linear": {
+        "width": 0.0015394392240237753,
+        "over_true": 44.20947272691822,
+        "margin": 519176.48533420597
+      }
+    },
+    "verdict": {
+      "gap_reduction_factor": 1.003284949790266,
+      "remaining_gap_vs_zonotope": 11.458190623342231,
+      "conclusion": "The state-of-the-art softmax relaxation reduces the attention gap by 0.3% -- essentially nothing. Softmax relaxation quality is NOT the bottleneck. The bottleneck is the representation: two-sided linear bounds must relax the product p*v, whereas a zonotope carries p and v as affine forms over SHARED noise symbols and keeps the first-order cross terms exactly, paying only second order. c16 concluded a better softmax relaxation was what was needed; this refutes that."
+    }
+  },
+  "width_scaling": {
+    "rows": [
+      {
+        "d_model": 32,
+        "rho": 0.0001,
+        "input_width": 0.0002061638239646557,
+        "layers": [
+          {
+            "layer": 0,
+            "unstable_relus": 0,
+            "of_total": 640,
+            "unstable_frac": 0.0,
+            "ln2_spread": 1.000215774951582,
+            "out_width": 0.001287149743722793
+          },
+          {
+            "layer": 1,
+            "unstable_relus": 0,
+            "of_total": 640,
+            "unstable_frac": 0.0,
+            "ln2_spread": 1.0009935724097243,
+            "out_width": 0.00596677572775467
+          }
+        ],
+        "final_width": 0.00596677572775467,
+        "amplification": 28.94191431362663
+      },
+      {
+        "d_model": 32,
+        "rho": 0.001,
+        "input_width": 0.002061638239646335,
+        "layers": [
+          {
+            "layer": 0,
+            "unstable_relus": 0,
+            "of_total": 640,
+            "unstable_frac": 0.0,
+            "ln2_spread": 1.0023004651005585,
+            "out_width": 0.014227441838656318
+          },
+          {
+            "layer": 1,
+            "unstable_relus": 4,
+            "of_total": 640,
+            "unstable_frac": 0.00625,
+            "ln2_spread": 1.0164247622092997,
+            "out_width": 0.1202376162872919
+          }
+        ],
+        "final_width": 0.1202376162872919,
+        "amplification": 58.321394110306244
+      },
+      {
+        "d_model": 32,
+        "rho": 0.01,
+        "input_width": 0.020616382396462907,
+        "layers": [
+          {
+            "layer": 0,
+            "unstable_relus": 18,
+            "of_total": 640,
+            "unstable_frac": 0.028125,
+            "ln2_spread": 1.0384835758652597,
+            "out_width": 0.34582949549676867
+          },
+          {
+            "layer": 1,
+            "unstable_relus": 128,
+            "of_total": 640,
+            "unstable_frac": 0.2,
+            "ln2_spread": 4443.606649224617,
+            "out_width": 121410.89341171959
+          }
+        ],
+        "final_width": 121410.89341171959,
+        "amplification": 5889049.352933506
+      },
+      {
+        "d_model": 64,
+        "rho": 0.0001,
+        "input_width": 0.00019004460497340503,
+        "layers": [
+          {
+            "layer": 0,
+            "unstable_relus": 1,
+            "of_total": 1280,
+            "unstable_frac": 0.00078125,
+            "ln2_spread": 1.000167308064529,
+            "out_width": 0.0019839394880691863
+          },
+          {
+            "layer": 1,
+            "unstable_relus": 8,
+            "of_total": 1280,
+            "unstable_frac": 0.00625,
+            "ln2_spread": 1.006280174910648,
+            "out_width": 0.12349348052254094
+          }
+        ],
+        "final_width": 0.12349348052254094,
+        "amplification": 649.8131348681153
+      },
+      {
+        "d_model": 64,
+        "rho": 0.001,
+        "input_width": 0.0019004460497340503,
+        "layers": [
+          {
+            "layer": 0,
+            "unstable_relus": 3,
+            "of_total": 1280,
+            "unstable_frac": 0.00234375,
+            "ln2_spread": 1.0017878943239331,
+            "out_width": 0.023163075937513433
+          },
+          {
+            "layer": 1,
+            "unstable_relus": 233,
+            "of_total": 1280,
+            "unstable_frac": 0.18203125,
+            "ln2_spread": 1.299862411364611,
+            "out_width": 14.865419202284226
+          }
+        ],
+        "final_width": 14.865419202284226,
+        "amplification": 7822.068510897483
+      },
+      {
+        "d_model": 64,
+        "rho": 0.01,
+        "input_width": 0.019004460497338727,
+        "layers": [
+          {
+            "layer": 0,
+            "unstable_relus": 33,
+            "of_total": 1280,
+            "unstable_frac": 0.02578125,
+            "ln2_spread": 1.0301565419103484,
+            "out_width": 0.6557223118417526
+          },
+          {
+            "layer": 1,
+            "unstable_relus": 256,
+            "of_total": 1280,
+            "unstable_frac": 0.2,
+            "ln2_spread": 812740.4404867961,
+            "out_width": 56702475.838652685
+          }
+        ],
+        "final_width": 56702475.838652685,
+        "amplification": 2983640385.192359
+      },
+      {
+        "d_model": 128,
+        "rho": 0.0001,
+        "input_width": 0.00012312833729982708,
+        "layers": [
+          {
+            "layer": 0,
+            "unstable_relus": 1,
+            "of_total": 2560,
+            "unstable_frac": 0.000390625,
+            "ln2_spread": 1.0004121526402183,
+            "out_width": 0.03414265641330849
+          },
+          {
+            "layer": 1,
+            "unstable_relus": 512,
+            "of_total": 2560,
+            "unstable_frac": 0.2,
+            "ln2_spread": 2883.239848367847,
+            "out_width": 522297.0831863192
+          }
+        ],
+        "final_width": 522297.0831863192,
+        "amplification": 4241891790.6321206
+      },
+      {
+        "d_model": 128,
+        "rho": 0.001,
+        "input_width": 0.0012312833729984374,
+        "layers": [
+          {
+            "layer": 0,
+            "unstable_relus": 13,
+            "of_total": 2560,
+            "unstable_frac": 0.005078125,
+            "ln2_spread": 1.0043699397914698,
+            "out_width": 0.3740781604582728
+          },
+          {
+            "layer": 1,
+            "unstable_relus": 512,
+            "of_total": 2560,
+            "unstable_frac": 0.2,
+            "ln2_spread": 2765.8426101947625,
+            "out_width": 474453.14136507135
+          }
+        ],
+        "final_width": 474453.14136507135,
+        "amplification": 385332208.4660957
+      },
+      {
+        "d_model": 128,
+        "rho": 0.01,
+        "input_width": 0.012312833729984152,
+        "layers": [
+          {
+            "layer": 0,
+            "unstable_relus": 220,
+            "of_total": 2560,
+            "unstable_frac": 0.0859375,
+            "ln2_spread": 1.0713417688416502,
+            "out_width": 7.985979507256809
+          },
+          {
+            "layer": 1,
+            "unstable_relus": 512,
+            "of_total": 2560,
+            "unstable_frac": 0.2,
+            "ln2_spread": 25366230.49751073,
+            "out_width": 4813783674.853415
+          }
+        ],
+        "final_width": 4813783674.853415,
+        "amplification": 390956605150.1948
+      }
+    ],
+    "caveat": "Randomly initialised, untrained transformers. These measure how the RELAXATION scales with width, not certified radius on a trained model of that width."
+  },
+  "prompt_sweep": {
+    "rho": 0.02,
+    "max_boxes": 512,
+    "n": 50,
+    "n_certified": 47,
+    "fraction_certified": 0.94,
+    "failures": [
+      17,
+      31,
+      49
+    ],
+    "rows": [
+      {
+        "prompt": 0,
+        "tokens": [
+          6,
+          5,
+          4,
+          2,
+          11
+        ],
+        "certified": true
+      },
+      {
+        "prompt": 1,
+        "tokens": [
+          2,
+          0,
+          0,
+          0,
+          11
+        ],
+        "certified": true
+      },
+      {
+        "prompt": 2,
+        "tokens": [
+          1,
+          6,
+          5,
+          7,
+          8
+        ],
+        "certified": true
+      },
+      {
+        "prompt": 3,
+        "tokens": [
+          5,
+          0,
+          4,
+          1,
+          8
+        ],
+        "certified": true
+      },
+      {
+        "prompt": 4,
+        "tokens": [
+          5,
+          4,
+          4,
+          7,
+          8
+        ],
+        "certified": true
+      },
+      {
+        "prompt": 5,
+        "tokens": [
+          2,
+          6,
+          5,
+          0,
+          8
+        ],
+        "certified": true
+      },
+      {
+        "prompt": 6,
+        "tokens": [
+          2,
+          4,
+          0,
+          3,
+          11
+        ],
+        "certified": true
+      },
+      {
+        "prompt": 7,
+        "tokens": [
+          6,
+          5,
+          6,
+          1,
+          11
+        ],
+        "certified": true
+      },
+      {
+        "prompt": 8,
+        "tokens": [
+          0,
+          6,
+          0,
+          4,
+          10
+        ],
+        "certified": true
+      },
+      {
+        "prompt": 9,
+        "tokens": [
+          0,
+          2,
+          3,
+          3,
+          9
+        ],
+        "certified": true
+      },
+      {
+        "prompt": 10,
+        "tokens": [
+          3,
+          0,
+          0,
+          0,
+          8
+        ],
+        "certified": true
+      },
+      {
+        "prompt": 11,
+        "tokens": [
+          0,
+          5,
+          4,
+          5,
+          11
+        ],
+        "certified": true
+      },
+      {
+        "prompt": 12,
+        "tokens": [
+          1,
+          7,
+          6,
+          4,
+          11
+        ],
+        "certified": true
+      },
+      {
+        "prompt": 13,
+        "tokens": [
+          1,
+          2,
+          1,
+          6,
+          9
+        ],
+        "certified": true
+      },
+      {
+        "prompt": 14,
+        "tokens": [
+          7,
+          5,
+          4,
+          1,
+          10
+        ],
+        "certified": true
+      },
+      {
+        "prompt": 15,
+        "tokens": [
+          7,
+          3,
+          4,
+          3,
+          11
+        ],
+        "certified": true
+      },
+      {
+        "prompt": 16,
+        "tokens": [
+          7,
+          1,
+          4,
+          5,
+          11
+        ],
+        "certified": true
+      },
+      {
+        "prompt": 17,
+        "tokens": [
+          6,
+          4,
+          3,
+          2,
+          9
+        ],
+        "certified": false
+      },
+      {
+        "prompt": 18,
+        "tokens": [
+          3,
+          3,
+          5,
+          7,
+          9
+        ],
+        "certified": true
+      },
+      {
+        "prompt": 19,
+        "tokens": [
+          0,
+          7,
+          4,
+          2,
+          10
+        ],
+        "certified": true
+      },
+      {
+        "prompt": 20,
+        "tokens": [
+          5,
+          4,
+          2,
+          2,
+          8
+        ],
+        "certified": true
+      },
+      {
+        "prompt": 21,
+        "tokens": [
+          5,
+          4,
+          4,
+          2,
+          8
+        ],
+        "certified": true
+      },
+      {
+        "prompt": 22,
+        "tokens": [
+          6,
+          3,
+          2,
+          7,
+          9
+        ],
+        "certified": true
+      },
+      {
+        "prompt": 23,
+        "tokens": [
+          2,
+          1,
+          5,
+          4,
+          8
+        ],
+        "certified": true
+      },
+      {
+        "prompt": 24,
+        "tokens": [
+          0,
+          0,
+          3,
+          6,
+          10
+        ],
+        "certified": true
+      },
+      {
+        "prompt": 25,
+        "tokens": [
+          7,
+          6,
+          4,
+          1,
+          11
+        ],
+        "certified": true
+      },
+      {
+        "prompt": 26,
+        "tokens": [
+          4,
+          1,
+          3,
+          1,
+          11
+        ],
+        "certified": true
+      },
+      {
+        "prompt": 27,
+        "tokens": [
+          5,
+          2,
+          4,
+          1,
+          11
+        ],
+        "certified": true
+      },
+      {
+        "prompt": 28,
+        "tokens": [
+          6,
+          3,
+          7,
+          6,
+          9
+        ],
+        "certified": true
+      },
+      {
+        "prompt": 29,
+        "tokens": [
+          7,
+          0,
+          3,
+          0,
+          10
+        ],
+        "certified": true
+      },
+      {
+        "prompt": 30,
+        "tokens": [
+          4,
+          3,
+          7,
+          1,
+          8
+        ],
+        "certified": true
+      },
+      {
+        "prompt": 31,
+        "tokens": [
+          7,
+          0,
+          4,
+          4,
+          9
+        ],
+        "certified": false
+      },
+      {
+        "prompt": 32,
+        "tokens": [
+          0,
+          2,
+          4,
+          3,
+          9
+        ],
+        "certified": true
+      },
+      {
+        "prompt": 33,
+        "tokens": [
+          3,
+          7,
+          7,
+          0,
+          8
+        ],
+        "certified": true
+      },
+      {
+        "prompt": 34,
+        "tokens": [
+          0,
+          2,
+          5,
+          0,
+          10
+        ],
+        "certified": true
+      },
+      {
+        "prompt": 35,
+        "tokens": [
+          4,
+          5,
+          6,
+          7,
+          9
+        ],
+        "certified": true
+      },
+      {
+        "prompt": 36,
+        "tokens": [
+          3,
+          3,
+          3,
+          7,
+          9
+        ],
+        "certified": true
+      },
+      {
+        "prompt": 37,
+        "tokens": [
+          1,
+          3,
+          0,
+          3,
+          11
+        ],
+        "certified": true
+      },
+      {
+        "prompt": 38,
+        "tokens": [
+          5,
+          5,
+          7,
+          5,
+          9
+        ],
+        "certified": true
+      },
+      {
+        "prompt": 39,
+        "tokens": [
+          4,
+          7,
+          0,
+          3,
+          11
+        ],
+        "certified": true
+      },
+      {
+        "prompt": 40,
+        "tokens": [
+          4,
+          1,
+          3,
+          2,
+          9
+        ],
+        "certified": true
+      },
+      {
+        "prompt": 41,
+        "tokens": [
+          3,
+          3,
+          0,
+          1,
+          11
+        ],
+        "certified": true
+      },
+      {
+        "prompt": 42,
+        "tokens": [
+          0,
+          3,
+          2,
+          5,
+          10
+        ],
+        "certified": true
+      },
+      {
+        "prompt": 43,
+        "tokens": [
+          5,
+          5,
+          7,
+          7,
+          9
+        ],
+        "certified": true
+      },
+      {
+        "prompt": 44,
+        "tokens": [
+          1,
+          0,
+          1,
+          5,
+          11
+        ],
+        "certified": true
+      },
+      {
+        "prompt": 45,
+        "tokens": [
+          3,
+          4,
+          2,
+          7,
+          10
+        ],
+        "certified": true
+      },
+      {
+        "prompt": 46,
+        "tokens": [
+          6,
+          0,
+          0,
+          6,
+          10
+        ],
+        "certified": true
+      },
+      {
+        "prompt": 47,
+        "tokens": [
+          0,
+          7,
+          6,
+          7,
+          8
+        ],
+        "certified": true
+      },
+      {
+        "prompt": 48,
+        "tokens": [
+          2,
+          1,
+          4,
+          7,
+          8
+        ],
+        "certified": true
+      },
+      {
+        "prompt": 49,
+        "tokens": [
+          2,
+          1,
+          1,
+          0,
+          9
+        ],
+        "certified": false
+      }
+    ],
+    "seq_len_note": "SEQ_LEN is fixed at 5 by the task, so sequence length could not be varied without retraining; only the attention map varies, through token content."
+  },
+  "runtime_sec": 677.1231014728546
+}

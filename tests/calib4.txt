@@ -1,0 +1,5 @@
+BaB with a larger budget:
+     rho  proved       worst   boxes     reason    sec
+   0.025    True  0.0000e+00     255     proved   18.4
+    0.03    True  0.0000e+00    1023     proved   73.6
+    0.04    True  0.0000e+00    2047     proved  156.1

@@ -1,0 +1,33 @@
+=== launched 2026-08-05T14:40:42Z ===
+[wrap] sleep inhibit ON
+[      0.0s] device=cpu eps_train=0.0 ramp=100+1000 kappa_final=0.5 vocab=65
+[      0.0s]   L2_d32_standard_lr0.001_s0 CACHED
+[      0.0s]   L2_d32_standard_lr0.001_s1 CACHED
+[      0.0s]   L2_d32_standard_lr0.001_s2 CACHED
+[      0.0s]   L2_d32_standard_lr0.003_s0 CACHED
+[     68.1s]   L2_d32_standard_lr0.003_s1 ppl=7.9267 div=False 21ms/step [62s]
+[     68.5s]   L2_d32_standard_lr0.003_s1 gap=1.294e+09 meaningful=False unstable=197 viol=-9.8e-13
+[    134.5s]   L2_d32_standard_lr0.003_s2 ppl=7.8677 div=False 22ms/step [66s]
+[    134.9s]   L2_d32_standard_lr0.003_s2 gap=3.188e+09 meaningful=False unstable=249 viol=+1.0e-14
+[    134.9s]   L2_d32_standard_lr0.01_s0 CACHED
+[    202.3s]   L2_d32_standard_lr0.01_s1 ppl=8.0589 div=False 22ms/step [67s]
+[    202.8s]   L2_d32_standard_lr0.01_s1 gap=1.087e+07 meaningful=False unstable=149 viol=+6.4e-14
+[    282.4s]   L2_d32_standard_lr0.01_s2 ppl=7.8653 div=False 26ms/step [79s]
+[    282.7s]   L2_d32_standard_lr0.01_s2 gap=1.422e+10 meaningful=False unstable=174 viol=-3.1e-13
+[    282.7s]   L2_d32_fixnorm_lr0.001_s0 CACHED
+[    341.5s]   L2_d32_fixnorm_lr0.001_s1 ppl=8.4725 div=False 20ms/step [59s]
+[    341.9s]   L2_d32_fixnorm_lr0.001_s1 gap=19.46 meaningful=True unstable=43 viol=+7.1e-15
+[    404.9s]   L2_d32_fixnorm_lr0.001_s2 ppl=8.4670 div=False 21ms/step [63s]
+[    405.3s]   L2_d32_fixnorm_lr0.001_s2 gap=76.28 meaningful=True unstable=113 viol=+9.8e-15
+[    405.3s]   L2_d32_fixnorm_lr0.003_s0 CACHED
+[    501.8s]   L2_d32_fixnorm_lr0.003_s1 ppl=8.0643 div=False 32ms/step [96s]
+[    502.5s]   L2_d32_fixnorm_lr0.003_s1 gap=1266 meaningful=False unstable=134 viol=+3.3e-15
+[    602.8s]   L2_d32_fixnorm_lr0.003_s2 ppl=7.9435 div=False 33ms/step [100s]
+[    603.3s]   L2_d32_fixnorm_lr0.003_s2 gap=1651 meaningful=False unstable=130 viol=+2.2e-15
+[    603.3s]   L2_d32_fixnorm_lr0.01_s0 CACHED
+[    689.6s]   L2_d32_fixnorm_lr0.01_s1 ppl=8.1833 div=False 29ms/step [86s]
+[    690.4s]   L2_d32_fixnorm_lr0.01_s1 gap=49.3 meaningful=True unstable=27 viol=+5.1e-15
+[    777.1s]   L2_d32_fixnorm_lr0.01_s2 ppl=7.9736 div=False 29ms/step [87s]
+[    777.5s]   L2_d32_fixnorm_lr0.01_s2 gap=4275 meaningful=False unstable=133 viol=+7.1e-15
+[    777.5s] done: 18 parts in C:\Users\sehaj\experiments\ai_safety_lyapunov\results\c25_control_parts
+[wrap] exit=0 elapsed=791s
