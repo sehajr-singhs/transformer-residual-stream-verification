@@ -2,8 +2,8 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <meta name="description" content="Certified safety margins for a transformer residual stream: sound hybrid-zonotope branch-and-bound certification, an infeasibility proof for strict Lyapunov decrease, and an honest account of what does and does not scale, including two negative results and one comparison that did not complete.">
-  <meta name="keywords" content="formal verification, neural network certification, Lyapunov stability, transformer safety, interval bound propagation, CROWN, branch and bound, AI safety">
+  <meta name="description" content="Certified safety margins for a transformer residual stream: a sound hybrid-zonotope certifier, a Lyapunov infeasibility proof, and an adversarial search that finds real slack in the training signal but does not transfer to the actual certified bound (16.9x vs 1.05x), checked black-box against the prover that never saw the attack.">
+  <meta name="keywords" content="formal verification, neural network certification, adversarial robustness, Lyapunov stability, transformer safety, interval bound propagation, CROWN, branch and bound, AI safety, red teaming">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Certified Safety Margins for a Transformer Residual Stream</title>
 
@@ -298,6 +298,31 @@
 
 <section class="section" style="border-top: 1px solid #eee;">
   <div class="container">
+    <h2 class="title">Every claim here was attacked, including this one</h2>
+    <div class="content has-text-justified">
+      <p>Nothing in this project is trusted on the say-so of the engine that produced it. Every discharged box is
+        replayed with dense sampling and PGD by a second process. The primitives are checked against z3 over
+        exact rationals — that check is what caught a real bug (a sound-but-loose readout inflating the bound by
+        ~11.7 logits) that a soundness-only regression test missed. Two independent from-scratch reference
+        engines and a CROWN-style engine were built to cross-check the end-to-end bound; where they lose to the
+        native prover, the loss is localized and explained rather than shrugged at. And the training signal used
+        to build the one certified-by-construction model was put under a gradient-based adversarial search
+        looking specifically for where it lies.</p>
+      <p>That last check is the sharpest example, so here it is up front rather than at the bottom of the page.
+        The search found real, repeatable slack in the differentiable training signal — a
+        <strong>16.9&times;</strong> relaxation-gap increase on adversarial contexts, reproduced in 5 of 5
+        restarts. Checked black-box against the actual certifying prover, which was never part of the search, the
+        same adversarial context moved the sound bound by only <strong>1.05&times;</strong>. The gap the attack
+        found in the proxy did not transfer to the thing actually being certified. That is not proof the
+        certifier is unbreakable — it is one context pair, stated as one context pair — but it is the difference
+        between a claim that was checked and a claim that was assumed. Full protocol, scope, and the honest
+        caveats are in <a href="#adversarial">Adversarial stress test</a> below.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section" style="border-top: 1px solid #eee;">
+  <div class="container">
     <h2 class="title">The bet</h2>
     <div class="content has-text-justified">
       <p>Treat the residual stream as a discrete-time nonlinear dynamical system with the layer index as time,
@@ -446,7 +471,7 @@
   </div>
 </section>
 
-<section class="section" style="border-top: 1px solid #eee;">
+<section class="section" style="border-top: 1px solid #eee;" id="adversarial">
   <div class="container">
     <h2 class="title">Adversarial stress test</h2>
     <div class="content has-text-justified">

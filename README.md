@@ -20,6 +20,30 @@ project's local compute environment could not complete (Section III-C of the
 IEEE paper) and one negative result from a schedule search run specifically to
 try to close it (Section 6k of the manuscript). Neither gap is papered over.
 
+## Every claim here was attacked, including this one
+
+The certificate itself is proof-based, not sampled — but nothing in this
+project is trusted on the say-so of the engine that produced it. Every
+discharged box is replayed with dense sampling and PGD by a second process.
+The primitives are checked against z3 over exact rationals, which is what
+caught a real bug (a sound-but-loose readout inflating the bound by ~11.7
+logits) that a soundness-only regression test missed. Two from-scratch
+reference engines and a CROWN-style engine were built to cross-check the
+end-to-end bound; where they lose to the native prover, the loss is localized
+and explained, not shrugged at. And the training signal behind the one
+certified-by-construction model was put under a gradient-based adversarial
+search looking specifically for where it lies.
+
+That last check is the sharpest result in the repo. The search found real,
+repeatable slack in the differentiable training signal — a **16.9x**
+relaxation-gap increase on adversarial contexts, reproduced in 5 of 5
+restarts. Checked black-box against the actual certifying prover, which was
+never part of the search, the same adversarial context moved the sound bound
+by only **1.05x**. The gap the attack found in the proxy did not transfer to
+the thing actually being certified — one context pair, not a swept claim, but
+the difference between a checked claim and an assumed one. Full protocol in
+section 6l of `MANUSCRIPT.md`.
+
 ## The bet
 
 Treat the residual stream as a discrete-time nonlinear dynamical system with
